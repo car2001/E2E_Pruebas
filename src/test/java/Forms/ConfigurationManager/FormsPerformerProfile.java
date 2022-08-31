@@ -1,0 +1,56 @@
+package Forms.ConfigurationManager;
+
+import Helpers.BasicControl;
+import Helpers.FormsControl;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+
+
+import java.util.List;
+
+public class FormsPerformerProfile {
+    private WebDriver driver;
+    private List<WebElement> listForm;
+    private BasicControl basicControl;
+    private String reusePP;
+    private String currentUser;
+    private String assignMethod;
+
+    public FormsPerformerProfile(WebDriver driver){
+        this.driver = driver;
+        this.basicControl = new BasicControl(driver);
+        this.reusePP = "//div[contains(@id,'--reusePerformer-handle')]";
+        this.currentUser = "//div[contains(@id,'--assignCurrentUser-switch')]";
+        this.assignMethod = "//span[contains(@id,'--assignmentMethod-arrow')]";
+    }
+
+    public void formCreatePerformer(String performer){
+        basicControl.btnAdd();
+        listForm = FormsControl.controlNew(driver,"perfil de ejecutor","Performer Profile");
+        listForm.get(2).click();
+        listForm.get(2).sendKeys(performer);
+        listForm.get(3).click();
+        listForm.get(3).sendKeys(performer);
+        listForm.get(4).click();
+        listForm.get(4).sendKeys("Descripción " + performer);
+        driver.findElement(By.xpath(assignMethod)).click();
+        driver.findElement(By.xpath("//div[@class='sapMSLITitleOnly'][normalize-space()='By Group']")).click();
+        basicControl.btnSave();
+    }
+
+    public void formEditPerformer(String performer) throws InterruptedException {
+        listForm = FormsControl.controlEdit(driver,"perfil de ejecutor","Performer Profile");
+        listForm.get(2).clear();
+        listForm.get(2).sendKeys(performer);
+        listForm.get(3).clear();
+        listForm.get(3).sendKeys(performer);
+        listForm.get(4).clear();
+        listForm.get(4).sendKeys("Descripción " + performer);
+        driver.findElement(By.xpath(assignMethod)).click();
+        driver.findElement(By.xpath("//div[@class='sapMSLITitleOnly'][normalize-space()='By Experience']")).click();
+        basicControl.btnSave();
+    }
+
+}

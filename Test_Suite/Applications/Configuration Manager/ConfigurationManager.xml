@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="ALL_CM">
+    <!-- TC-COUNTER -->
+    <parameter name="url" value=""></parameter>
+    <parameter name="counter" value="Counter_WEDOX"></parameter>
+    <parameter name="INS" value="INS_WEDOX"></parameter>
+    <test name="Counter">
+        <parameter name="inicio" value="100"></parameter>
+        <parameter name="incremento" value="100"></parameter>
+        <classes>
+            <class name="Applications.ConfigurationManager.CM_Counter">
+                <methods>
+                    <include name="crearCounter"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <!-- TC-INS -->
+    <test name="INS">
+        <parameter name="separador" value="-"></parameter>
+        <parameter name="valorFijo" value="100"></parameter>
+        <classes>
+            <class name="Applications.ConfigurationManager.CM_INS">
+                <methods>
+                    <include name="crearINS"></include>
+                    <include name="eliminarINS"></include>
+                </methods>
+            </class>
+            <class name="Applications.ConfigurationManager.CM_Counter">
+                <methods>
+                    <include name="eliminarCounter"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <!-- TC-SLA -->
+    <test name="SLA">
+        <parameter name="SLA" value="SLA_WEDOX"></parameter>
+        <parameter name="typesla" value="Fixed Value"></parameter>
+        <parameter name="SLA_edit" value="SLA_WEDOX_EDIT"></parameter>
+        <parameter name="versionMayorSLA" value="SLA_WEDOX_MAYOR"></parameter>
+        <parameter name="versionMenorrSLA" value="SLA_WEDOX_MAYOR"></parameter>
+        <parameter name="restore_Version" value="SLA_WEDOX_RESTAURADO"></parameter>
+        <parameter name="delete_SLA" value="SLA_WEDOX_RESTAURADO"></parameter>
+        <classes>
+            <class name="Applications.ConfigurationManager.CM_SLA">
+                <methods>
+                    <include name="crear_SLA"></include>
+                    <include name="viewDependecies_SLA"></include>
+                    <include name="editar_SLA"></include>
+                    <include name="versionMayor_SLA"></include>
+                    <include name="versionMenor_SLA"></include>
+                    <include name="restoreVersion_SLA"></include>
+                    <include name="eliminar_SLA"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <!-- TC-Form UI -->
+    <test name="Form UI">
+        <parameter name="formUI" value="FUI_WEDOX"></parameter>
+        <parameter name="formUI_edit" value="FUI_WEDOX_EDIT"></parameter>
+        <parameter name="versionMayorFormUI" value="FUI_WEDOX_MAYOR"></parameter>
+        <parameter name="versionMenorFormUI" value="FUI_WEDOX_MAYOR"></parameter>
+        <parameter name="restore_Version" value="FUI_WEDOX_RESTAURADO"></parameter>
+        <parameter name="delete_FormUI" value="FUI_WEDOX_RESTAURADO"></parameter>
+        <classes>
+            <class name="Applications.ConfigurationManager.CM_Form_UI">
+                <methods>
+                    <include name="crear_FormUI"></include>
+                    <include name="viewDependecies_FormUI"></include>
+                    <include name="editar_FormUI"></include>
+                    <include name="versionMayor_FormUI"></include>
+                    <include name="versionMenor_FormUI"></include>
+                    <include name="restoreVersion_FormUI"></include>
+                    <include name="eliminar_FormUI"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <!-- TC-Performer Profile -->
+    <test name="Performer Profile">
+        <parameter name="PP" value="PP_WEDOX"></parameter>
+        <parameter name="PP_edit" value="PP_WEDOX_EDIT"></parameter>
+        <parameter name="versionMayorPP" value="PP_WEDOX_MAYOR"></parameter>
+        <parameter name="versionMenorPP" value="PP_WEDOX_MAYOR"></parameter>
+        <parameter name="restore_Version" value="PP_WEDOX_RESTAURADO"></parameter>
+        <parameter name="delete_PP" value="PP_WEDOX_RESTAURADO"></parameter>
+        <classes>
+            <class name="Applications.ConfigurationManager.CM_Performer_Profile">
+                <methods>
+                    <include name="crearPerformerProfile"></include>
+                    <include name="viewDependecies_PP"></include>
+                    <include name="editarPerformerProfile"></include>
+                    <include name="versionMayor_PP"></include>
+                    <include name="versionMenor_PP"></include>
+                    <include name="restoreVersion_PP"></include>
+                    <include name="eliminarPerformerProfile"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <!-- TC-Notification Profile -->
+   <test name="Notification Profile">
+        <parameter name="notificationProfile" value="NP_WEDOX"></parameter>
+        <parameter name="editNotificationProfile" value="NP_WEDOX_EDIT"></parameter>
+        <parameter name="versionMayorNP" value="NP_WEDOX_MAYOR"></parameter>
+        <parameter name="versionMenorNP" value="NP_WEDOX_MAYOR"></parameter>
+        <parameter name="restoreVersionNP" value="NP_WEDOX_RESTAURADO"></parameter>
+        <parameter name="delete_NP" value="NP_WEDOX_RESTAURADO"></parameter>
+        <classes>
+            <class name="Applications.ConfigurationManager.CM_Notification_Profile">
+                <methods>
+                    <include name="crearNotification"></include>
+                    <include name="viewDependecies_Notification"></include>
+                    <include name="editarNotification"></include>
+                    <include name="versionMayor_Notification"></include>
+                    <include name="versionMenor_Notification"></include>
+                    <include name="restoreVersion_Notification"></include>
+                    <include name="eliminarNotification"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <!-- TC-Risk Profile -->
+    <test name="Risk Profile">
+        <parameter name="riskProfile" value="RP_WEDOX"></parameter>
+        <parameter name="edit_RiskProfile" value="RP_WEDOX_EDIT"></parameter>
+        <parameter name="versionMayorRP" value="RP_WEDOX_MAYOR"></parameter>
+        <parameter name="versionMenorRP" value="RP_WEDOX_MAYOR"></parameter>
+        <parameter name="restoreVersionRP" value="RP_WEDOX_RESTAURADO"></parameter>
+        <parameter name="delete_RP" value="RP_WEDOX_RESTAURADO"></parameter>
+        <classes>
+            <class name="Applications.ConfigurationManager.CM_Risk_Profile">
+                <methods>
+                    <include name="crearRiskProfile"></include>
+                    <include name="viewDependecies_RP"></include>
+                    <include name="editRiskProfile"></include>
+                    <include name="versionMayor_RP"></include>
+                    <include name="versionMenor_RP"></include>
+                    <include name="restoreVersion_RP"></include>
+                    <include name="eliminar_RP"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

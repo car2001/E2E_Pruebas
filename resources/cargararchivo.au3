@@ -1,0 +1,5 @@
+ControlFocus("Abrir","","Edit1")
+Sleep(2000)
+ControlSetText("Abrir","","Edit1","D:\DOCUMENTOS\Yo\WEDOX\Entregables\Pruebas Automatizado\E2E_PRUEBAS\resources\ServiceRequest\diagram.bpmn")
+Sleep(2000)
+ControlClick("Abrir","","Button1")

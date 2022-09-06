@@ -22,12 +22,9 @@ import java.util.List;
 public class PM_Process {
 
     private WebDriver driver;
-    private final String chosen_browser = "Chrome";
-    private static BasicControl basicControl;
 
+    BasicControl basicControl;
     Actions action;
-    SelectBrowser browser = new SelectBrowser(driver);
-    Login login;
     AccessBranch accessBranch;
     DynamicScroll searchScrollElement;
     Asserts asserts;
@@ -42,41 +39,36 @@ public class PM_Process {
     String SLA = "SLA Selenium";
     String AF = "Activity Form Selenium";
     String PP = "Performer Selenium";
-    int xpos;
 
     public PM_Process(WebDriver driver){
         this.driver = driver;
         this.asserts = new Asserts(driver);
         this.action = new Actions(driver);
         this.accessBranch = new AccessBranch(driver);
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(100));
         this.searchScrollElement = new DynamicScroll(driver);
-        this.formsProcess = new FormsProcess(driver);
-        this.xpos = -1;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(100));
         this.js = (JavascriptExecutor) driver;
         this.basicControl = new BasicControl(driver);
-    }
-
-    @BeforeMethod
-    public void setUp() throws InterruptedException {
-        LoginApplications.loginPM(driver);
+        this.formsProcess = new FormsProcess(driver);
     }
 
     @Test
-    public void crearProceso() throws InterruptedException, AWTException {
-        xpos = searchScrollElement.elementSearch(nameLevel);
+    public void crearProceso(String nameLevel, String nameProcess,String INS,String SLA) throws InterruptedException, AWTException {
+        int xpos = searchScrollElement.elementSearch(nameLevel);
+        System.out.println(xpos);
         if(xpos != -1){
+            accessBranch.clickBranches(xpos);
             xpos = searchScrollElement.elementSearch(component);
             if(xpos!=-1){
                 WebElement process = driver.findElement(By.xpath("//span[text()='"+component+"']"));
                 action.contextClick(process).perform();
                 driver.findElement(By.xpath("//div[normalize-space()='New Process']")).click();
                 Thread.sleep(1000);
-                FormsPM.creteNewProcess(driver,nameProcess,action,INS,SLA,js);
+                formsProcess.createProcess(nameProcess,INS,SLA);
                 ChargePopPup.PopPupMain(driver,wait);
                 asserts.assertSave();
                 //Realizamos los pasos
-                stepsProcess();
+                //stepsProcess();
             }else{
                 Assert.assertEquals("No se encontro la jerarquia","NO");
 
@@ -87,7 +79,6 @@ public class PM_Process {
     @Test
     public void stepsProcess() throws InterruptedException, AWTException {
         //PASOS TOTALES
-        openWizard();
         step1Process();
         step2Process();
         step3Process();
@@ -96,12 +87,7 @@ public class PM_Process {
         step8Process();
     }
 
-    public void openWizard(){
-        WebElement verticalbar = driver.findElement(By.xpath("//div[@title='Ajustar el tamaño entre el panel 1 y el panel 2']"));// este el original
-        action.doubleClick(verticalbar).build().perform();
-        driver.findElement(By.id("__xmlview4--btnGoToWizard-content")).click();
-        ChargePopPup.PopPupDetail(driver,wait);
-    }
+
 
     public void step1Process() throws InterruptedException {
         //Ingrsamos al paso 1
@@ -172,7 +158,7 @@ public class PM_Process {
         driver.findElement(By.id("__xmlview4--btnAddACTF-inner")).click();
         Forms.FormsPM.createNewActivityForm(driver,AF);
         ChargePopPup.PopPupMain(driver,wait);
-        Forms.FormsPM.panelActivityForm(driver,action,3,js);
+        Forms.FormsPM.panelActivityForm(driver,3,js);
         //Ingresamos a la actividad 2
         String task2 = "#__xmlview4--js-canvas-fb > div > div > svg > g > g > g > g.djs-children > g:nth-child(13) > g > rect.djs-hit.djs-hit-all";
         ElementSVG.clickSVGElements(task2,js,action,driver,rect,0);

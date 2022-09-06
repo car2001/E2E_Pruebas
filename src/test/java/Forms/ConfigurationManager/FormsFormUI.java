@@ -29,12 +29,12 @@ public class FormsFormUI {
         basicControl = new BasicControl(driver);
         basicControl.btnAdd();
         listForm = FormsControl.controlNew(driver,"UI","UI");
+        listForm.get(0).click();
+        listForm.get(0).sendKeys(UI);
+        listForm.get(1).click();
+        listForm.get(1).sendKeys(UI);
         listForm.get(2).click();
         listForm.get(2).sendKeys(UI);
-        listForm.get(3).click();
-        listForm.get(3).sendKeys(UI);
-        listForm.get(4).click();
-        listForm.get(4).sendKeys(UI);
         driver.findElement(By.xpath(comment)).click();
         driver.findElement(By.xpath(attachment)).click();
         driver.findElement(By.xpath(instructions)).click();
@@ -44,15 +44,15 @@ public class FormsFormUI {
     public void formEditFormUI(String UI) throws InterruptedException {
         basicControl = new BasicControl(driver);
         listForm = FormsControl.controlEdit(driver,"UI","UI");
+        listForm.get(0).click();
+        listForm.get(0).clear();
+        listForm.get(0).sendKeys(UI);
+        listForm.get(1).click();
+        listForm.get(1).clear();
+        listForm.get(1).sendKeys(UI);
         listForm.get(2).click();
         listForm.get(2).clear();
         listForm.get(2).sendKeys(UI);
-        listForm.get(3).click();
-        listForm.get(3).clear();
-        listForm.get(3).sendKeys(UI);
-        listForm.get(4).click();
-        listForm.get(4).clear();
-        listForm.get(4).sendKeys(UI);
         basicControl.btnSave();
     }
 

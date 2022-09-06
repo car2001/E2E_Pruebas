@@ -21,12 +21,12 @@ public class FormsHierarchie {
     }
     public void createNewHierarchie(String hierarchie){
         listForm = FormsControl.controlNew(driver,"nivel","Level");
+        listForm.get(0).click();
+        listForm.get(0).sendKeys(hierarchie);
+        listForm.get(1).click();
+        listForm.get(1).sendKeys(hierarchie);
         listForm.get(2).click();
         listForm.get(2).sendKeys(hierarchie);
-        listForm.get(3).click();
-        listForm.get(3).sendKeys(hierarchie);
-        listForm.get(4).click();
-        listForm.get(4).sendKeys(hierarchie);
         basicControl.btnSave();
     }
 

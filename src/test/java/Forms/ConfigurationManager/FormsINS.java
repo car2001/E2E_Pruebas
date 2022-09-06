@@ -25,14 +25,14 @@ public class FormsINS {
     public void formCreateINS(String INS , String separador , String fixedValue, String counter){
         basicControl.btnAdd();
         listForm = FormsControl.controlNew(driver,"Nuevo esquema de numeración de instancias","Instance Numbering Schema");
+        listForm.get(0).click();
+        listForm.get(0).sendKeys(INS);
+        listForm.get(1).click();
+        listForm.get(1).sendKeys(INS);
         listForm.get(2).click();
         listForm.get(2).sendKeys(INS);
-        listForm.get(3).click();
-        listForm.get(3).sendKeys(INS);
         listForm.get(4).click();
-        listForm.get(4).sendKeys(INS);
-        listForm.get(6).click();
-        listForm.get(6).sendKeys(separador);
+        listForm.get(4).sendKeys(separador);
         //Agregamos Component List
         driver.findElement(By.xpath(addOptions)).click();
         driver.findElement(By.xpath(addOptions)).click();
@@ -42,9 +42,9 @@ public class FormsINS {
         driver.findElement(By.xpath("//div[text()='Fixed Value' and @class ='sapMSLITitleOnly']")).click();
         cboComponentes.get(1).click();
         driver.findElements(By.xpath("//div[text()='Counter' and @class ='sapMSLITitleOnly']")).get(1).click();
-        listForm= driver.findElements(By.className("sapMInputBaseInner"));
-        listForm.get(8).click();
-        listForm.get(8).sendKeys(fixedValue);
+        listForm = basicControl.inputForms();
+        listForm.get(6).click();
+        listForm.get(6).sendKeys(fixedValue);
         driver.findElements(By.xpath(selectOptions)).get(2).click();
         driver.findElement(By.xpath("//div[text()='"+counter+"']")).click();
         basicControl.btnSave();

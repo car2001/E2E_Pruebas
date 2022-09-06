@@ -29,12 +29,12 @@ public class FormsPerformerProfile {
     public void formCreatePerformer(String performer){
         basicControl.btnAdd();
         listForm = FormsControl.controlNew(driver,"perfil de ejecutor","Performer Profile");
+        listForm.get(0).click();
+        listForm.get(0).sendKeys(performer);
+        listForm.get(1).click();
+        listForm.get(1).sendKeys(performer);
         listForm.get(2).click();
-        listForm.get(2).sendKeys(performer);
-        listForm.get(3).click();
-        listForm.get(3).sendKeys(performer);
-        listForm.get(4).click();
-        listForm.get(4).sendKeys("Descripción " + performer);
+        listForm.get(2).sendKeys("Descripción " + performer);
         driver.findElement(By.xpath(assignMethod)).click();
         driver.findElement(By.xpath("//div[@class='sapMSLITitleOnly'][normalize-space()='By Group']")).click();
         basicControl.btnSave();
@@ -42,12 +42,12 @@ public class FormsPerformerProfile {
 
     public void formEditPerformer(String performer) throws InterruptedException {
         listForm = FormsControl.controlEdit(driver,"perfil de ejecutor","Performer Profile");
+        listForm.get(0).clear();
+        listForm.get(0).sendKeys(performer);
+        listForm.get(1).clear();
+        listForm.get(1).sendKeys(performer);
         listForm.get(2).clear();
-        listForm.get(2).sendKeys(performer);
-        listForm.get(3).clear();
-        listForm.get(3).sendKeys(performer);
-        listForm.get(4).clear();
-        listForm.get(4).sendKeys("Descripción " + performer);
+        listForm.get(2).sendKeys("Descripción " + performer);
         driver.findElement(By.xpath(assignMethod)).click();
         driver.findElement(By.xpath("//div[@class='sapMSLITitleOnly'][normalize-space()='By Experience']")).click();
         basicControl.btnSave();

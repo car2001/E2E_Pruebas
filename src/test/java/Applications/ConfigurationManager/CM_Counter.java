@@ -11,11 +11,10 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
 public class CM_Counter {
+
     private WebDriver driver;
-    private String chosen_browser;
     final String URL = "http://wedox.sytes.net/buplat_config/";
 
-    SelectBrowser browser;
     Asserts asserts;
     BasicControl basicControl;
     FormsCounter formsCounter;

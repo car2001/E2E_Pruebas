@@ -24,23 +24,23 @@ public class FormsOSM {
     public static void formCreateCompany(WebDriver driver,String company) {
         FormsControl.controlNew(driver,"Empresa","");
         listForm = driver.findElements(By.className("sapMInputBaseInner"));
-        listForm.get(2).sendKeys(company);
-        listForm.get(3).sendKeys(company);
-        listForm.get(4).sendKeys("Compañia Creada en Selenium");
-        listForm.get(5).sendKeys("123456");
+        listForm.get(0).sendKeys(company);
+        listForm.get(1).sendKeys(company);
+        listForm.get(2).sendKeys("Compañia Creada en Selenium");
+        listForm.get(3).sendKeys("123456");
         driver.findElement(By.id(save)).click();
     }
 
     public static void formEditCompany(WebDriver driver, String company) throws InterruptedException {
         listForm = FormsControl.controlEdit(driver,"Empresa","");
+        listForm.get(0).clear();
+        listForm.get(0).sendKeys(company);
+        listForm.get(1).clear();
+        listForm.get(1).sendKeys(company);
         listForm.get(2).clear();
-        listForm.get(2).sendKeys(company);
+        listForm.get(2).sendKeys("Compañia Editada en Selenium");
         listForm.get(3).clear();
-        listForm.get(3).sendKeys(company);
-        listForm.get(4).clear();
-        listForm.get(4).sendKeys("Compañia Editada en Selenium");
-        listForm.get(5).clear();
-        listForm.get(5).sendKeys("123456");
+        listForm.get(3).sendKeys("123456");
         driver.findElement(By.id(save)).click();
 
     }
@@ -49,9 +49,9 @@ public class FormsOSM {
     public static void formCreateOrganization(WebDriver driver, String organización) throws InterruptedException{
         Thread.sleep(1000);
         listForm = driver.findElements(By.className("sapMInputBaseInner"));
-        listForm.get(2).sendKeys(organización);
-        listForm.get(3).sendKeys(organización);
-        listForm.get(4).sendKeys("Creado por " + organización);
+        listForm.get(0).sendKeys(organización);
+        listForm.get(1).sendKeys(organización);
+        listForm.get(2).sendKeys("Creado por " + organización);
         driver.findElement(By.id(save)).click();
     }
 
@@ -60,12 +60,12 @@ public class FormsOSM {
         driver.findElement(By.id(edit)).click();
         Thread.sleep(300);
         listForm = driver.findElements(By.className("sapMInputBaseInner"));
+        listForm.get(0).clear();
+        listForm.get(0).sendKeys(organización);
+        listForm.get(1).clear();
+        listForm.get(1).sendKeys(organización);
         listForm.get(2).clear();
         listForm.get(2).sendKeys(organización);
-        listForm.get(3).clear();
-        listForm.get(3).sendKeys(organización);
-        listForm.get(4).clear();
-        listForm.get(4).sendKeys(organización);
         driver.findElement(By.id(save)).click();
     }
 
@@ -74,9 +74,9 @@ public class FormsOSM {
     public static void formCreateLocation(WebDriver driver, String location) throws InterruptedException {
         Thread.sleep(2000);
         listForm = driver.findElements(By.className("sapMInputBaseInner"));
-        listForm.get(2).sendKeys(location);
-        listForm.get(3).sendKeys(location);
-        listForm.get(4).sendKeys("Location es" + location);
+        listForm.get(0).sendKeys(location);
+        listForm.get(1).sendKeys(location);
+        listForm.get(2).sendKeys("Location es" + location);
         driver.findElement(By.id(save)).click();
     }
 
@@ -86,12 +86,12 @@ public class FormsOSM {
         driver.findElement(By.id(edit)).click();
         Thread.sleep(500);
         listForm = driver.findElements(By.className("sapMInputBaseInner"));
+        listForm.get(0).clear();
+        listForm.get(0).sendKeys(location);
+        listForm.get(1).clear();
+        listForm.get(1).sendKeys(location);
         listForm.get(2).clear();
-        listForm.get(2).sendKeys(location);
-        listForm.get(3).clear();
-        listForm.get(3).sendKeys(location);
-        listForm.get(4).clear();
-        listForm.get(4).sendKeys("Location es" + location);
+        listForm.get(2).sendKeys("Location es" + location);
         driver.findElement(By.id(save)).click();
     }
 
@@ -101,9 +101,9 @@ public class FormsOSM {
         Thread.sleep(500);
         //Llenando Formulario
         listForm = driver.findElements(By.className("sapMInputBaseInner"));
-        listForm.get(2).sendKeys(position);
-        listForm.get(3).sendKeys(position);
-        listForm.get(4).sendKeys("Posicion es " + position);
+        listForm.get(0).sendKeys(position);
+        listForm.get(1).sendKeys(position);
+        listForm.get(2).sendKeys("Posicion es " + position);
         driver.findElement(By.id(save)).click();
     }
 
@@ -112,12 +112,12 @@ public class FormsOSM {
         driver.findElement(By.id(edit)).click();
         Thread.sleep(300);
         listForm = driver.findElements(By.className("sapMInputBaseInner"));
+        listForm.get(0).clear();
+        listForm.get(0).sendKeys(position);
+        listForm.get(1).clear();
+        listForm.get(1).sendKeys(position);
         listForm.get(2).clear();
-        listForm.get(2).sendKeys(position);
-        listForm.get(3).clear();
-        listForm.get(3).sendKeys(position);
-        listForm.get(4).clear();
-        listForm.get(4).sendKeys("Posicion es " + position);
+        listForm.get(2).sendKeys("Posicion es " + position);
         driver.findElement(By.id(save)).click();
     }
 

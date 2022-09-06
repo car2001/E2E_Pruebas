@@ -27,9 +27,9 @@ public class FormsRM {
 
     public static void formCreateProject(WebDriver driver,String proyecto){
         listForm = FormsControl.controlNew(driver,"proyecto","");
-        listForm.get(2).sendKeys(proyecto);
-        listForm.get(3).sendKeys(proyecto);
-        listForm.get(4).sendKeys("Proyecto Creado en Selenium");
+        listForm.get(0).sendKeys(proyecto);
+        listForm.get(1).sendKeys(proyecto);
+        listForm.get(2).sendKeys("Proyecto Creado en Selenium");
         //Thread.sleep(500);
         driver.findElement(By.id("__xmlview4--ProjectStartDate-icon")).click();
         LocalDate date = LocalDate.now();
@@ -48,12 +48,12 @@ public class FormsRM {
 
     public static void formEditProject(WebDriver driver,String proyecto) throws InterruptedException {
         listForm = FormsControl.controlEdit(driver,"proyecto","");
+        listForm.get(0).clear();
+        listForm.get(0).sendKeys(proyecto);
+        listForm.get(1).clear();
+        listForm.get(1).sendKeys(proyecto);
         listForm.get(2).clear();
-        listForm.get(2).sendKeys(proyecto);
-        listForm.get(3).clear();
-        listForm.get(3).sendKeys(proyecto);
-        listForm.get(4).clear();
-        listForm.get(4).sendKeys("Creado en Selenium");
+        listForm.get(2).sendKeys("Creado en Selenium");
         driver.findElement(By.id("__xmlview4--selectProjectState-label")).click();
         driver.findElement(By.xpath("//li[text()='Closed']")).click();
         driver.findElement(By.id(save)).click();
@@ -62,9 +62,9 @@ public class FormsRM {
 
     public static void formCreateProjectWithoutRelease(WebDriver driver,String proyecto){
         listForm = FormsControl.controlNew(driver,"proyecto","");
-        listForm.get(2).sendKeys(proyecto);
-        listForm.get(3).sendKeys(proyecto);
-        listForm.get(4).sendKeys(" Proyecto sin Release Creado en Selenium");
+        listForm.get(0).sendKeys(proyecto);
+        listForm.get(1).sendKeys(proyecto);
+        listForm.get(2).sendKeys(" Proyecto sin Release Creado en Selenium");
         driver.findElement(By.id("__xmlview4--ProjectStartDate-icon")).click();
         LocalDate date = LocalDate.now();
         driver.findElement(By.xpath("//span[normalize-space()='"+date.getDayOfMonth()+"']")).click();
@@ -82,9 +82,9 @@ public class FormsRM {
 
     public static void formCreateRelease(WebDriver driver,String release){
         listForm = FormsControl.controlNew(driver,"liberación","");
-        listForm.get(2).sendKeys(release);
-        listForm.get(3).sendKeys(release);
-        listForm.get(4).sendKeys("Release Creado en Selenium");
+        listForm.get(0).sendKeys(release);
+        listForm.get(1).sendKeys(release);
+        listForm.get(2).sendKeys("Release Creado en Selenium");
         driver.findElement(By.id("__xmlview4--ReleaseStartDate-icon")).click();
         LocalDate date = LocalDate.now();
         List<WebElement> Day = driver.findElements(By.xpath("//span[normalize-space()='"+date.getDayOfMonth()+"']"));
@@ -103,10 +103,10 @@ public class FormsRM {
 
     public static void formEditRelease(WebDriver driver,String release) throws InterruptedException {
         listForm = FormsControl.controlEdit(driver,"liberacion","");
-        listForm.get(2).clear();
-        listForm.get(2).sendKeys(release);
-        listForm.get(3).clear();
-        listForm.get(3).sendKeys(release);
+        listForm.get(0).clear();
+        listForm.get(0).sendKeys(release);
+        listForm.get(1).clear();
+        listForm.get(1).sendKeys(release);
         driver.findElement(By.id("__xmlview4--ReleaseStartDate-icon")).click();
         LocalDate date = LocalDate.now();
         List<WebElement> Day = driver.findElements(By.xpath("//span[normalize-space()='"+date.getDayOfMonth()+"']"));
@@ -116,8 +116,8 @@ public class FormsRM {
         driver.findElement(By.xpath("//div[text()='"+(date.getYear()+5)+"']")).click();
         Day = driver.findElements(By.xpath("//span[normalize-space()='"+date.getDayOfMonth()+"']"));
         Day.get(1).click();
-        listForm.get(8).clear();
-        listForm.get(8).sendKeys("Release Selenium");
+        listForm.get(6).clear();
+        listForm.get(6).sendKeys("Release Selenium");
         driver.findElement(By.id(save)).click();
     }
 
@@ -125,12 +125,12 @@ public class FormsRM {
 
     public static void formCreateChangeContainer(WebDriver driver,String ChangeContainer,String Proyecto,String release,String user) throws InterruptedException {
         listForm = FormsControl.controlNew(driver,"contenedor de cambios","");
+        listForm.get(0).click();
+        listForm.get(0).sendKeys(ChangeContainer);
+        listForm.get(1).click();
+        listForm.get(1).sendKeys(ChangeContainer);
         listForm.get(2).click();
-        listForm.get(2).sendKeys(ChangeContainer);
-        listForm.get(3).click();
-        listForm.get(3).sendKeys(ChangeContainer);
-        listForm.get(4).click();
-        listForm.get(4).sendKeys( ChangeContainer);
+        listForm.get(2).sendKeys( ChangeContainer);
         List<WebElement> listComboBox = driver.findElements(By.className("sapMSltLabel"));
         listComboBox.get(0).click();
         driver.findElement(By.xpath("//li[text()='"+Proyecto+"']")).click();
@@ -145,10 +145,10 @@ public class FormsRM {
 
     public static void formDeploymentPackage(WebDriver driver , String DeploymentPackage,String Proyecto,String release){
         listForm = FormsControl.controlNew(driver,"paquete de instalación","");
-        listForm.get(3).click();
-        listForm.get(3).sendKeys(DeploymentPackage);
-        listForm.get(4).click();
-        listForm.get(4).sendKeys(DeploymentPackage);
+        listForm.get(1).click();
+        listForm.get(1).sendKeys(DeploymentPackage);
+        listForm.get(2).click();
+        listForm.get(2).sendKeys(DeploymentPackage);
         List<WebElement> listComboBox = driver.findElements(By.className("sapMSltLabel"));
         listComboBox.get(0).click();
         driver.findElement(By.xpath("//li[text()='"+Proyecto+"']")).click();
@@ -162,10 +162,10 @@ public class FormsRM {
 
     public static void formDeploymentRequest(WebDriver driver , String DeploymentRequest,String Proyecto,String release) throws InterruptedException {
         listForm = FormsControl.controlNew(driver,"solicitud de instalación","");
-        listForm.get(3).click();
-        listForm.get(3).sendKeys(DeploymentRequest);
-        listForm.get(4).click();
-        listForm.get(4).sendKeys(DeploymentRequest);
+        listForm.get(1).click();
+        listForm.get(1).sendKeys(DeploymentRequest);
+        listForm.get(2).click();
+        listForm.get(2).sendKeys(DeploymentRequest);
         List<WebElement> listComboBox = driver.findElements(By.className("sapMSltLabel"));
         listComboBox.get(0).click();
         driver.findElements(By.xpath("//li[text()='"+Proyecto+"']")).get(1).click();

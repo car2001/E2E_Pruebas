@@ -2,6 +2,7 @@ package HomePage;
 
 
 import Helpers.AccessBranch;
+import Helpers.BasicControl;
 import Helpers.ChargePopPup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,33 +15,31 @@ import java.time.Duration;
 public class LoginApplications {
     public static WebDriverWait wait;
     public static AccessBranch accessBranch;
+    public static BasicControl basicControl;
 
     public static void loginOSM(WebDriver driver){
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(100));
         accessBranch = new AccessBranch(driver);
-        String routeOSM = "//span[@class='sapMTextMaxLine sapMTextLineClamp' and normalize-space()='Organizational Structure Manager']";
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(routeOSM)));
-        driver.findElement(By.xpath(routeOSM)).click();
+        basicControl = new BasicControl(driver);
+        basicControl.btnApplication("Organizational Structure Manager");
         accessBranch.clickBranches(0);
         accessBranch.clickBranches(1);
     }
 
     public static void loginCM(WebDriver driver){
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        String routeCM = "//span[@class='sapMTextMaxLine sapMTextLineClamp' and normalize-space()='Configuration Manager']";
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(routeCM)));
-        driver.findElement(By.xpath(routeCM)).click();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(100));
+        basicControl = new BasicControl(driver);
+        basicControl.btnApplication("Configuration Manager");
         wait.until(ExpectedConditions.elementToBeClickable(By.id("navListItem-navList-0-a")));
         driver.findElement(By.xpath("//div[@title='Reusable Component']")).click();
         driver.findElement(By.xpath("//div[@title='Setting']")).click();
     }
 
     public static void loginRM(WebDriver driver, String componente){
-        wait = new WebDriverWait(driver,Duration.ofSeconds(50));
+        wait = new WebDriverWait(driver,Duration.ofSeconds(100));
         accessBranch = new AccessBranch(driver);
-        String routeRM = "//span[@class='sapMTextMaxLine sapMTextLineClamp' and normalize-space()='Release Manager']";
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(routeRM)));
-        driver.findElement(By.xpath(routeRM)).click();
+        basicControl = new BasicControl(driver);
+        basicControl.btnApplication("Release Manager");
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(@id,'--mainTree-rows-row0-treeicon')]")));
         if(componente.equals("Project")){
             accessBranch.clickBranches(0);
@@ -53,30 +52,40 @@ public class LoginApplications {
         }
     }
 
-    public static void loginPM(WebDriver driver){
+    public static void loginPM(WebDriver driver) throws InterruptedException {
         wait = new WebDriverWait(driver,Duration.ofSeconds(100));
         accessBranch = new AccessBranch(driver);
-        String routePM = "//span[@class='sapMTextMaxLine sapMTextLineClamp' and normalize-space()='Process Manager']";
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(routePM)));
-        driver.findElement(By.xpath(routePM)).click();
+        basicControl = new BasicControl(driver);
+        basicControl.btnApplication("Process Manager");
         //Esperamos las cargas
-        //ChargePopPup.PopPupGeneral(driver,wait);
         ChargePopPup.PopPupGeneral(driver,wait);
     }
 
     public static void loginColl(WebDriver driver, String proceso){
         wait = new WebDriverWait(driver,Duration.ofSeconds(100));
-        String routePM = "//span[@class='sapMTextMaxLine sapMTextLineClamp' and normalize-space()='Collaboration Workspace']";
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(routePM)));
-        driver.findElement(By.xpath(routePM)).click();
+        basicControl = new BasicControl(driver);
+        basicControl.btnApplication("Collaboration Workspace");
         ChargePopPup.PopPupGeneral(driver,wait);
         driver.findElement(By.id("navListItem-navList-2")).click();
         ChargePopPup.PopPupGeneral(driver,wait);
         driver.findElement(By.xpath("//div[contains(@aria-label,'"+proceso+"')]")).click();
-        driver.findElement(By.xpath("//bdi[text()='Sí']")).click();
+        driver.findElement(By.xpath("//bdi[text()='Sí' or text()='Yes']")).click();
         ChargePopPup.PopPupGeneral(driver,wait);
         ChargePopPup.PopPupGeneral(driver,wait);
     }
 
+    public static void loginDataEntity(WebDriver driver){
+        wait = new WebDriverWait(driver,Duration.ofSeconds(100));
+        basicControl = new BasicControl(driver);
+        basicControl.btnApplication("Data Entity Manager");
+        ChargePopPup.PopPupGeneral(driver,wait);
+    }
+
+    public static void loginDataRecord(WebDriver driver){
+        wait = new WebDriverWait(driver,Duration.ofSeconds(100));
+        basicControl = new BasicControl(driver);
+        basicControl.btnApplication("Data Record Manager");
+
+    }
 
 }

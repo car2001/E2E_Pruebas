@@ -8,19 +8,21 @@ import org.openqa.selenium.WebElement;
 public class AccessBranch {
     private WebDriver driver;
     private JavascriptExecutor js ;
-
+    private BasicControl basicControl;
 
     public AccessBranch(WebDriver driver) {
         this.driver = driver;
+        this.basicControl = new BasicControl(driver);
         js= (JavascriptExecutor) driver;
     }
 
     public void clickBranches(Integer exist){
         WebElement branch = driver.findElement(By.xpath("//span[contains(@id,'-mainTree-rows-row"+exist+"-treeicon')]"));
-        String id = branch.getAttribute("id").substring(9,10);
+        String id = basicControl.getXmlview();
+
         branch.click();
         try {
-            String script = "let next=document.getElementById('__xmlview"+id+"--mainTree-rows-row"+(exist+1)+"');return next.textContent";
+            String script = "let next=document.getElementById('"+id+"--mainTree-rows-row"+(exist+1)+"');return next.textContent";
             String next = js.executeScript(script).toString();
             while(next.contains("Loading...")){
                 next = js.executeScript(script).toString();

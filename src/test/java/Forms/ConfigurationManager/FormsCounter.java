@@ -21,16 +21,16 @@ public class FormsCounter {
     public  void formCreateCounter(String Counter, String inicio , String incremento){
         basicControl.btnAdd();
         listForm = FormsControl.controlNew(driver,"contador","Counter");
+        listForm.get(0).click();
+        listForm.get(0).sendKeys(Counter);
+        listForm.get(1).click();
+        listForm.get(1).sendKeys(Counter);
         listForm.get(2).click();
         listForm.get(2).sendKeys(Counter);
-        listForm.get(3).click();
-        listForm.get(3).sendKeys(Counter);
         listForm.get(4).click();
-        listForm.get(4).sendKeys(Counter);
-        listForm.get(6).click();
-        listForm.get(6).sendKeys(inicio);
-        listForm.get(7).click();
-        listForm.get(7).sendKeys(incremento);
+        listForm.get(4).sendKeys(inicio);
+        listForm.get(5).click();
+        listForm.get(5).sendKeys(incremento);
         basicControl.btnSave();
     }
 

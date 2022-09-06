@@ -36,12 +36,12 @@ public class FormsRiskProfile {
     public void formCreateRisk(WebDriver driver, String risk){
         basicControl.btnAdd();
         listForm = FormsControl.controlNew(driver,"perfil de riesgo","Risk Profile");
+        listForm.get(0).click();
+        listForm.get(0).sendKeys(risk);
+        listForm.get(1).click();
+        listForm.get(1).sendKeys(risk);
         listForm.get(2).click();
-        listForm.get(2).sendKeys(risk);
-        listForm.get(3).click();
-        listForm.get(3).sendKeys(risk);
-        listForm.get(4).click();
-        listForm.get(4).sendKeys("Descripción " + risk);
+        listForm.get(2).sendKeys("Descripción " + risk);
         driver.findElement(By.xpath(typeRisk)).click();
         driver.findElement(By.xpath(fixedValue)).click();
         driver.findElement(By.xpath(numberHours)).sendKeys("4");
@@ -50,15 +50,15 @@ public class FormsRiskProfile {
     }
     public void formEditRisk(WebDriver driver,String risk) throws InterruptedException {
         listForm = FormsControl.controlEdit(driver,"perfil de riesgo","Risk Profile");
+        listForm.get(0).click();
+        listForm.get(0).clear();
+        listForm.get(0).sendKeys(risk);
+        listForm.get(1).click();
+        listForm.get(1).clear();
+        listForm.get(1).sendKeys(risk);
         listForm.get(2).click();
         listForm.get(2).clear();
-        listForm.get(2).sendKeys(risk);
-        listForm.get(3).click();
-        listForm.get(3).clear();
-        listForm.get(3).sendKeys(risk);
-        listForm.get(4).click();
-        listForm.get(4).clear();
-        listForm.get(4).sendKeys("Descripción " + risk);
+        listForm.get(2).sendKeys("Descripción " + risk);
         driver.findElement(By.xpath(typeRisk)).click();
         driver.findElement(By.xpath(timeRate)).click();
         driver.findElement(By.xpath(rateRisk)).sendKeys("5");

@@ -43,7 +43,7 @@ public class FormsDataEntity {
         listForm.get(2).sendKeys(dataEntity);
         driver.findElement(By.xpath(arrowTypeEntity)).click();
         selectListItem.SelectItemLi(typeEntity);
-        driver.findElements(By.xpath("//div[@class='sapMSwtHandle']")).get(1).click();
+
 
         int x = 0;
         for (Map.Entry<String,String> attribute : attributeList.entrySet()) {

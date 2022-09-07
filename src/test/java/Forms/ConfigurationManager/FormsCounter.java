@@ -27,10 +27,10 @@ public class FormsCounter {
         listForm.get(1).sendKeys(Counter);
         listForm.get(2).click();
         listForm.get(2).sendKeys(Counter);
+        listForm.get(3).click();
+        listForm.get(3).sendKeys(inicio);
         listForm.get(4).click();
-        listForm.get(4).sendKeys(inicio);
-        listForm.get(5).click();
-        listForm.get(5).sendKeys(incremento);
+        listForm.get(4).sendKeys(incremento);
         basicControl.btnSave();
     }
 

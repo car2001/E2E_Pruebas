@@ -31,7 +31,7 @@ public class FormsNotificationProfile {
         listForm.get(0).click();
         listForm.get(0).sendKeys(notification);
         listForm.get(1).click();
-        listForm.get(2).sendKeys(notification);
+        listForm.get(1).sendKeys(notification);
         listForm.get(2).click();
         listForm.get(2).sendKeys("Descripción " + notification);
         driver.findElement(By.xpath(addItem)).click();

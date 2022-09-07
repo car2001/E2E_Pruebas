@@ -70,26 +70,28 @@ public class FormsProcess {
         basicControl.btnSave();
     }
 
-    private void securityProfile(){
+    private void securityProfile() throws InterruptedException {
         //SECURITY PROFILE
         WebElement btnSecurity =  driver.findElement(By.xpath(addSecurityProfile));
         action.doubleClick(btnSecurity).perform();
         //Permisos
         List<WebElement> permisos = driver.findElements(By.xpath(groupPermisos));
+        List<WebElement> tipo = driver.findElements(By.xpath(selectType));
+        List<WebElement> value = driver.findElements(By.xpath(valueA));
+        //Instance Creator
         permisos.get(0).click();
         selectListItem.SelectItemLi("Instance Creator");
-        permisos.get(1).click();
-        selectListItem.SelectItemLi("Administrator");
-        //Tipo
-        List<WebElement> tipo = driver.findElements(By.xpath(selectType));
         tipo.get(0).click();
         selectListItem.SelectItemLi("Role");
+        value.get(0).click();
+        selectListItem.SelectItemLi("Superadmin");
+        Thread.sleep(500);
+        //Instance Administrator
+        permisos.get(1).click();
+        selectListItem.SelectItemLi("Administrator");
         tipo.get(1).click();
         selectListItem.SelectItemLi("Role");
         //Value
-        List<WebElement> value = driver.findElements(By.xpath(valueA));
-        value.get(0).click();
-        selectListItem.SelectItemLi("Superadmin");
         value.get(1).click();
         selectListItem.SelectItemLi("Superadmin");
     }

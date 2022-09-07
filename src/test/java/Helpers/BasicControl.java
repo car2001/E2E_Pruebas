@@ -53,7 +53,7 @@ public class BasicControl {
     }
 
     public List<WebElement> inputForms(){
-        String input = "//div[contains(@id,'__xmlview') and @class='sapUiView sapUiXMLView sapMNavItem']//*[@class='sapMInputBaseInner' or @class='sapMInputBaseInner sapMTextAreaInner sapMTextAreaGrow']";
+        String input = "//div[contains(@id,'__xmlview') and @class='sapUiView sapUiXMLView sapMNavItem']//*[@class='sapMInputBaseInner' or @class='sapMInputBaseInner sapMTextAreaInner sapMTextAreaGrow'][not(contains(@disabled,'disabled'))]";
         List<WebElement> listForm = driver.findElements(By.xpath(input));
         return  listForm;
     }

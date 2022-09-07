@@ -70,6 +70,8 @@ public class ServiceRequest {
         basicControl.logo();
         LoginApplications.loginDataRecord(driver);
         recordManager.createDRM_ServiceRequest();
+        basicControl.logo();
+        LoginApplications.loginPM(driver);
     }
 
     @Test

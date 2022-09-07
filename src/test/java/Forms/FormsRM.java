@@ -145,10 +145,10 @@ public class FormsRM {
 
     public static void formDeploymentPackage(WebDriver driver , String DeploymentPackage,String Proyecto,String release){
         listForm = FormsControl.controlNew(driver,"paquete de instalación","");
+        listForm.get(0).click();
+        listForm.get(0).sendKeys(DeploymentPackage);
         listForm.get(1).click();
         listForm.get(1).sendKeys(DeploymentPackage);
-        listForm.get(2).click();
-        listForm.get(2).sendKeys(DeploymentPackage);
         List<WebElement> listComboBox = driver.findElements(By.className("sapMSltLabel"));
         listComboBox.get(0).click();
         driver.findElement(By.xpath("//li[text()='"+Proyecto+"']")).click();
@@ -162,10 +162,10 @@ public class FormsRM {
 
     public static void formDeploymentRequest(WebDriver driver , String DeploymentRequest,String Proyecto,String release) throws InterruptedException {
         listForm = FormsControl.controlNew(driver,"solicitud de instalación","");
+        listForm.get(0).click();
+        listForm.get(0).sendKeys(DeploymentRequest);
         listForm.get(1).click();
         listForm.get(1).sendKeys(DeploymentRequest);
-        listForm.get(2).click();
-        listForm.get(2).sendKeys(DeploymentRequest);
         List<WebElement> listComboBox = driver.findElements(By.className("sapMSltLabel"));
         listComboBox.get(0).click();
         driver.findElements(By.xpath("//li[text()='"+Proyecto+"']")).get(1).click();

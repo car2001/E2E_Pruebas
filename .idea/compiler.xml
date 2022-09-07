@@ -9,6 +9,7 @@
         <module name="E2E_PRUEBAS" />
         <module name="Pruebas" />
         <module name="TestSelenium" />
+        <module name="E2E_Pruebas" />
         <module name="JavaSeleniumTest_Unitarias" />
         <module name="git-JavaSeleniumTest" />
       </profile>

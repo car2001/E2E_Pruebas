@@ -37,10 +37,10 @@ public class FormsControl {
         basicControl = new BasicControl(driver);
         basicControl.btnEdit();
         listForm = basicControl.inputForms();
-        WebElement disabled = listForm.get(1);
+        WebElement disabled = listForm.get(0);
         while(disabled.isEnabled() == false){
             listForm = driver.findElements(By.className("sapMInputBaseInner"));
-            disabled = listForm.get(1);
+            disabled = listForm.get(0);
         }
         inputFocus(driver);
         return listForm;
@@ -49,8 +49,8 @@ public class FormsControl {
     public static void inputFocus(WebDriver driver){
         boolean focus = false;
         while(focus == false){
-            listForm.get(1).click();
-            if(listForm.get(1).equals(driver.switchTo().activeElement())){
+            listForm.get(0).click();
+            if(listForm.get(0).equals(driver.switchTo().activeElement())){
                 System.out.println("Element is focused");
                 focus = true;
             }

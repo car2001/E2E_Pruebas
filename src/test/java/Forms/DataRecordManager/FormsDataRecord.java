@@ -27,8 +27,7 @@ public class FormsDataRecord {
         this.asserts = new Asserts(driver);
     }
 
-    public void createDataRecord(String [][] data){
-        //driver.findElement(By.xpath(newDataRecord)).click();
+    public void createDataRecord(String [][] data) throws InterruptedException {
         int filas = data.length;
         int col = data[0].length;
         for(int i =0 ; i < filas; i++){
@@ -39,6 +38,7 @@ public class FormsDataRecord {
                 listForm.get(j).sendKeys(data[i][j]);
             }
             basicControl.btnSave();
+            Thread.sleep(1000);
             asserts.assertSave();
         }
 

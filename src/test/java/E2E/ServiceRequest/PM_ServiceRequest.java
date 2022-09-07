@@ -26,8 +26,8 @@ public class PM_ServiceRequest {
     }
 
     public void createPM_ServiceRequest() throws InterruptedException, AWTException, IOException {
-        hierarchies.crearHierarchies("Gestión Soporte");
-        process.crearProceso("Gestión Soporte","Service Request Selenium","INS-SR","SLA-SR");
+        hierarchies.crearHierarchies("Gestión Soporte Selenium");
+        process.crearProceso("Gestión Soporte Selenium","Service Request Selenium","INS-SR","SLA-SR");
         //basicControl.openWizard();
         //step1.step1Process();
     }

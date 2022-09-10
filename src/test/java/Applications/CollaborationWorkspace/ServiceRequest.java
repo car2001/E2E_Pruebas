@@ -60,18 +60,19 @@ public class ServiceRequest {
         LoginApplications.loginRM(driver,"Change Container");
         basicControl.logo();
         LoginApplications.loginCM(driver);
-        //configurationManager.createCM_ServiceRequest();
+        configurationManager.createCM_ServiceRequest();
         basicControl.logo();
         LoginApplications.loginPM(driver);
-        //processManager.createPM_ServiceRequest();
+        processManager.createPM_ServiceRequest();
         basicControl.logo();
         LoginApplications.loginDataEntity(driver);
-        //entityManager.createDEM_ServiceRequest();
+        entityManager.createDEM_ServiceRequest();
         basicControl.logo();
         LoginApplications.loginDataRecord(driver);
         recordManager.createDRM_ServiceRequest();
         basicControl.logo();
         LoginApplications.loginPM(driver);
+        processManager.createSteps_ServiceRequest();
     }
 
     @Test

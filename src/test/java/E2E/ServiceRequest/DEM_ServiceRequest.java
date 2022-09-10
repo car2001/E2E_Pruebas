@@ -45,6 +45,8 @@ public class DEM_ServiceRequest {
         entity.crearDataEntity("Decision2 Selenium",listAttributeDecision2(),"Cross Environment Entity");
         entity.crearDataEntity("Project Selenium",listAttributeProject(),"Cross Environment Entity");
         entity.crearDataEntity("Request Closure Authorization Selenium",listAttributeRequestClosure(),"Cross Environment Entity");
+        //transactional
+        entity.crearDataEntity("Tabla Selenium",listAttributeTablaSelenium(),"Transactional");
         accessBranch.clickBranches(0);
         //Cross Process
         entity.crearDataEntityProcess("Gestión Soporte Selenium","Service Request Selenium","RequestCategory Selenium",listAttributeRequestCategory(),"Cross Environment Entity");
@@ -150,6 +152,13 @@ public class DEM_ServiceRequest {
         Map<String,String> attributeList =  new LinkedHashMap<String,String>();
         attributeList.put("MotivoSolicitudSR","String");
         attributeList.put("IDMotivoSolicitudSR","String");
+        return attributeList;
+    }
+
+    private Map<String,String> listAttributeTablaSelenium(){
+        Map<String,String> attributeList =  new LinkedHashMap<String,String>();
+        attributeList.put("ID","String");
+        attributeList.put("Descripción","String");
         return attributeList;
     }
 }

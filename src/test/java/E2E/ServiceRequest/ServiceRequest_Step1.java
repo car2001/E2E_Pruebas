@@ -46,7 +46,7 @@ public class ServiceRequest_Step1 {
         driver.findElement(By.xpath("//div[@data-action='delete']")).click();
         driver.findElement(By.xpath("//bdi[text()='Sí' or text()='Yes']")).click();
         driver.findElement(By.xpath(openFile)).click();
-        Runtime.getRuntime().exec("D:\\DOCUMENTOS\\Yo\\WEDOX\\Entregables\\Pruebas Automatizado\\E2E_PRUEBAS\\resources\\cargararchivo.exe");
+        Runtime.getRuntime().exec("D:\\Pruebas_Selenium\\E2E_Test\\E2E_Pruebas\\resources\\cargararchivo.exe");
         Thread.sleep(5000);
         basicControl.btnSave(saveModel);
         ChargePopPup.PopPupGeneral(driver,wait);

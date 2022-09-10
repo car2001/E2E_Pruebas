@@ -29,6 +29,7 @@ public class DRM_ServiceRequest {
     }
 
     public void createDRM_ServiceRequest() throws InterruptedException {
+        //Cross
         entityRecord.crearDataRecordGlobal("Category Selenium",listDataCategorySelenium(),"Cross Environment Entity");
         entityRecord.crearDataRecord("Priority Selenium",listDataPrioritySelenium());
         entityRecord.crearDataRecord("Decision2 Selenium",listDataDecision2Selenium());
@@ -37,19 +38,22 @@ public class DRM_ServiceRequest {
         entityRecord.scrollTop();
         accessBranch.clickBranches(searchScrollElement.elementSearch("Cross Environment Entity"));
         accessBranch.clickBranches(searchScrollElement.elementSearch("Global"));
+        //Local
         entityRecord.crearDataRecordGlobal("Employee Selenium",listDataRequestEmployeeSelenium(),"Local Environment Entity");
         entityRecord.crearDataRecord("CustomerContact Selenium",listDataRequestCustomerContactSelenium());
         entityRecord.crearDataRecord("Customer Selenium",listDataRequestCustomerSelenium());
         entityRecord.scrollTop();
+        accessBranch.clickBranches(searchScrollElement.elementSearch("Local Environment Entity"));
         accessBranch.clickBranches(searchScrollElement.elementSearch("Global"));
+        //Process
         entityRecord.crearDataRecordProcess("Gestión Soporte Selenium", "Service Request Selenium","RequestCategory Selenium",listDataRequestCategorySelenium(),"Cross Environment Entity");
         entityRecord.crearDataRecord("Impact Selenium",listDataRequestImpactSelenium());
         entityRecord.crearDataRecord("RequestReason Selenium",listDataRequestReasonSelenium());
+        accessBranch.clickBranches(searchScrollElement.elementSearch("Cross Environment Entity"));
         entityRecord.scrollTop();
-        accessBranch.clickBranches(searchScrollElement.elementSearch("Process Hierarchies"));
-        Thread.sleep(1000);
-        //entityRecord.crearDataRecordProcess("Gestión Soporte Selenium", "Service Request Selenium","Categoria SR Selenium",listDataRequestCategoriaSR(),"Local Environment Entity");
-        //entityRecord.crearDataRecord("Motivo de Solicitud SR Selenium",listDataRequestMotivoSolicitudSR());
+        accessBranch.clickBranches(searchScrollElement.elementSearch("Local Environment Entity"));
+        entityRecord.crearDataRecord("Categoria SR Selenium",listDataRequestCategoriaSR());
+        entityRecord.crearDataRecord("Motivo de Solicitud SR Selenium",listDataRequestMotivoSolicitudSR());
     }
 
     private String[][] listDataCategorySelenium(){

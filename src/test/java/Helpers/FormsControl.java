@@ -51,12 +51,10 @@ public class FormsControl {
         while(focus == false){
             listForm.get(0).click();
             if(listForm.get(0).equals(driver.switchTo().activeElement())){
-                System.out.println("Element is focused");
                 focus = true;
             }
             else {
                 listForm = driver.findElements(By.className("sapMInputBaseInner"));
-                System.out.println("Element is no focused");
                 focus = false;
             }
         }

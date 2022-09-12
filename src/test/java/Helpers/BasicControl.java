@@ -140,7 +140,7 @@ public class BasicControl {
         WebElement verticalbar = driver.findElement(By.xpath("//div[@title='Ajustar el tamaño entre el panel 1 y el panel 2' or @title='Resize between pane 1 and pane 2']"));// este el original
         action.doubleClick(verticalbar).build().perform();
         driver.findElement(By.xpath("//span[contains(@id,'--btnGoToWizard-content')]")).click();
-        ChargePopPup.PopPupDetail(driver,wait);
+        //ChargePopPup.PopPupDetail(driver,wait);
     }
 
 

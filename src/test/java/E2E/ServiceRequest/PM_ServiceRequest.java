@@ -42,15 +42,10 @@ public class PM_ServiceRequest {
 
     public void createSteps_ServiceRequest() throws IOException, InterruptedException {
         searchProcess("Service Request Selenium");
-    }
-
-    private void clickProcess() throws IOException, InterruptedException {
-        WebElement process = driver.findElement(By.xpath("//span[text()='Service Request Selenium']"));
-        process.click();
-        ChargePopPup.PopPupGeneral(driver,new WebDriverWait(driver, Duration.ofSeconds(100)));
         basicControl.openWizard();
         step1.step1Process();
     }
+
 
     private void searchProcess(String nameProcess){
         int xpos = searchScrollElement.elementSearch("Process Hierarchies");
@@ -64,7 +59,9 @@ public class PM_ServiceRequest {
                     accessBranch.clickBranches(xpos);
                     xpos = searchScrollElement.elementSearch(nameProcess);
                     if(xpos != -1){
-                        WebElement process = driver.findElement(By.xpath());
+                        WebElement process = driver.findElement(By.xpath("//span[text()='"+nameProcess+"']"));
+                        process.click();
+                        ChargePopPup.PopPupGeneral(driver,new WebDriverWait(driver, Duration.ofSeconds(100)));
                         //Ingreso al proceso
                     }else{
                         System.out.println("No hay proceso buscado");

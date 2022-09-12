@@ -10,7 +10,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.Duration;
 
 
@@ -22,7 +25,7 @@ public class ServiceRequest_Step1 {
     private Asserts asserts;
     private Actions action;
     private String editModel = "--btnEdit-img";
-    private String openFile = "//span[contains(@id,'__xmlview6--btnOpenFile-img')]";
+    private String openFile = "//span[contains(@id,'--btnOpenFile-img')]";
     private String saveModel = "--btnSave-inne";
 
     public ServiceRequest_Step1(WebDriver driver){
@@ -46,11 +49,27 @@ public class ServiceRequest_Step1 {
         driver.findElement(By.xpath("//div[@data-action='delete']")).click();
         driver.findElement(By.xpath("//bdi[text()='Sí' or text()='Yes']")).click();
         driver.findElement(By.xpath(openFile)).click();
-        Runtime.getRuntime().exec("D:\\Pruebas_Selenium\\E2E_Test\\E2E_Pruebas\\resources\\cargararchivo.exe");
-        Thread.sleep(5000);
+        String rutaExe , rutaDiagrama;
+        rutaDiagrama = pathFile("resources\\ServiceRequest\\diagramSR.bpmn");
+        rutaExe = pathFile("resources\\ServiceRequest\\cargardiagramaServiceRequest.exe");
+        ProcessBuilder pb = new ProcessBuilder(rutaExe,rutaDiagrama);
+        pb.start();
+        Thread.sleep(6000);
         basicControl.btnSave(saveModel);
         ChargePopPup.PopPupGeneral(driver,wait);
         asserts.assertSaveDiagram();
     }
+
+    private  String pathFile(String NOMBRE_ARCHIVO){
+        final String pathAbsolute;
+        Path rutaRelativa = Paths.get(NOMBRE_ARCHIVO);
+        Path rutaAbsoluta = rutaRelativa.toAbsolutePath();
+        File ca  = new File("cargardiagramaServiceRequest.exe");
+        ca.getAbsolutePath();
+
+        return  rutaAbsoluta.toString();
+    }
+
+
 
 }

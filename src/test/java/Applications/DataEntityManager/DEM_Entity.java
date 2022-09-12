@@ -51,7 +51,12 @@ public class DEM_Entity {
                 xpos = searchScrollElement.elementSearch(nameProcess);
                 if(xpos != -1){
                     accessBranch.clickBranches(xpos);
-                    crearDataEntity(dataName,attributeList,typeEntity);
+                    xpos = searchScrollElement.elementSearch("Data Entities");
+                    if(xpos != -1){
+                        crearDataEntity(dataName,attributeList,typeEntity);
+                    }else{
+                        Assert.assertEquals("No hay data Entities","Si hay data Entities");
+                    }
                 }else{
                     Assert.assertEquals("No hay proceso","Si hay proceso");
                 }

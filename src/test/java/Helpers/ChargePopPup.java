@@ -13,13 +13,12 @@ public class ChargePopPup {
             WebElement popupCarga = driver.findElement(By.xpath("//div[@id='sapUiBusyIndicator' and @class='sapUiUserSelectable']"));
             wait.until(ExpectedConditions.visibilityOf(popupCarga));
             wait.until(ExpectedConditions.invisibilityOf(popupCarga));
-            Thread.sleep(1000);
+            Thread.sleep(800);
             String carga = driver.findElement(By.id("sap-ui-blocklayer-popup")).getAttribute("style");
-            System.out.println(carga);
             while(carga.contains("z-index: 8; visibility: visible;")){
                 carga = driver.findElement(By.id("sap-ui-blocklayer-popup")).getAttribute("style");
-                System.out.println(carga);
             }
+            Thread.sleep(500);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

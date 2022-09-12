@@ -5,6 +5,7 @@ import Helpers.AccessBranch;
 import Helpers.BasicControl;
 import Helpers.ChargePopPup;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,6 +17,7 @@ public class LoginApplications {
     public static WebDriverWait wait;
     public static AccessBranch accessBranch;
     public static BasicControl basicControl;
+    public static JavascriptExecutor js;
 
     public static void loginOSM(WebDriver driver){
         wait = new WebDriverWait(driver, Duration.ofSeconds(100));
@@ -54,11 +56,17 @@ public class LoginApplications {
 
     public static void loginPM(WebDriver driver) throws InterruptedException {
         wait = new WebDriverWait(driver,Duration.ofSeconds(100));
+        js = (JavascriptExecutor) driver;
         accessBranch = new AccessBranch(driver);
         basicControl = new BasicControl(driver);
         basicControl.btnApplication("Process Manager");
         //Esperamos las cargas
+        String xmlview = basicControl.getXmlview();
         ChargePopPup.PopPupGeneral(driver,wait);
+        int tam = js.executeScript("let tam = document.getElementById('sap-ui-blocklayer-popup'); return(tam.clientHeight)").hashCode();
+        if(tam != 0){
+            ChargePopPup.PopPupGeneral(driver,wait);
+        }
     }
 
     public static void loginColl(WebDriver driver, String proceso){

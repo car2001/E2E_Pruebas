@@ -63,10 +63,19 @@ public class DRM_EntityRecord {
                 xpos = searchScrollElement.elementSearch(process);
                 if(xpos != -1){
                     accessBranch.clickBranches(xpos);
-                    accessBranch.clickBranches(xpos+1);
-                    xpos =searchScrollElement.elementSearch(typeEntity);
-                    accessBranch.clickBranches(xpos);
-                    crearDataRecord(dataName,attributeList);
+                    xpos = searchScrollElement.elementSearch("Data Entities");
+                    if(xpos != -1){
+                        accessBranch.clickBranches(xpos-1);
+                        xpos =searchScrollElement.elementSearch(typeEntity);
+                        if(xpos != -1){
+                            accessBranch.clickBranches(xpos);
+                            crearDataRecord(dataName,attributeList);
+                        }else{
+                            System.out.println("Error");
+                        }
+                    }else{
+                        System.out.println("Error");
+                    }
                 }else{
                     System.out.println("Error");
                 }

@@ -1,18 +1,13 @@
 package Applications.ProcessManager;
 
-import Forms.FormsPM;
-import Forms.ProcessManager.FormsHierarchie;
 import Forms.ProcessManager.FormsProcess;
 import Helpers.*;
-import HomePage.Login;
-import HomePage.LoginApplications;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.awt.*;
@@ -29,6 +24,7 @@ public class PM_Process {
     DynamicScroll searchScrollElement;
     Asserts asserts;
     JavascriptExecutor js;
+    ElementSVG elementSVG;
     WebDriverWait wait;
     FormsProcess formsProcess;
 
@@ -144,7 +140,7 @@ public class PM_Process {
     }
 
     public void step3Process()  throws InterruptedException, AWTException {
-        //Ingreso al paso 3
+/*        //Ingreso al paso 3
         driver.findElements(By.cssSelector(".sapUiIcon.sapUiIconMirrorInRTL.sapMITBFilterIcon.sapMITBBadgeHolder.sapMITBFilterDefault")).get(2).click();
         WebElement titleStep3 = driver.findElement(By.xpath("//span[text()='Asignar formularios' and contains(@id,'--objFormTitle')]"));
         wait.until(ExpectedConditions.visibilityOf(titleStep3));
@@ -153,7 +149,7 @@ public class PM_Process {
         //Ingresamos a la actividad 1
         String rect = "#__xmlview4--js-canvas-fb > div > div > svg > g";
         String task1 = "#__xmlview4--js-canvas-fb > div > div > svg > g > g > g > g.djs-children > g:nth-child(9) > g > rect.djs-hit.djs-hit-all";
-        ElementSVG.clickSVGElements(task1,js,action,driver,rect,0);
+        elementSVG.clickSVGElementCenter(task1);
         Thread.sleep(1000);
         driver.findElement(By.id("__xmlview4--btnAddACTF-inner")).click();
         Forms.FormsPM.createNewActivityForm(driver,AF);
@@ -161,7 +157,7 @@ public class PM_Process {
         Forms.FormsPM.panelActivityForm(driver,3,js);
         //Ingresamos a la actividad 2
         String task2 = "#__xmlview4--js-canvas-fb > div > div > svg > g > g > g > g.djs-children > g:nth-child(13) > g > rect.djs-hit.djs-hit-all";
-        ElementSVG.clickSVGElements(task2,js,action,driver,rect,0);
+        elementSVG.clickSVGElementCenter(task2);
         Thread.sleep(1000);
         driver.findElement(By.xpath("//input[contains(@id,'--cbActivityForm-inner') and @placeholder = 'Seleccione una opción']")).click();
         driver.findElement(By.xpath("//input[contains(@id,'--cbActivityForm-inner') and @placeholder = 'Seleccione una opción']")).sendKeys(AF);
@@ -170,7 +166,7 @@ public class PM_Process {
         Thread.sleep(1000);
         //Ingresamos a la actividad 3
         String task3 = "#__xmlview4--js-canvas-fb > div > div > svg > g > g > g > g.djs-children > g:nth-child(16) > g > rect.djs-outline";
-        ElementSVG.clickSVGElements(task3,js,action,driver,rect,0);
+        elementSVG.clickSVGElementCenter(task3);
         Thread.sleep(1000);
         driver.findElement(By.xpath("//span[contains(@id,'--btnEmailDefinition-inner')]")).click();
         WebElement popEmailDefinition = driver.findElement(By.xpath("//span[text()='Editor de correo electrónico']"));
@@ -185,7 +181,7 @@ public class PM_Process {
         driver.findElement(By.xpath("//span[contains(@id,'--btnSaveEE-content')]")).click();
         driver.findElement(By.xpath("//button[@title='Rechazar']")).click();
         driver.findElement(By.xpath("//span[contains(@id,'--btnSaveModelerFB-inner')]")).click();
-        asserts.assertSave();
+        asserts.assertSave();*/
     }
 
     public void step4Process() throws InterruptedException {
@@ -199,7 +195,7 @@ public class PM_Process {
         // Ingresamos a la actividad 1
         String rect = "#__xmlview4--js-canvas-sp > div > div > svg > g > g > g > g.djs-element.djs-shape.highlight-gray > g";
         String task1 = "#__xmlview4--js-canvas-sp > div > div > svg > g > g > g > g.djs-children > g:nth-child(9) > g > rect.djs-hit.djs-hit-all";
-        ElementSVG.clickSVGElements(task1,js,action,driver,rect,0);
+        elementSVG.clickSVGElementCenter(task1);
         Thread.sleep(1000);
         driver.findElement(By.xpath("//div[contains(@id,'--allowReassigmentSUP-handle')]")).click();
         driver.findElement(By.xpath("//div[contains(@id,'--allowInsCancellationSUP-handle')]")).click();
@@ -223,7 +219,7 @@ public class PM_Process {
         Thread.sleep(1000);
         // Ingresamos a la actividad 2
         String task2 = "#__xmlview4--js-canvas-sp > div > div > svg > g > g > g > g.djs-children > g:nth-child(13) > g > rect.djs-hit.djs-hit-all";
-        ElementSVG.clickSVGElements(task2,js,action,driver,rect,0);
+        elementSVG.clickSVGElementCenter(task2);
         Thread.sleep(1000);
         driver.findElement(By.xpath("//div[contains(@id,'--allowReassigmentSUP-handle')]")).click();
         driver.findElement(By.xpath("//div[contains(@id,'--allowInsCancellationSUP-handle')]")).click();
@@ -260,7 +256,7 @@ public class PM_Process {
         // Ingresamos a la actividad 1
         String rect ="#__xmlview4--js-canvas-ic > div > div > svg > g > g > g > g.djs-element.djs-shape.highlight-gray > g";
         String task1 = "#__xmlview4--js-canvas-ic > div > div > svg > g > g > g > g.djs-children > g:nth-child(9) > g > rect.djs-hit.djs-hit-all";
-        ElementSVG.clickSVGElements(task1,js,action,driver,rect,0);
+        elementSVG.clickSVGElementCenter(task1);
         Thread.sleep(1000);
         driver.findElement(By.xpath("//div[contains(@id,'--allowDueDateChangeIC-handle')]")).click();
         driver.findElement(By.xpath("//input[contains(@id,'--selectSLAProperty-inner')]")).click();
@@ -272,7 +268,7 @@ public class PM_Process {
         Thread.sleep(1000);
         //Ingresamos a la actividad 2
         String task2 = "#__xmlview4--js-canvas-ic > div > div > svg > g > g > g > g.djs-children > g:nth-child(13) > g > rect.djs-hit.djs-hit-all";
-        ElementSVG.clickSVGElements(task2,js,action,driver,rect,0);
+        elementSVG.clickSVGElementCenter(task2);
         Thread.sleep(1000);
         driver.findElement(By.xpath("//div[contains(@id,'--allowDueDateChangeIC-handle')]")).click();
         driver.findElement(By.xpath("//input[contains(@id,'--selectSLAProperty-inner')]")).click();
@@ -284,7 +280,7 @@ public class PM_Process {
         Thread.sleep(1000);
         //Creamos a la regla Si
         String reglaSi = "#__xmlview4--js-canvas-ic > div > div > svg > g > g > g > g.djs-children > g:nth-child(4) > g > polyline";
-        ElementSVG.clickSVGElements(reglaSi,js,action,driver,rect,0);
+        elementSVG.clickSVGElementCenter(reglaSi);
         Thread.sleep(1000);
         driver.findElement(By.xpath("//span[contains(@id,'--btnAddRE-img')]")).click();
         ChargePopPup.PopPupGeneral(driver,wait);
@@ -310,7 +306,7 @@ public class PM_Process {
         ChargePopPup.PopPupGeneral(driver,wait);
         //Creamos regla NO
         String reglaNo = "#__xmlview4--js-canvas-ic > div > div > svg > g > g > g > g.djs-children > g:nth-child(2) > g > polyline";
-        ElementSVG.clickSVGElements(reglaNo,js,action,driver,rect,-40);
+        elementSVG.clickSVGElementRule(reglaNo,-40,0);
         Thread.sleep(1000);
         driver.findElement(By.xpath("//span[contains(@id,'--btnAddRE-img')]")).click();
         ChargePopPup.PopPupGeneral(driver,wait);

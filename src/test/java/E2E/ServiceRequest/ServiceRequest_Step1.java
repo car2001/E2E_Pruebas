@@ -38,7 +38,7 @@ public class ServiceRequest_Step1 {
 
     public void step1Process() throws InterruptedException, IOException {
         //Ingrsamos al paso 1 Model Process
-        FormsControl.controlTitle(driver,"Modelar proceso","Model Process");
+        FormsControl.controlTitle(driver,"Modelar Proceso","Model Process");
         //Editamos el paso 1
         basicControl.btnEdit(editModel);
         //Obtenemos xmlview

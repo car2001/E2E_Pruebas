@@ -8,12 +8,34 @@ import org.openqa.selenium.interactions.Actions;
 
 public class ElementSVG {
 
-    public static void clickSVGElements(String cssSelectorSVG, JavascriptExecutor js, Actions action , WebDriver driver , String rect, int x){
-        js.executeScript("let g = document.querySelector('"+rect+"'); g.scrollIntoView();");
+    private WebDriver driver;
+    private JavascriptExecutor js;
+    private Actions action;
+    private BasicControl basicControl;
 
-        WebElement task1 =  driver.findElement(By.cssSelector(cssSelectorSVG));
-        action.moveToElement(task1,x,0).click().build().perform();
-        js.executeScript("let y = document.getElementById('__xmlview4--detail-cont');y.scroll(0,0)");
+    public ElementSVG(WebDriver driver){
+        this.driver = driver;
+        this.js = (JavascriptExecutor) driver;
+        this.basicControl = new BasicControl(driver);
+        this.action = new Actions(driver);
+    }
+
+    public  void clickSVGElementCenter(String cssSelectorSVG) throws InterruptedException {
+        String xmlview = basicControl.getXmlview();
+        js.executeScript("let g = document.querySelector('"+cssSelectorSVG+"'); g.scrollIntoView();");
+        WebElement task =  driver.findElement(By.cssSelector(cssSelectorSVG));
+        action.moveToElement(task,0,0).click().build().perform();
+        Thread.sleep(1000);
+        js.executeScript("let y = document.getElementById('"+xmlview+"--detail-cont');y.scroll(0,0)");
+    }
+
+    public  void clickSVGElementRule(String cssSelectorSVG,int x,int y) throws InterruptedException {
+        String xmlview = basicControl.getXmlview();
+        js.executeScript("let g = document.querySelector('"+cssSelectorSVG+"'); g.scrollIntoView();");
+        WebElement task =  driver.findElement(By.cssSelector(cssSelectorSVG));
+        action.moveToElement(task,x,y).click().build().perform();
+        Thread.sleep(1000);
+        js.executeScript("let y = document.getElementById('"+xmlview+"--detail-cont');y.scroll(0,0)");
     }
 
 

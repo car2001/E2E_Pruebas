@@ -20,16 +20,18 @@ public class FormsActivityForm {
     private WebDriver driver;
     private List<WebElement> listForm;
     private BasicControl basicControl;
+    private JavascriptExecutor js;
     private WebDriverWait wait;
 
     public FormsActivityForm(WebDriver driver){
         this.driver = driver;
         this.basicControl = new BasicControl(driver);
+        this.js = (JavascriptExecutor) driver;
         this.wait = new WebDriverWait(driver,Duration.ofSeconds(100));
     }
 
     public void createNewActivityForm(String nameAf){
-        listForm = FormsControl.controlNew(driver,"formulario de actividad","Activity Form");
+        listForm = FormsControl.controlNew(driver,"Formulario de Actividad","New Activity Form");
         listForm.get(0).click();
         listForm.get(0).sendKeys(nameAf);
         listForm.get(1).click();
@@ -39,7 +41,7 @@ public class FormsActivityForm {
         basicControl.btnSave();
     }
 
-    public void panelActivityForm(WebDriver driver, Actions actions , int tamModel, JavascriptExecutor js ) throws InterruptedException, AWTException {
+    public void panelActivityForm(int tamModel) throws InterruptedException, AWTException {
         wait = new WebDriverWait(driver, Duration.ofSeconds(100));
         driver.findElement(By.xpath("//span[contains(@id,'--TreeDMFB-rows-row0-treeicon')]")).click();
         Thread.sleep(2000);

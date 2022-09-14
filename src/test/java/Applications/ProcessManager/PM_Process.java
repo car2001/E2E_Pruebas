@@ -58,7 +58,7 @@ public class PM_Process {
             if(xpos!=-1){
                 WebElement process = driver.findElement(By.xpath("//span[text()='"+component+"']"));
                 action.contextClick(process).perform();
-                driver.findElement(By.xpath("//div[normalize-space()='New Process']")).click();
+                driver.findElement(By.xpath("//div[normalize-space()='New Process' or text()='Nuevo Proceso']")).click();
                 Thread.sleep(1000);
                 formsProcess.createProcess(nameProcess,INS,SLA);
                 ChargePopPup.PopPupMain(driver,wait);

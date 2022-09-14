@@ -29,7 +29,7 @@ public class FormsINS {
 
     public void formCreateINS(String INS , String separador , String fixedValue, String counter){
         basicControl.btnAdd();
-        listForm = FormsControl.controlNew(driver,"Nuevo esquema de numeración de instancias","Instance Numbering Schema");
+        listForm = FormsControl.controlNew(driver,"Esquema de Numeración de Instancias","Instance Numbering Schema");
         listForm.get(0).click();
         listForm.get(0).sendKeys(INS);
         listForm.get(1).click();

@@ -46,7 +46,7 @@ public class FormsProcess {
     }
 
     public void createProcess(String process,String INS, String SLA) throws InterruptedException {
-        listForm = FormsControl.controlNew(driver,"proceso","Process");
+        listForm = FormsControl.controlNew(driver,"Proceso","Process");
         listForm.get(0).click();
         listForm.get(0).sendKeys(process);
         listForm.get(1).click();

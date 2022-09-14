@@ -27,7 +27,7 @@ public class FormsNotificationProfile {
 
     public void formCreateNotification(WebDriver driver, String notification){
         basicControl.btnAdd();
-        listForm = FormsControl.controlNew(driver,"perfil de notificación","Notification Profile");
+        listForm = FormsControl.controlNew(driver,"Perfil de Notificación","Notification Profile");
         listForm.get(0).click();
         listForm.get(0).sendKeys(notification);
         listForm.get(1).click();
@@ -41,7 +41,7 @@ public class FormsNotificationProfile {
     }
 
     public void formEditNotification(WebDriver driver,String notification) throws InterruptedException {
-        listForm = FormsControl.controlEdit(driver,"perfil de notificación","Notification Profile");
+        listForm = FormsControl.controlEdit(driver,"Perfil de Notificación","Notification Profile");
         listForm.get(0).click();
         listForm.get(0).clear();
         listForm.get(0).sendKeys(notification);

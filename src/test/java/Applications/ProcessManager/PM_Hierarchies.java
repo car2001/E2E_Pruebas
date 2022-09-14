@@ -38,7 +38,7 @@ public class PM_Hierarchies {
         accessBranch.clickBranches(1);
         WebElement hierarchies = driver.findElement(By.xpath("//span[text()='"+component+"']"));
         action.contextClick(hierarchies).perform();
-        driver.findElement(By.xpath("//div[normalize-space()='New Level']")).click();
+        driver.findElement(By.xpath("//div[normalize-space()='New Level' or text()='Nuevo Nivel']")).click();
         Thread.sleep(1000);
         formsHierarchie.createNewHierarchie(nameLevel);
         asserts.assertSave();

@@ -20,7 +20,7 @@ public class FormsHierarchie {
         this.basicControl = new BasicControl(driver);
     }
     public void createNewHierarchie(String hierarchie){
-        listForm = FormsControl.controlNew(driver,"nivel","Level");
+        listForm = FormsControl.controlNew(driver,"Nivel","Level");
         listForm.get(0).click();
         listForm.get(0).sendKeys(hierarchie);
         listForm.get(1).click();

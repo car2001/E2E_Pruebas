@@ -35,7 +35,7 @@ public class FormsRiskProfile {
 
     public void formCreateRisk(WebDriver driver, String risk){
         basicControl.btnAdd();
-        listForm = FormsControl.controlNew(driver,"perfil de riesgo","Risk Profile");
+        listForm = FormsControl.controlNew(driver,"Perfil de Riesgo","Risk Profile");
         listForm.get(0).click();
         listForm.get(0).sendKeys(risk);
         listForm.get(1).click();
@@ -49,7 +49,7 @@ public class FormsRiskProfile {
         basicControl.btnSave();
     }
     public void formEditRisk(WebDriver driver,String risk) throws InterruptedException {
-        listForm = FormsControl.controlEdit(driver,"perfil de riesgo","Risk Profile");
+        listForm = FormsControl.controlEdit(driver,"Perfil de Riesgo","Risk Profile");
         listForm.get(0).click();
         listForm.get(0).clear();
         listForm.get(0).sendKeys(risk);

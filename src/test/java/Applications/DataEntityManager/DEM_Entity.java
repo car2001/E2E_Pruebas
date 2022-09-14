@@ -45,7 +45,7 @@ public class DEM_Entity {
         int xpos = searchScrollElement.elementSearch(hierarchie);
         if(xpos != -1){
             accessBranch.clickBranches(xpos);
-            xpos = searchScrollElement.elementSearch("Process");
+            xpos = searchScrollElement.elementSearch("Processes");
             if (xpos != -1){
                 accessBranch.clickBranches(xpos);
                 xpos = searchScrollElement.elementSearch(nameProcess);
@@ -71,7 +71,7 @@ public class DEM_Entity {
     public void crearDataEntity(String dataName,Map<String,String> attributeList,String typeEntity) throws InterruptedException {
         WebElement entity = driver.findElement(By.xpath("//span[text()='"+componente+"']"));
         action.contextClick(entity).perform();
-        driver.findElement(By.xpath("//div[normalize-space()='New Entity Manager' or text()='Nuevo gestor de entidad']")).click();
+        driver.findElement(By.xpath("//div[normalize-space()='New Entity Manager' or text()='Nuevo Gestor de Entidad']")).click();
         Thread.sleep(1000);
         formsDataEntity.createDataEntity(dataName,attributeList,typeEntity);
         asserts.assertSave();

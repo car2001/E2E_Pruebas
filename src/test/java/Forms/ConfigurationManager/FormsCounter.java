@@ -20,7 +20,7 @@ public class FormsCounter {
 
     public  void formCreateCounter(String Counter, String inicio , String incremento){
         basicControl.btnAdd();
-        listForm = FormsControl.controlNew(driver,"contador","Counter");
+        listForm = FormsControl.controlNew(driver,"Contador","Counter");
         listForm.get(0).click();
         listForm.get(0).sendKeys(Counter);
         listForm.get(1).click();

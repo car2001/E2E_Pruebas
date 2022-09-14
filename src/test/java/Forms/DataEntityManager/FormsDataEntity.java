@@ -24,7 +24,7 @@ public class FormsDataEntity {
     private String arrowTypeEntity = "//div[contains(@id,'xmlview')]//span[contains(@id,'idSelectEntityType-arrow')]";
     private String arrowTbl = "//table[contains(@id,'--idTableAttribute-listUl')]//span[contains(@class,'sapMSltArrow')]";
     private String inputTbl = "//table[contains(@id,'--idTableAttribute-listUl')]//div[not(contains(@id,'idDisplayNameGrid'))]//input[contains(@class,'sapMInputBaseInner')]";
-    private String addAtributte = "//button[@title='Añadir' or @title='Add']";
+    private String addAtributte = "//button[@title='Agregar' or @title='Add']";
 
     public FormsDataEntity(WebDriver driver){
         this.driver = driver;
@@ -34,7 +34,7 @@ public class FormsDataEntity {
     }
 
     public void createDataEntity(String dataEntity,Map<String,String> attributeList,String typeEntity) throws InterruptedException {
-        listForm = FormsControl.controlNew(driver,"entidad de datos","Data Entity");
+        listForm = FormsControl.controlNew(driver,"Entidad de Datos","Data Entity");
         listForm.get(0).click();
         listForm.get(0).sendKeys(dataEntity);
         listForm.get(1).click();

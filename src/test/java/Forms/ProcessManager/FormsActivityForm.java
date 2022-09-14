@@ -23,7 +23,7 @@ public class FormsActivityForm {
     private Actions action;
     private JavascriptExecutor js;
     private WebDriverWait wait;
-    private String more = "//div[contains(@id,'--itbMainFB--header-overflow-text')]//span[text()='Más' or text()='More'][@class='sapMITHTextContent sapMITBBadgeHolder']";
+    private String more = "//div[contains(@id,'--itbMainFB--header-overflow-text')]";
     private String container = "//span[text()='Contenedores' or text()='Containers'][@class='sapMText sapMTextNoWrap sapMITBText sapMITBBadgeHolder']";
     private String dataModel = "//span[text()='Modelo de Datos' or text()='Data Model'][@class='sapMText sapMTextNoWrap sapMITBText sapMITBBadgeHolder']";
     private String dataModelList = "//span[contains(@id,'--TreeDMFB-rows-row0-treeicon')]";
@@ -67,24 +67,41 @@ public class FormsActivityForm {
     }
 
     public void panelActivityForm() throws InterruptedException, AWTException {
-        //Click en more
-        WebElement btnMore = driver.findElement(By.xpath(more));
-        WebElement spanContainer = driver.findElement(By.xpath(container));
-        WebElement spanDataModel = driver.findElement(By.xpath(dataModel));
-        //span[contains(@id,'--TreeDMFB-rows-row0-treeicon')]
-        //td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='Impact']
-
-        btnMore.click();// Click en más
-
-        Thread.sleep(500);
-        spanContainer.click(); // click en containers
-        Thread.sleep(500);
+        Thread.sleep(1000);
+        WebElement more = driver.findElement(By.id(""+basicControl.getXmlview()+"--itbMainFB--header-overflow"));
+        action.click(more).build().perform();
+        Thread.sleep(2000);
+        more.click();
+        WebElement btncontainer = driver.findElement(By.xpath(container));
+        action.click(btncontainer).build().perform();
+        Thread.sleep(1000);
         driver.findElement(By.xpath(containerList)).click();
         Thread.sleep(500);
         WebElement from = driver.findElement(By.xpath("//td[contains(@id,'--idContainerList-rows-row')]//span[text()='Panel']"));
         WebElement to = driver.findElement(By.xpath("//div[contains(@id,'idGridBuilder') and @aria-roledescription='Lista de elementos']"));
         moveBox(from,to,js);
+        driver.findElement(By.xpath("//h2[text()='Panel'][@class='sapMPanelHdr']")).click();
+        Thread.sleep(1000);
+        List<WebElement> listForms = basicControl.inputForms();
+        listForms.get(0).clear();
+        listForms.get(0).click();
+        listForms.get(0).sendKeys("Aprobación de la Solución");
+        listForms.get(1).clear();
+        listForms.get(1).click();
+        listForms.get(1).sendKeys("Aprobación de la Solución");
+        driver.findElement(By.xpath("//span[contains(@id,'--idCloseAtt-img')]")).click();
 
+        moveBox(from,to,js);
+        driver.findElement(By.xpath("//h2[text()='Panel'][@class='sapMPanelHdr']")).click();
+        Thread.sleep(1000);
+        listForms = basicControl.inputForms();
+        listForms.get(0).clear();
+        listForms.get(0).click();
+        listForms.get(0).sendKeys("Detalle de la Atención 3");
+        listForms.get(1).clear();
+        listForms.get(1).click();
+        listForms.get(1).sendKeys("Detalle de la Atención 3");
+        driver.findElement(By.xpath("//span[contains(@id,'--idCloseAtt-img')]")).click();
 /*        driver.findElement(By.id("__xmlview4--btnSaveFB-img")).click();
         WebElement popupCarga = driver.findElement(By.cssSelector("#sapUiBusyIndicator.sapUiUserSelectable"));
         wait.until(ExpectedConditions.visibilityOf(popupCarga));

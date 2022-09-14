@@ -28,7 +28,7 @@ public class FormsPerformerProfile {
 
     public void formCreatePerformer(String performer){
         basicControl.btnAdd();
-        listForm = FormsControl.controlNew(driver,"perfil de ejecutor","Performer Profile");
+        listForm = FormsControl.controlNew(driver,"Perfil de Ejecutor","Performer Profile");
         listForm.get(0).click();
         listForm.get(0).sendKeys(performer);
         listForm.get(1).click();
@@ -41,7 +41,7 @@ public class FormsPerformerProfile {
     }
 
     public void formEditPerformer(String performer) throws InterruptedException {
-        listForm = FormsControl.controlEdit(driver,"perfil de ejecutor","Performer Profile");
+        listForm = FormsControl.controlEdit(driver,"Perfil de Ejecutor","Performer Profile");
         listForm.get(0).clear();
         listForm.get(0).sendKeys(performer);
         listForm.get(1).clear();

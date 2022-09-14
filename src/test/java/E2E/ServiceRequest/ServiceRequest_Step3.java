@@ -24,6 +24,7 @@ public class ServiceRequest_Step3 {
     private String step3 = "//span[contains(@id,'-count') and @class='sapMITBCount' and text()='3']";
     private String editModelerFB = "--btnEditModelerFB-inner";
     private String addACTF = "//span[contains(@id,'--btnAddACTF-img')]";
+    private String zoomOut = "//span[contains(@id,'--btnZoomOutFB-img')]";
 
     public ServiceRequest_Step3(WebDriver driver){
         this.driver = driver;
@@ -42,22 +43,27 @@ public class ServiceRequest_Step3 {
 
         //Ingreso al paso 3
         driver.findElement(By.xpath(step3)).click();
-        FormsControl.controlTitle(driver,"Asignar Formularios","Assign Forms");
         ChargePopPup.PopPupDetail(driver,wait);
+        FormsControl.controlTitle(driver,"Asignar Formularios","Assign Forms");
         //Editamos el paso 3
         basicControl.btnEdit(editModelerFB);
+        //Reducimos el tamaño del modelo
+        WebElement btnzoomOut = driver.findElement(By.xpath(zoomOut));
+        action.click(btnzoomOut).click().click().perform();
 
         //Ingresamos a la actividad 1
         String xmlview = basicControl.getXmlview();
 
-        //Definimos nuestras tareas
+        //Definimos los rect
+        String mainRect = "#"+xmlview+"--js-canvas-fb > div > div > svg > g > g > g > g.djs-element.djs-shape.highlight-gray > rect.djs-hit.djs-hit-all";
+        //Definimos los user Task
         String userTask1 = "#"+xmlview+"--js-canvas-fb > div > div > svg > g > g > g > g.djs-children > g:nth-child(30) > g > rect.djs-hit.djs-hit-all";
         String userTask2 = "#"+xmlview+"--js-canvas-fb > div > div > svg > g > g > g > g.djs-children > g:nth-child(36) > g > rect.djs-hit.djs-hit-all";
         String userTask3 = "#"+xmlview+"--js-canvas-fb > div > div > svg > g > g > g > g.djs-children > g:nth-child(43) > g > rect.djs-hit.djs-hit-all";
         String userTask4 = "#"+xmlview+"--js-canvas-fb > div > div > svg > g > g > g > g.djs-children > g:nth-child(46) > g > rect.djs-hit.djs-hit-all";
         String userTask5 = "#"+xmlview+"--js-canvas-fb > div > div > svg > g > g > g > g.djs-children > g:nth-child(51) > g > rect.djs-hit.djs-hit-all";
         String userTask6 = "#"+xmlview+"--js-canvas-fb > div > div > svg > g > g > g > g.djs-children > g:nth-child(54) > g > rect.djs-hit.djs-hit-all";
-
+        //Definimos send Task
         String sendTask1 = "#"+xmlview+"--js-canvas-fb > div > div > svg > g > g > g > g.djs-children > g:nth-child(39) > g > rect.djs-hit.djs-hit-all";
         String sendTask2 = "#"+xmlview+"--js-canvas-fb > div > div > svg > g > g > g > g.djs-children > g:nth-child(53) > g > rect.djs-hit.djs-hit-all";
 
@@ -67,7 +73,7 @@ public class ServiceRequest_Step3 {
         driver.findElement(By.xpath(addACTF)).click();
         formsAF.createNewActivityForm("AF-SELENIUM");
         ChargePopPup.PopPupMain(driver,wait);
-        //formsAF.panelActivityForm(3);
+        formsAF.panelActivityForm();
 
 
         //Ingresamos a la actividad 2

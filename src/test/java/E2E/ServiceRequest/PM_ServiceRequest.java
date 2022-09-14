@@ -48,9 +48,10 @@ public class PM_ServiceRequest {
         searchProcess("Service Request Selenium");
         basicControl.openWizard();
         Thread.sleep(5000);
-        step1.step1Process();
+        System.out.println(driver.manage().window().getSize());
+        //step1.step1Process();
         //step2.step2Process();
-        step3.step3Process();
+        //step3.step3Process();
     }
 
 

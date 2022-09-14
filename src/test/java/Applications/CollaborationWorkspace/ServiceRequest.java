@@ -76,7 +76,7 @@ public class ServiceRequest {
     }
 
     @Test
-    public void DeleteunProcessServiceRequest() throws InterruptedException {
+    public void deleteunProcessServiceRequest() throws InterruptedException {
         login.loginPage();
         LoginApplications.loginRM(driver,"Change Container");
         basicControl.logo();

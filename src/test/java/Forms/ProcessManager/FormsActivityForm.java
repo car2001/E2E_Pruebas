@@ -20,12 +20,20 @@ public class FormsActivityForm {
     private WebDriver driver;
     private List<WebElement> listForm;
     private BasicControl basicControl;
+    private Actions action;
     private JavascriptExecutor js;
     private WebDriverWait wait;
+    private String more = "//div[contains(@id,'--itbMainFB--header-overflow-text')]//span[text()='Más' or text()='More'][@class='sapMITHTextContent sapMITBBadgeHolder']";
+    private String container = "//span[text()='Contenedores' or text()='Containers'][@class='sapMText sapMTextNoWrap sapMITBText sapMITBBadgeHolder']";
+    private String dataModel = "//span[text()='Modelo de Datos' or text()='Data Model'][@class='sapMText sapMTextNoWrap sapMITBText sapMITBBadgeHolder']";
+    private String dataModelList = "//span[contains(@id,'--TreeDMFB-rows-row0-treeicon')]";
+    private String containerList = "//span[contains(@id,'--idContainerList-rows-row0-treeicon')]";
+
 
     public FormsActivityForm(WebDriver driver){
         this.driver = driver;
         this.basicControl = new BasicControl(driver);
+        this.action = new Actions(driver);
         this.js = (JavascriptExecutor) driver;
         this.wait = new WebDriverWait(driver,Duration.ofSeconds(100));
     }
@@ -42,7 +50,6 @@ public class FormsActivityForm {
     }
 
     public void panelActivityForm(int tamModel) throws InterruptedException, AWTException {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(100));
         driver.findElement(By.xpath("//span[contains(@id,'--TreeDMFB-rows-row0-treeicon')]")).click();
         Thread.sleep(2000);
         WebElement to = driver.findElement(By.xpath("//div[contains(@id,'idGridBuilder') and @aria-roledescription='Lista de elementos']"));
@@ -56,6 +63,32 @@ public class FormsActivityForm {
         WebElement popupCarga = driver.findElement(By.cssSelector("#sapUiBusyIndicator.sapUiUserSelectable"));
         wait.until(ExpectedConditions.visibilityOf(popupCarga));
         wait.until(ExpectedConditions.invisibilityOf(popupCarga));
+
+    }
+
+    public void panelActivityForm() throws InterruptedException, AWTException {
+        //Click en more
+        WebElement btnMore = driver.findElement(By.xpath(more));
+        WebElement spanContainer = driver.findElement(By.xpath(container));
+        WebElement spanDataModel = driver.findElement(By.xpath(dataModel));
+        //span[contains(@id,'--TreeDMFB-rows-row0-treeicon')]
+        //td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='Impact']
+
+        btnMore.click();// Click en más
+
+        Thread.sleep(500);
+        spanContainer.click(); // click en containers
+        Thread.sleep(500);
+        driver.findElement(By.xpath(containerList)).click();
+        Thread.sleep(500);
+        WebElement from = driver.findElement(By.xpath("//td[contains(@id,'--idContainerList-rows-row')]//span[text()='Panel']"));
+        WebElement to = driver.findElement(By.xpath("//div[contains(@id,'idGridBuilder') and @aria-roledescription='Lista de elementos']"));
+        moveBox(from,to,js);
+
+/*        driver.findElement(By.id("__xmlview4--btnSaveFB-img")).click();
+        WebElement popupCarga = driver.findElement(By.cssSelector("#sapUiBusyIndicator.sapUiUserSelectable"));
+        wait.until(ExpectedConditions.visibilityOf(popupCarga));
+        wait.until(ExpectedConditions.invisibilityOf(popupCarga));*/
 
     }
 

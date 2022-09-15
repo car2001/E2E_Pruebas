@@ -102,6 +102,9 @@ public class FormsActivityForm {
         listForms.get(1).click();
         listForms.get(1).sendKeys("Detalle de la Atención 3");
         driver.findElement(By.xpath("//span[contains(@id,'--idCloseAtt-img')]")).click();
+
+
+        //div[@aria-roledescription='Lista de elementos'  and contains(@id,'__container')]
 /*        driver.findElement(By.id("__xmlview4--btnSaveFB-img")).click();
         WebElement popupCarga = driver.findElement(By.cssSelector("#sapUiBusyIndicator.sapUiUserSelectable"));
         wait.until(ExpectedConditions.visibilityOf(popupCarga));

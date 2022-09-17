@@ -91,6 +91,7 @@ public class FormsActivityForm {
         listForms.get(1).sendKeys("Aprobación de la Solución");
         driver.findElement(By.xpath("//span[contains(@id,'--idCloseAtt-img')]")).click();
 
+
         moveBox(from,to,js);
         driver.findElement(By.xpath("//h2[text()='Panel'][@class='sapMPanelHdr']")).click();
         Thread.sleep(1000);
@@ -102,6 +103,32 @@ public class FormsActivityForm {
         listForms.get(1).click();
         listForms.get(1).sendKeys("Detalle de la Atención 3");
         driver.findElement(By.xpath("//span[contains(@id,'--idCloseAtt-img')]")).click();
+
+        driver.findElement(By.xpath("//h2[text()='Detalle de la Atención 3'][@class='sapMPanelHdr']")).click();
+        driver.findElement(By.xpath("//h2[text()='Aprobación de la Solución'][@class='sapMPanelHdr']")).click();
+
+        driver.findElement(By.xpath("//span[contains(@id,'--idCloseAtt-img')]")).click();
+
+        more = driver.findElement(By.id(""+basicControl.getXmlview()+"--itbMainFB--header-overflow"));
+        action.click(more).build().perform();
+        Thread.sleep(2000);
+        more.click();
+        WebElement btnDataModel = driver.findElement(By.xpath(dataModel));
+        action.click(btnDataModel).build().perform();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath(dataModelList)).click();
+        Thread.sleep(500);
+
+        from = driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='Impact']"));
+        to = driver.findElements(By.xpath("//div[@aria-roledescription='Lista de elementos'  and contains(@id,'__container')]")).get(0);
+        moveBox(from,to,js);
+        Thread.sleep(1000);
+        String idTitlePanel = driver.findElement(By.xpath("//h2[text()='Detalle de la Atención 3'][@class='sapMPanelHdr']")).getAttribute("id");
+        js.executeScript("let title = document.getElementById('"+idTitlePanel+"');title.scrollIntoView(false);");
+        Thread.sleep(1000);
+        from = driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='NoUsersolicitante']"));
+        moveBox(from,to,js);
+
 
 
         //div[@aria-roledescription='Lista de elementos'  and contains(@id,'__container')]
@@ -131,8 +158,8 @@ public class FormsActivityForm {
         robot.mouseMove(x+desplazamiento.get(0)+10,y-desplazamiento.get(1));
         Thread.sleep(1000);
         robot.mouseRelease(InputEvent.BUTTON1_MASK);
-        robot.mousePress(InputEvent.BUTTON1_MASK);
-        robot.mouseRelease(InputEvent.BUTTON1_MASK);
+        //robot.mousePress(InputEvent.BUTTON1_MASK);
+        //robot.mouseRelease(InputEvent.BUTTON1_MASK);
     }
 
     private List<Integer> calculoPixeles(WebElement from , WebElement to,JavascriptExecutor js){

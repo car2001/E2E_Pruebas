@@ -21,6 +21,7 @@ public class LoginApplications {
 
     public static void loginOSM(WebDriver driver){
         wait = new WebDriverWait(driver, Duration.ofSeconds(100));
+        js = (JavascriptExecutor) driver;
         accessBranch = new AccessBranch(driver);
         basicControl = new BasicControl(driver);
         basicControl.btnApplication("Organizational Structure Manager");
@@ -30,19 +31,30 @@ public class LoginApplications {
 
     public static void loginCM(WebDriver driver){
         wait = new WebDriverWait(driver, Duration.ofSeconds(100));
+        js = (JavascriptExecutor) driver;
         basicControl = new BasicControl(driver);
         basicControl.btnApplication("Configuration Manager");
         wait.until(ExpectedConditions.elementToBeClickable(By.id("navListItem-navList-0-a")));
+        int tam = js.executeScript("let tam = document.getElementById('sap-ui-blocklayer-popup'); return(tam.clientHeight)").hashCode();
+        if(tam != 0){
+            ChargePopPup.PopPupGeneral(driver,wait);
+        }
         driver.findElement(By.xpath("//div[@title='Reusable Component']")).click();
         driver.findElement(By.xpath("//div[@title='Setting']")).click();
     }
 
     public static void loginRM(WebDriver driver, String componente){
         wait = new WebDriverWait(driver,Duration.ofSeconds(100));
+        js = (JavascriptExecutor) driver;
         accessBranch = new AccessBranch(driver);
         basicControl = new BasicControl(driver);
         basicControl.btnApplication("Release Manager");
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(@id,'--mainTree-rows-row0-treeicon')]")));
+        ChargePopPup.PopPupGeneral(driver,wait);
+        int tam = js.executeScript("let tam = document.getElementById('sap-ui-blocklayer-popup'); return(tam.clientHeight)").hashCode();
+        if(tam != 0){
+            ChargePopPup.PopPupGeneral(driver,wait);
+        }
+
         if(componente.equals("Project")){
             accessBranch.clickBranches(0);
         }else if(componente.equals("Change Container")){
@@ -71,6 +83,7 @@ public class LoginApplications {
 
     public static void loginColl(WebDriver driver, String proceso){
         wait = new WebDriverWait(driver,Duration.ofSeconds(100));
+        js = (JavascriptExecutor) driver;
         basicControl = new BasicControl(driver);
         basicControl.btnApplication("Collaboration Workspace");
         ChargePopPup.PopPupGeneral(driver,wait);
@@ -79,7 +92,10 @@ public class LoginApplications {
         driver.findElement(By.xpath("//div[contains(@aria-label,'"+proceso+"')]")).click();
         driver.findElement(By.xpath("//bdi[text()='Sí' or text()='Yes']")).click();
         ChargePopPup.PopPupGeneral(driver,wait);
-        ChargePopPup.PopPupGeneral(driver,wait);
+        int tam = js.executeScript("let tam = document.getElementById('sap-ui-blocklayer-popup'); return(tam.clientHeight)").hashCode();
+        if(tam != 0){
+            ChargePopPup.PopPupGeneral(driver,wait);
+        }
     }
 
     public static void loginDataEntity(WebDriver driver){
@@ -87,13 +103,21 @@ public class LoginApplications {
         basicControl = new BasicControl(driver);
         basicControl.btnApplication("Data Entity Manager");
         ChargePopPup.PopPupGeneral(driver,wait);
+        int tam = js.executeScript("let tam = document.getElementById('sap-ui-blocklayer-popup'); return(tam.clientHeight)").hashCode();
+        if(tam != 0){
+            ChargePopPup.PopPupGeneral(driver,wait);
+        }
     }
 
     public static void loginDataRecord(WebDriver driver){
         wait = new WebDriverWait(driver,Duration.ofSeconds(100));
         basicControl = new BasicControl(driver);
         basicControl.btnApplication("Data Record Manager");
-
+        ChargePopPup.PopPupGeneral(driver,wait);
+        int tam = js.executeScript("let tam = document.getElementById('sap-ui-blocklayer-popup'); return(tam.clientHeight)").hashCode();
+        if(tam != 0){
+            ChargePopPup.PopPupGeneral(driver,wait);
+        }
     }
 
 }

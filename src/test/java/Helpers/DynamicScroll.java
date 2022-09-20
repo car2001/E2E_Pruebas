@@ -159,5 +159,51 @@ public class DynamicScroll {
 
 
 
+    public void searchAttribute(String attributte){
+        int xpos = -1;
+        WebElement scroll;
+        Boolean displayedScroll = false;
+        List<WebElement> listElementAttribute = driver.findElements(By.xpath("//tr[contains(@id,'--TreeDMFB-rows-row')]"));
+        List<String> listTextAttribute = new ArrayList<>();
+
+        for (int i =0; i <= listElementAttribute.size()-1; i++){
+            listTextAttribute.add(listElementAttribute.get(i).getText());
+        }
+
+        try{
+            scroll = driver.findElement(By.xpath("//div[@class='sapUiTableVSb' and contains(@id,'--TreeDMFB-vsb')]"));
+            displayedScroll = scroll.isDisplayed();
+        }catch (Exception e){
+            System.out.println("No se encontro scroll");
+        }
+
+        if(displayedScroll == true){
+            scroll = driver.findElement(By.xpath("//div[@class='sapUiTableVSb' and contains(@id,'--TreeDMFB-vsb')]"));
+            int scrollHeight= js.executeScript("let scrollHeight = arguments[0].scrollHeight; return(scrollHeight)",scroll).hashCode();
+            int clientHeight = js.executeScript("let clientHeight = arguments[0].clientHeight; return(clientHeight)",scroll).hashCode();
+
+            int numVeces = scrollHeight/clientHeight;
+            int iterator = 0;
+
+            while (iterator<=numVeces+1){
+                if(listTextAttribute.contains(attributte)){
+                    return;
+                }else{
+                    iterator = iterator+1;
+                    int multiplo = clientHeight*iterator ;
+                    js.executeScript("arguments[0].scroll(0,'"+multiplo+"')",scroll);
+                    listElementAttribute = driver.findElements(By.xpath("//tr[contains(@id,'--TreeDMFB-rows-row')]"));
+                    listTextAttribute.clear();
+                    for(int i = 0; i<= listElementAttribute.size()-1;i=i+1){
+                        listTextAttribute.add(listElementAttribute.get(i).getText());
+                    }
+                }
+            }
+
+        }
+
+
+    }
+
 
 }

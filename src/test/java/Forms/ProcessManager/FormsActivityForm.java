@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.event.InputEvent;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class FormsActivityForm {
@@ -67,59 +68,32 @@ public class FormsActivityForm {
     }
 
     public void panelActivityForm() throws InterruptedException, AWTException {
-        Thread.sleep(1000);
-        WebElement more = driver.findElement(By.id(""+basicControl.getXmlview()+"--itbMainFB--header-overflow"));
-        action.click(more).build().perform();
-        Thread.sleep(2000);
-        more.click();
-        WebElement btncontainer = driver.findElement(By.xpath(container));
-        action.click(btncontainer).build().perform();
-        Thread.sleep(1000);
-        driver.findElement(By.xpath(containerList)).click();
+        driver.findElement(By.xpath(dataModelList)).click(); //Hacemos click en los atributos
         Thread.sleep(500);
-        WebElement from = driver.findElement(By.xpath("//td[contains(@id,'--idContainerList-rows-row')]//span[text()='Panel']"));
-        WebElement to = driver.findElement(By.xpath("//div[contains(@id,'idGridBuilder') and @aria-roledescription='Lista de elementos']"));
-        moveBox(from,to,js);
-        driver.findElement(By.xpath("//h2[text()='Panel'][@class='sapMPanelHdr']")).click();
-        Thread.sleep(1000);
-        List<WebElement> listForms = basicControl.inputForms();
-        listForms.get(0).clear();
-        listForms.get(0).click();
-        listForms.get(0).sendKeys("Aprobación de la Solución");
-        listForms.get(1).clear();
-        listForms.get(1).click();
-        listForms.get(1).sendKeys("Aprobación de la Solución");
-        driver.findElement(By.xpath("//span[contains(@id,'--idCloseAtt-img')]")).click();
-
-
-        moveBox(from,to,js);
-        driver.findElement(By.xpath("//h2[text()='Panel'][@class='sapMPanelHdr']")).click();
-        Thread.sleep(1000);
-        listForms = basicControl.inputForms();
-        listForms.get(0).clear();
-        listForms.get(0).click();
-        listForms.get(0).sendKeys("Detalle de la Atención 3");
-        listForms.get(1).clear();
-        listForms.get(1).click();
-        listForms.get(1).sendKeys("Detalle de la Atención 3");
-        driver.findElement(By.xpath("//span[contains(@id,'--idCloseAtt-img')]")).click();
-
-        driver.findElement(By.xpath("//h2[text()='Detalle de la Atención 3'][@class='sapMPanelHdr']")).click();
-        driver.findElement(By.xpath("//h2[text()='Aprobación de la Solución'][@class='sapMPanelHdr']")).click();
-
-        driver.findElement(By.xpath("//span[contains(@id,'--idCloseAtt-img')]")).click();
-
-        more = driver.findElement(By.id(""+basicControl.getXmlview()+"--itbMainFB--header-overflow"));
-        action.click(more).build().perform();
-        Thread.sleep(2000);
-        more.click();
-        WebElement btnDataModel = driver.findElement(By.xpath(dataModel));
-        action.click(btnDataModel).build().perform();
-        Thread.sleep(1000);
-        driver.findElement(By.xpath(dataModelList)).click();
+        clickMore("Container"); // En el popup de container
+        Thread.sleep(500);
+        driver.findElement(By.xpath(containerList)).click(); // Listamos los container
         Thread.sleep(500);
 
-        from = driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='Impact']"));
+        ArrayList<String> titlePanels = new ArrayList<>();
+        titlePanels.add("Aprobación de la Solución");
+        titlePanels.add("Detalle de la Atención 3");
+        titlePanels.add("Detalle de la Atención 2");
+        titlePanels.add("Detalle de la Atención 1");
+        titlePanels.add("Aprobación de la Solicitud");
+        titlePanels.add("Información de la Solicitud de Servicio");
+
+        for(int i = 0; i <= titlePanels.size() -1 ; i++ ){
+            putPanel(titlePanels.get(i));
+
+        }
+
+
+        clickMore("Data Model"); // En el popup de Data Model
+        Thread.sleep(500);
+
+
+/*        from = driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='Impact']"));
         to = driver.findElements(By.xpath("//div[@aria-roledescription='Lista de elementos'  and contains(@id,'__container')]")).get(0);
         moveBox(from,to,js);
         Thread.sleep(1000);
@@ -128,8 +102,17 @@ public class FormsActivityForm {
         Thread.sleep(1000);
         from = driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='NoUsersolicitante']"));
         moveBox(from,to,js);
+        Thread.sleep(1000);
+        from = driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='NousarAsignee']"));
+        moveBox(from,to,js);
+        Thread.sleep(1000);
+        from = driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='RequestDatail']"));
+        moveBox(from,to,js);
 
-
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='EstimatedTime']")).click();
+        from = driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='EstimatedTime']"));
+        moveBox(from,to,js);*/
 
         //div[@aria-roledescription='Lista de elementos'  and contains(@id,'__container')]
 /*        driver.findElement(By.id("__xmlview4--btnSaveFB-img")).click();
@@ -137,6 +120,53 @@ public class FormsActivityForm {
         wait.until(ExpectedConditions.visibilityOf(popupCarga));
         wait.until(ExpectedConditions.invisibilityOf(popupCarga));*/
 
+    }
+
+    private void clickMore(String element) throws InterruptedException {
+        Thread.sleep(500);
+        WebElement more = driver.findElement(By.id("" + basicControl.getXmlview() + "--itbMainFB--header-overflow"));
+        action.click(more).build().perform();
+        Thread.sleep(500);
+        more.click();
+        if(element.equals("Container")){
+            WebElement btncontainer = driver.findElement(By.xpath(container));
+            action.click(btncontainer).build().perform();
+            Thread.sleep(1000);
+        }else{
+            WebElement btnDataModel = driver.findElement(By.xpath(dataModel));
+            action.click(btnDataModel).build().perform();
+            Thread.sleep(1000);
+        }
+    }
+
+    private void putPanel(String titlePanel) throws InterruptedException, AWTException {
+        WebElement from = driver.findElement(By.xpath("//td[contains(@id,'--idContainerList-rows-row')]//span[text()='Panel']"));
+        WebElement to = driver.findElement(By.xpath("//div[contains(@id,'idGridBuilder') and @aria-roledescription='Lista de elementos']"));
+        moveBox(from,to,js);
+        driver.findElement(By.xpath("//h2[text()='Panel'][@class='sapMPanelHdr']")).click();
+        Thread.sleep(1000);
+        List<WebElement> listForms = basicControl.inputForms();
+        listForms.get(0).clear();
+        listForms.get(0).click();
+        listForms.get(0).sendKeys(titlePanel);
+        listForms.get(1).clear();
+        listForms.get(1).click();
+        listForms.get(1).sendKeys(titlePanel);
+        driver.findElement(By.xpath("//span[contains(@id,'--idCloseAtt-img')]")).click();
+        Thread.sleep(500);
+        driver.findElement(By.xpath("//h2[text()='"+titlePanel+"'][@class='sapMPanelHdr']")).click();
+        driver.findElement(By.xpath("//span[contains(@id,'--idCloseAtt-img')]")).click();
+        Thread.sleep(500);
+    }
+
+    private void putAttribute() throws InterruptedException, AWTException {
+        WebElement from = driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='Impact']"));
+        WebElement to = driver.findElements(By.xpath("//div[@aria-roledescription='Lista de elementos'  and contains(@id,'__container')]")).get(0);
+        moveBox(from,to,js);
+        Thread.sleep(1000);
+        String idTitlePanel = driver.findElement(By.xpath("//h2[text()='Detalle de la Atención 3'][@class='sapMPanelHdr']")).getAttribute("id");
+        js.executeScript("let title = document.getElementById('"+idTitlePanel+"');title.scrollIntoView(false);");
+        Thread.sleep(1000);
     }
 
     private void moveBox(WebElement from , WebElement to,JavascriptExecutor js) throws AWTException, InterruptedException {

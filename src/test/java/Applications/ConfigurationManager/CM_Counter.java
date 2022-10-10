@@ -19,7 +19,7 @@ public class CM_Counter {
     BasicControl basicControl;
     FormsCounter formsCounter;
 
-    final String componente = "Counter ";
+    final String componente = "Counters";
     final String newCounter = "Counter Selenium";
     final String start = "100";
     final String increment = "1";

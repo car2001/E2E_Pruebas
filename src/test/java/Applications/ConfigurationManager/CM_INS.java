@@ -20,7 +20,7 @@ public class CM_INS {
     BasicControl basicControl;
     FormsINS formsINS;
 
-    final String componente = "Instance Numbering Schema";
+    final String componente = "Instance Numbering Schemas";
     final String newINS = "INS Selenium";
     final String separator = "-";
     final String fixedValue = "SELENIUM";

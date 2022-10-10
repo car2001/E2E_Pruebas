@@ -23,7 +23,7 @@ public class CM_Notification_Profile {
     BasicControl basicControl;
     FormsNotificationProfile formsNotificationProfile;
 
-    final String componente = "Notification Profile";
+    final String componente = "Notification Profiles";
     final String newNotification = "Notification Profile Selenium";
     final String editNotification = "Notification Profile Selenium Editado";
 

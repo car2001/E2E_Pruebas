@@ -54,7 +54,7 @@ public class DynamicScroll {
                 int numVeces,iterator;
 
                 numVeces = scrollHeight/clientHeight; // Numero de veces para repetir el bucle
-                iterator = 0;
+                iterator = -1;
                 // Verificamos
                 while (iterator<=numVeces+1){
                     if(nameElement.lastIndexOf(element) != -1){
@@ -159,7 +159,7 @@ public class DynamicScroll {
 
 
 
-    public void searchAttribute(String attributte){
+    public int searchAttribute(String attributte){
         int xpos = -1;
         WebElement scroll;
         Boolean displayedScroll = false;
@@ -177,18 +177,23 @@ public class DynamicScroll {
             System.out.println("No se encontro scroll");
         }
 
+
         if(displayedScroll == true){
             scroll = driver.findElement(By.xpath("//div[@class='sapUiTableVSb' and contains(@id,'--TreeDMFB-vsb')]"));
             int scrollHeight= js.executeScript("let scrollHeight = arguments[0].scrollHeight; return(scrollHeight)",scroll).hashCode();
             int clientHeight = js.executeScript("let clientHeight = arguments[0].clientHeight; return(clientHeight)",scroll).hashCode();
 
             int numVeces = scrollHeight/clientHeight;
-            int iterator = 0;
+            int iterator = -1;
 
             while (iterator<=numVeces+1){
+
                 if(listTextAttribute.contains(attributte)){
-                    return;
-                }else{
+                    xpos = listTextAttribute.lastIndexOf(attributte);
+                    listTextAttribute.clear();
+                    break;
+                }
+                else{
                     iterator = iterator+1;
                     int multiplo = clientHeight*iterator ;
                     js.executeScript("arguments[0].scroll(0,'"+multiplo+"')",scroll);
@@ -200,9 +205,12 @@ public class DynamicScroll {
                 }
             }
 
+        }else{
+            xpos = listTextAttribute.lastIndexOf(attributte);
+
         }
 
-
+        return  xpos;
     }
 
 

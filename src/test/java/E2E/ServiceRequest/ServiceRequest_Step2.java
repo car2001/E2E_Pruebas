@@ -54,6 +54,7 @@ public class ServiceRequest_Step2 {
 
         List<String> listName = listDataModelName();
         List<String> listDataType = listDataModelDataType();
+        List<String> listDisplayName = listDataDisplayName();
 
         xmlview = basicControl.getXmlview();
 
@@ -62,10 +63,17 @@ public class ServiceRequest_Step2 {
             xpos = i;
             input = "//div[contains(@id,'tblAttributes-"+xpos+"-content') and not(contains(@id,'idDisplayNameGridModel'))]//input[@class='sapMInputBaseInner']";
             arrowDataType = "//span[@id='"+xmlview+"--idDataType-"+xmlview+"--tblAttributes-"+xpos+"-arrow']";
-
+            String display = "//div[contains(@id,'--idDisplayNameGridModel-"+xmlview+"--tblAttributes-"+xpos+"-content')]//input[@class='sapMInputBaseInner']";
+            //Name de los Atributos
             WebElement inputName = driver.findElement(By.xpath(input));
             inputName.click();
             inputName.sendKeys(listName.get(i));
+            //DisplayName de los atributos
+            WebElement inputDisplayName = driver.findElement(By.xpath(display));
+            inputDisplayName.click();
+            inputDisplayName.clear();
+            inputDisplayName.sendKeys(listDisplayName.get(i));
+            //Selecciobar el tipo de atributo
             WebElement arrowType = driver.findElement(By.xpath(arrowDataType));
             arrowType.click();
             selectListItem.SelectItemLi(listDataType.get(i));
@@ -117,7 +125,7 @@ public class ServiceRequest_Step2 {
         listName.add("ObservationComment");
         listName.add("Project");
         listName.add("Requestor");
-        listName.add("Cutomer");
+        listName.add("Customer");
         listName.add("RequestSummary");
         listName.add("ExternalReference");
         listName.add("DueDate");
@@ -138,6 +146,54 @@ public class ServiceRequest_Step2 {
         listName.add("RequestClosureAuthorization");
         listName.add("Tabla Selenium");
         return listName;
+    }
+
+    private  List<String> listDataDisplayName(){
+        List<String> listDisplayName = new ArrayList<String>();
+        listDisplayName.add("NoUsersolicitante");
+        listDisplayName.add("NOUSARRequestDate");
+        listDisplayName.add("Detalle de la Solicitud");
+        listDisplayName.add("NousarRequestCategory");
+        listDisplayName.add("NO USAR Impacto");
+        listDisplayName.add("Prioridad");
+        listDisplayName.add("Motivo de la Solicitud");
+        listDisplayName.add("NousarAsignee");
+        listDisplayName.add("Tiempo Estimado (Horas)");
+        listDisplayName.add("NO_USAR_¿Requiere Aprobación?");
+        listDisplayName.add("NousarApprover");
+        listDisplayName.add("Detalle de la Solución");
+        listDisplayName.add("NO_USAR_¿Aprueba Solicitud?");
+        listDisplayName.add("NousarExecutor");
+        listDisplayName.add("Asignado");
+        listDisplayName.add("Aprobador");
+        listDisplayName.add("Ejecutor");
+        listDisplayName.add("Registrado por");
+        listDisplayName.add("Categoría");
+        listDisplayName.add("¿Hay Observaciones?");
+        listDisplayName.add("Comentario de la Observación");
+        listDisplayName.add("Proyecto");
+        listDisplayName.add("Reportado por");
+        listDisplayName.add("Cliente");
+        listDisplayName.add("Resumen de la Solicitud");
+        listDisplayName.add("Referencia Externa");
+        listDisplayName.add("Posible Fecha de Entrega");
+        listDisplayName.add("¿Se Requiere 2° Ejecutor?");
+        listDisplayName.add("Tiempo Estimado 2 (Horas)");
+        listDisplayName.add("Ejecutor 2");
+        listDisplayName.add("Detalle de la Atención Realizada 2");
+        listDisplayName.add("¿Se Requiere 3° Ejecutor?");
+        listDisplayName.add("Tiempo Estimado 3 (Horas)");
+        listDisplayName.add("Ejecutor 3");
+        listDisplayName.add("Detalle de la Atención Realizada 3");
+        listDisplayName.add("Comentario de la Aprobación");
+        listDisplayName.add("¿Aprueba Solicitud?");
+        listDisplayName.add("¿Requiere Aprobación?");
+        listDisplayName.add("Tiempo Total Estimado (horas)");
+        listDisplayName.add("Categoría");
+        listDisplayName.add("Motivo de la Solicitud");
+        listDisplayName.add("¿El Cliente Autorizó el Cierre de la Solicitud?");
+        listDisplayName.add("Tabla Selenium");
+        return listDisplayName;
     }
 
     private  List<String> listDataModelDataType(){
@@ -184,7 +240,7 @@ public class ServiceRequest_Step2 {
         listDataType.add("ForeignKey");
         listDataType.add("ForeignKey");
         listDataType.add("ForeignKey");
-        listDataType.add("ForeignKey");
+        listDataType.add("Table");
         return listDataType;
     }
 

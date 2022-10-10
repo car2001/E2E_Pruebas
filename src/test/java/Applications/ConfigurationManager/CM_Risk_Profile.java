@@ -23,7 +23,7 @@ public class CM_Risk_Profile {
     BasicControl basicControl;
     FormsRiskProfile formsRiskProfile;
 
-    final String componente = "Risk Profile";
+    final String componente = "Risk Profiles";
     final String newRiskProfile = "Risk Profile Selenium";
     final String editRiskProfile = "Risk Profile Selenium Editado";
 

@@ -21,7 +21,7 @@ public class CM_Performer_Profile {
     BasicControl basicControl;
     FormsPerformerProfile formsPerformerProfile;
 
-    final String componente = "Performer Profile";
+    final String componente = "Performer Profiles";
     final String newPerformer = "Performer Selenium";
     final String editPerformer = "Performer Edit Selenium";
 

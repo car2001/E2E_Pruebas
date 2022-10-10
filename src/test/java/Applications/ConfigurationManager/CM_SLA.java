@@ -16,7 +16,7 @@ public class CM_SLA {
     private WebDriver driver;
     final String URL = "http://wedox.sytes.net/buplat_dev/";
 
-    final String componente = "SLA Definition";
+    final String componente = "SLA Definitions";
     final String newSLA = "SLA Selenium";
     final String editSLA = "SLA Edit Selenium";
 

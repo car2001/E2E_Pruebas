@@ -1,7 +1,8 @@
 package Forms.ProcessManager;
 
-import Helpers.BasicControl;
-import Helpers.FormsControl;
+import Helpers.*;
+import org.apache.commons.collections4.MultiValuedMap;
+import org.apache.commons.collections4.map.MultiValueMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -9,19 +10,22 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.collections.MultiMap;
 
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.*;
 import java.util.List;
 
 public class FormsActivityForm {
     private WebDriver driver;
     private List<WebElement> listForm;
     private BasicControl basicControl;
+    private SelectListItem selectListItem;
     private Actions action;
+    private DynamicScroll searchElement;
     private JavascriptExecutor js;
     private WebDriverWait wait;
     private String more = "//div[contains(@id,'--itbMainFB--header-overflow-text')]";
@@ -35,6 +39,8 @@ public class FormsActivityForm {
         this.driver = driver;
         this.basicControl = new BasicControl(driver);
         this.action = new Actions(driver);
+        this.selectListItem = new SelectListItem(driver);
+        this.searchElement = new DynamicScroll(driver);
         this.js = (JavascriptExecutor) driver;
         this.wait = new WebDriverWait(driver,Duration.ofSeconds(100));
     }
@@ -75,51 +81,77 @@ public class FormsActivityForm {
         driver.findElement(By.xpath(containerList)).click(); // Listamos los container
         Thread.sleep(500);
 
-        ArrayList<String> titlePanels = new ArrayList<>();
-        titlePanels.add("Aprobación de la Solución");
-        titlePanels.add("Detalle de la Atención 3");
-        titlePanels.add("Detalle de la Atención 2");
-        titlePanels.add("Detalle de la Atención 1");
-        titlePanels.add("Aprobación de la Solicitud");
-        titlePanels.add("Información de la Solicitud de Servicio");
+        String[] titlePanels = {"Aprobación de la Solución", "Detalle de la Atención 3", "Detalle de la Atención 2",
+                "Detalle de la Atención 1", "Aprobación de la Solicitud", "Información de la Solicitud de Servicio"};
 
-        for(int i = 0; i <= titlePanels.size() -1 ; i++ ){
-            putPanel(titlePanels.get(i));
 
+        Map<String, String> aprobacionSolucion = new LinkedHashMap<>();
+        aprobacionSolucion.put("¿El Cliente Autorizó el Cierre de la Solicitud?", "RequestClosureAuthorization");
+        aprobacionSolucion.put("¿Hay Observaciones?", "DecisionDescription");
+        aprobacionSolucion.put("Comentario de la Observación", "Text Area");
+
+
+        Map<String, String> detalleAtención3 = new LinkedHashMap<>();
+        detalleAtención3.put("¿Se Requiere 3° Ejecutor?", " ");
+        detalleAtención3.put("Ejecutor 3", "Full Name");
+        detalleAtención3.put("Tiempo Estimado 3 (Horas)", " ");
+        detalleAtención3.put("Detalle de la Atención Realizada 3", "Text Area");
+
+        Map<String, String> detalleAtención2 = new LinkedHashMap<>();
+        detalleAtención2.put("¿Se Requiere 2° Ejecutor?", " ");
+        detalleAtención2.put("Ejecutor 2", "Full Name");
+        detalleAtención2.put("Tiempo Estimado 2 (Horas)", " ");
+        detalleAtención2.put("Detalle de la Atención Realizada 2", "Text Area");
+
+        Map<String, String> detalleAtención1 = new LinkedHashMap<>();
+        detalleAtención1.put("Asignado", "Full Name");
+        detalleAtención1.put("Tiempo Estimado (Horas)", " ");
+        detalleAtención1.put("Detalle de la Solución", "Text Area");
+
+        Map<String, String> aprobacionSolicitud = new LinkedHashMap<>();
+        aprobacionSolicitud.put("¿Requiere Aprobación?", "DecisionDescription");
+        aprobacionSolicitud.put("Aprobador", "Full Name");
+        aprobacionSolicitud.put("¿Aprueba Solicitud?", "DecisionDescription");
+        aprobacionSolicitud.put("Comentario de la Aprobación", "Text Area");
+
+        Map<String, String> informacionSolicitud = new LinkedHashMap<>();
+        informacionSolicitud.put("Cliente", "NombreComercial");
+        informacionSolicitud.put("Reportado por", "FullName");
+        informacionSolicitud.put("Resumen de la Solicitud", " ");
+        informacionSolicitud.put("Detalle de la Solicitud", "Text Area");
+        informacionSolicitud.put("Referencia Externa", " ");
+        informacionSolicitud.put("Prioridad", "PriorityName");
+        informacionSolicitud.put("Categoría", "RequestCategoryName");
+        informacionSolicitud.put("Motivo de la Solicitud", "RequestReasonName");
+        informacionSolicitud.put("Posible Fecha de Entrega", " ");
+        informacionSolicitud.put("Tiempo Total Estimado (horas)", " ");
+        informacionSolicitud.put("Tabla Selenium", "Table");
+
+        List<Map<String, String>> listAttribute = new ArrayList<>();
+
+        listAttribute.add(aprobacionSolucion);
+        listAttribute.add(detalleAtención3);
+        listAttribute.add(detalleAtención2);
+        listAttribute.add(detalleAtención1);
+        listAttribute.add(aprobacionSolicitud);
+        listAttribute.add(informacionSolicitud);
+
+        for (int i = 0; i <= titlePanels.length - 1; i++) {
+            //Colocar el panel en el diseñador de formularios.
+            putPanel(titlePanels[i]);
+            clickMore("Data Model"); // Click en el popup de Data Model
+            Thread.sleep(500);
+
+            for (Map.Entry<String, String> entry : listAttribute.get(i).entrySet()) {
+                putAttribute(titlePanels[i], entry.getKey(), entry.getValue());
+            }
+
+            clickMore("Container"); // Click En el popup de container
+            Thread.sleep(500);
         }
 
-
-        clickMore("Data Model"); // En el popup de Data Model
-        Thread.sleep(500);
-
-
-/*        from = driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='Impact']"));
-        to = driver.findElements(By.xpath("//div[@aria-roledescription='Lista de elementos'  and contains(@id,'__container')]")).get(0);
-        moveBox(from,to,js);
-        Thread.sleep(1000);
-        String idTitlePanel = driver.findElement(By.xpath("//h2[text()='Detalle de la Atención 3'][@class='sapMPanelHdr']")).getAttribute("id");
-        js.executeScript("let title = document.getElementById('"+idTitlePanel+"');title.scrollIntoView(false);");
-        Thread.sleep(1000);
-        from = driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='NoUsersolicitante']"));
-        moveBox(from,to,js);
-        Thread.sleep(1000);
-        from = driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='NousarAsignee']"));
-        moveBox(from,to,js);
-        Thread.sleep(1000);
-        from = driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='RequestDatail']"));
-        moveBox(from,to,js);
-
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='EstimatedTime']")).click();
-        from = driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='EstimatedTime']"));
-        moveBox(from,to,js);*/
-
-        //div[@aria-roledescription='Lista de elementos'  and contains(@id,'__container')]
-/*        driver.findElement(By.id("__xmlview4--btnSaveFB-img")).click();
-        WebElement popupCarga = driver.findElement(By.cssSelector("#sapUiBusyIndicator.sapUiUserSelectable"));
-        wait.until(ExpectedConditions.visibilityOf(popupCarga));
-        wait.until(ExpectedConditions.invisibilityOf(popupCarga));*/
-
+        basicControl.btnSave("--btnSaveFB-img");
+        ChargePopPup.PopPupGeneral(driver,wait);
     }
 
     private void clickMore(String element) throws InterruptedException {
@@ -138,6 +170,7 @@ public class FormsActivityForm {
             Thread.sleep(1000);
         }
     }
+
 
     private void putPanel(String titlePanel) throws InterruptedException, AWTException {
         WebElement from = driver.findElement(By.xpath("//td[contains(@id,'--idContainerList-rows-row')]//span[text()='Panel']"));
@@ -159,14 +192,83 @@ public class FormsActivityForm {
         Thread.sleep(500);
     }
 
-    private void putAttribute() throws InterruptedException, AWTException {
-        WebElement from = driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='Impact']"));
+
+    private void putAttribute(String titlePanel,String attribute,String typeAttribute) throws InterruptedException, AWTException {
+        searchAttribute(attribute);
+        WebElement from = driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='"+attribute+"']"));
         WebElement to = driver.findElements(By.xpath("//div[@aria-roledescription='Lista de elementos'  and contains(@id,'__container')]")).get(0);
+        from.click();
         moveBox(from,to,js);
         Thread.sleep(1000);
-        String idTitlePanel = driver.findElement(By.xpath("//h2[text()='Detalle de la Atención 3'][@class='sapMPanelHdr']")).getAttribute("id");
+        String idTitlePanel = driver.findElement(By.xpath("//h2[text()='"+titlePanel+"'][@class='sapMPanelHdr']")).getAttribute("id");
         js.executeScript("let title = document.getElementById('"+idTitlePanel+"');title.scrollIntoView(false);");
         Thread.sleep(1000);
+        String idPanel = to.getAttribute("id");
+        if(typeAttribute.equals("Table")){
+            driver.findElement(By.xpath("//div[@id = '"+idPanel+"']//span[text()='"+attribute+"']")).click(); // Hacemos click en el atributo en el diseñador de formulario
+        }else{
+            driver.findElement(By.xpath("//div[@id = '"+idPanel+"']//bdi[text()='"+attribute+"']")).click(); // Hacemos click en el atributo en el diseñador de formulario
+        }
+        Thread.sleep(800);
+        switch (typeAttribute) {
+            case " " :
+                break;
+            case "Text Area" :
+                driver.findElement(By.xpath("//span[contains(@id,'Control-internalBtn-img')]")).click();
+                driver.findElement(By.xpath("//div[@class='sapUiMnuItmTxt' and text()='Text Area']")).click();
+                break;
+            case "Table" :
+                //Primera columna
+                driver.findElement(By.xpath("//span[text()='"+attribute+"' and contains(@id,'__title')]/parent::div/parent::div/button[@title='Agregar' or @title='Add']")).click();
+                driver.findElement(By.xpath("//span[@class='sapMLabelTextWrapper']//bdi[text()='column']")).click();
+                List<WebElement> inputs = basicControl.inputForms();
+                inputs.get(0).click();
+                inputs.get(0).clear();
+                inputs.get(0).sendKeys("ID");
+                inputs.get(1).click();
+                inputs.get(1).clear();
+                inputs.get(1).sendKeys("ID");
+                driver.findElement(By.xpath("//span[contains(@id,'--dataPropertyFormBuilder-vhi')]")).click();
+                Thread.sleep(1500);
+                driver.findElement(By.xpath("//span[contains(@id,'--treeDM-rows-row0-treeicon')]")).click();
+                driver.findElement(By.xpath("//span[text()='ID : String']")).click();
+                Thread.sleep(1500);
+                //Segunda Columna
+                driver.findElement(By.xpath("//span[text()='"+attribute+"' and contains(@id,'__title')]/parent::div/parent::div/button[@title='Agregar' or @title='Add']")).click();
+                driver.findElement(By.xpath("//span[@class='sapMLabelTextWrapper']//bdi[text()='column']")).click();
+                inputs = basicControl.inputForms();
+                inputs.get(0).click();
+                inputs.get(0).clear();
+                inputs.get(0).sendKeys("Descripción");
+                inputs.get(1).click();
+                inputs.get(1).clear();
+                inputs.get(1).sendKeys("Descripción");
+                driver.findElement(By.xpath("//span[contains(@id,'--dataPropertyFormBuilder-vhi')]")).click();
+                Thread.sleep(1500);
+                driver.findElement(By.xpath("//span[contains(@id,'--treeDM-rows-row0-treeicon')]")).click();
+                driver.findElement(By.xpath("//span[text()='Descripción : String']")).click();
+                Thread.sleep(1500);
+                break;
+
+            default:
+                driver.findElement(By.xpath("//span[contains(@id,'fieldDataPropertyFormBuilder-arrow')]")).click();
+                selectListItem.SelectItemLi(typeAttribute);
+                break;
+
+        }
+        js.executeScript("let title = document.getElementById('"+idTitlePanel+"');title.scrollIntoView(false);");
+
+    }
+
+    private void searchAttribute(String attribute){
+        int pos = searchElement.searchAttribute(attribute);
+        System.out.println(pos);
+        if(pos != -1){
+            WebElement atributo = driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='"+attribute+"']"));
+            atributo.click();
+        }else{
+            Assert.assertEquals("No hay atributo","Si hay atributos");
+        }
     }
 
     private void moveBox(WebElement from , WebElement to,JavascriptExecutor js) throws AWTException, InterruptedException {
@@ -219,4 +321,25 @@ public class FormsActivityForm {
 
         return fijo -40;
     }
+
+    public static void main(String[] args) {
+
+        String typeAttribute = "T";
+        switch (typeAttribute) {
+            case " " :
+                break;
+            case "Text Area" :
+                System.out.println("txt");
+                break;
+            default:
+                System.out.println("default");
+                break;
+
+        }
+
+        System.out.println("Fin");
+
+
+    }
+
 }

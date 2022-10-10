@@ -10,6 +10,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.awt.*;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ServiceRequest_Step3 {
     private WebDriver driver;
@@ -63,20 +66,38 @@ public class ServiceRequest_Step3 {
         String userTask4 = "#"+xmlview+"--js-canvas-fb > div > div > svg > g > g > g > g.djs-children > g:nth-child(46) > g > rect.djs-hit.djs-hit-all";
         String userTask5 = "#"+xmlview+"--js-canvas-fb > div > div > svg > g > g > g > g.djs-children > g:nth-child(51) > g > rect.djs-hit.djs-hit-all";
         String userTask6 = "#"+xmlview+"--js-canvas-fb > div > div > svg > g > g > g > g.djs-children > g:nth-child(54) > g > rect.djs-hit.djs-hit-all";
+
+        List<String> userTasks = Arrays.asList(userTask2,userTask3,userTask4,userTask5,userTask6);
+
         //Definimos send Task
         String sendTask1 = "#"+xmlview+"--js-canvas-fb > div > div > svg > g > g > g > g.djs-children > g:nth-child(39) > g > rect.djs-hit.djs-hit-all";
         String sendTask2 = "#"+xmlview+"--js-canvas-fb > div > div > svg > g > g > g > g.djs-children > g:nth-child(53) > g > rect.djs-hit.djs-hit-all";
 
+        List<String> sendTasks = Arrays.asList(sendTask1,sendTask2);
+
+
         //Click en el primer userTask1
         elementSVG.clickSVGElementCenter(userTask1);
-        //Click para crear AF
+        //Click para crear el Activity Form
         driver.findElement(By.xpath(addACTF)).click();
         formsAF.createNewActivityForm("AF-SELENIUM");
         ChargePopPup.PopPupMain(driver,wait);
         formsAF.panelActivityForm();
 
+        //Ingresamos a todos los User Task
 
-        //Ingresamos a la actividad 2
+        for ( String userTask : userTasks ){
+            elementSVG.clickSVGElementCenter(userTask);
+            Thread.sleep(1000);
+            driver.findElement(By.xpath("//input[contains(@id,'--cbActivityForm-inner')]")).click();
+            driver.findElement(By.xpath("//input[contains(@id,'--cbActivityForm-inner')]")).sendKeys("AF-SELENIUM");
+            driver.findElement(By.xpath("//input[contains(@id,'--cbActivityForm-inner')]")).sendKeys(Keys.TAB);
+            driver.findElement(By.xpath("//button[@title='Rechazar']")).click();
+            Thread.sleep(1000);
+        }
+
+        //Ingresamos a los Send Task
+
 /*        String task2 = "#__xmlview4--js-canvas-fb > div > div > svg > g > g > g > g.djs-children > g:nth-child(13) > g > rect.djs-hit.djs-hit-all";
         elementSVG.clickSVGElementCenter(task2);
         Thread.sleep(1000);
@@ -104,4 +125,5 @@ public class ServiceRequest_Step3 {
         driver.findElement(By.xpath("//span[contains(@id,'--btnSaveModelerFB-inner')]")).click();*/
         //asserts.assertSave();
     }
+
 }

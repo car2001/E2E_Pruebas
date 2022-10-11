@@ -55,13 +55,13 @@ public class LoginApplications {
             ChargePopPup.PopPupGeneral(driver,wait);
         }
 
-        if(componente.equals("Project")){
+        if(componente.equals("Projects")){
             accessBranch.clickBranches(0);
-        }else if(componente.equals("Change Container")){
+        }else if(componente.equals("Change Containers")){
             accessBranch.clickBranches(1);
-        }else if (componente.equals("Deployment Package")){
+        }else if (componente.equals("Deployment Packages")){
             accessBranch.clickBranches(2);
-        }else if(componente.equals("Deployment Request")){
+        }else if(componente.equals("Deployment Requests")){
             accessBranch.clickBranches(3);
         }
     }

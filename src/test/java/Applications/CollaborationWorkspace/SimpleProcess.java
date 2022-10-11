@@ -1,10 +1,9 @@
 package Applications.CollaborationWorkspace;
 
-import E2E.ServiceRequest.CM_ServiceRequest;
-import E2E.ServiceRequest.DEM_ServiceRequest;
-import E2E.ServiceRequest.DRM_ServiceRequest;
-import E2E.ServiceRequest.PM_ServiceRequest;
+import E2E.ServiceRequest.*;
 import E2E.SimpleProcess.CM_SimpleProcess;
+import E2E.SimpleProcess.PM_SimpleProcess;
+import E2E.SimpleProcess.RM_SimpleProcess;
 import Helpers.Asserts;
 import Helpers.BasicControl;
 import Helpers.DynamicScroll;
@@ -31,7 +30,10 @@ public class SimpleProcess {
     JavascriptExecutor js;
     Asserts asserts;
     BasicControl basicControl;
+    RM_SimpleProcess releaseManager;
     CM_SimpleProcess configurationManager;
+    PM_SimpleProcess processManager;
+
 
     @BeforeTest
     public void setup(){
@@ -43,29 +45,32 @@ public class SimpleProcess {
         js = (JavascriptExecutor) driver;
         basicControl = new BasicControl(driver);
         searchScrollElement = new DynamicScroll(driver);
+        releaseManager = new RM_SimpleProcess(driver);
         configurationManager = new CM_SimpleProcess(driver);
+        processManager = new PM_SimpleProcess(driver);
     }
 
 
     @Test
-    public void runProcessServiceRequest() throws InterruptedException, AWTException, IOException {
+    public void runProcessSimpleProcess() throws InterruptedException, AWTException, IOException {
+        //Iniciamos Sesión
         login.loginPage();
+        //Ingresamos al Release Manager
+        LoginApplications.loginRM(driver,"Projects");
+        //Creamos los componentes del Release Manager
+        //releaseManager.createRM_SimpleProcess(login.getUser());
+        //Salimos a la vista de las aplicaciones
         basicControl.logo();
-        LoginApplications.loginRM(driver,"Change Container");
-        basicControl.logo();
+        //Ingresamos al Configuration Manager
         LoginApplications.loginCM(driver);
-        configurationManager.createCM_SimpleProcess();
+        //configurationManager.createCM_SimpleProcess();
+        //Salimos a la vista de las aplicaciones
         basicControl.logo();
+        //Ingresamos al Process Manager
         LoginApplications.loginPM(driver);
-        //processManager.createPM_ServiceRequest();
-        basicControl.logo();
-        LoginApplications.loginDataEntity(driver);
-        //entityManager.createDEM_ServiceRequest();
-        basicControl.logo();
-        LoginApplications.loginDataRecord(driver);
-        //recordManager.createDRM_ServiceRequest();
-        basicControl.logo();
-        LoginApplications.loginPM(driver);
+        processManager.createPM_SimpleProcess();
+
+
 
     }
 

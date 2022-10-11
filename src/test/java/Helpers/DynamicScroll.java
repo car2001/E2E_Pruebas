@@ -88,7 +88,7 @@ public class DynamicScroll {
         return positionFound;
     }
 
-    public  String searchElementTable(String project, String user ,String state ,String release,String name){
+    public  String searchElementTable(String project,String state ,String release,String nameCC){
         WebElement scrollTable;
         Boolean displayedScroll = false;
         String xpos = "";
@@ -121,7 +121,7 @@ public class DynamicScroll {
 
 
             while (iterator<=numVeces+1){
-                xpos = busqueda(textContentList,project,user,state,release,name);
+                xpos = busqueda(textContentList,project,state,release,nameCC);
                 if(xpos != " "){
                     break;
                 }else{
@@ -136,19 +136,20 @@ public class DynamicScroll {
                 }
             }
         } else{
-            xpos = busqueda(textContentList,project,user,state,release,name);
+            xpos = busqueda(textContentList,project,state,release,nameCC);
         }
 
         return xpos;
     }
 
-    public  String busqueda (List<String> contentList,String project, String user ,String state ,String release,String name){
+    public  String busqueda (List<String> contentList,String project,String state ,String release,String nameCC){
         String xpos = " ";
         String content = " ";
         for(int i = 0; i<= contentList.size()-1;i=i+1){
             content = contentList.get(i);
-            if(content.contains(state) && content.contains(user) && content.contains(project) && content.contains(release)){
-                xpos = content.substring(0,content.indexOf(name));
+
+            if(content.contains(state) && content.contains(project) && content.contains(release)){
+                xpos = content.substring(0,content.indexOf(nameCC));
                 break;
             }else{
                 xpos = " ";
@@ -213,5 +214,15 @@ public class DynamicScroll {
         return  xpos;
     }
 
+
+    public static void main(String[] args) {
+        String content = "012022-10-11 CC-SROpenJhoser Juarez11 oct. 2022 01:38:22 a.�m.2022-10-11 Proyect-SR2022-10-11 Release-SR2022-10-11 CC-SR";
+        if(content.contains("Open") && content.contains("jjuarez") && content.contains("2022-10-11 Proyect-SR") && content.contains("2022-10-11 Release-SR")){
+            String xpos = content.substring(0,content.indexOf("2022-10-11 CC-SR"));
+            System.out.println(xpos);
+        }else{
+            System.out.println("xxxxxx");
+        }
+    }
 
 }

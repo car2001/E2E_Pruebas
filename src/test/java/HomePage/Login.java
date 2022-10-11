@@ -33,6 +33,14 @@ public class Login {
         driver.findElement(By.xpath("//input[contains(@id,'--inputUserName-inner')]")).sendKeys(user);
         driver.findElement(By.xpath("//input[contains(@id,'--inputPassword-inner')]")).sendKeys(password);
         driver.findElement(By.xpath("//button[contains(@id,'--btnSubmit')]")).click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.get(getUrl()+"#/Applications");
+
     }
 
     public void loginPage(String url){
@@ -42,6 +50,13 @@ public class Login {
         driver.findElement(By.xpath("//input[contains(@id,'--inputUserName-inner')]")).sendKeys(user);
         driver.findElement(By.xpath("//input[contains(@id,'--inputPassword-inner')]")).sendKeys(password);
         driver.findElement(By.xpath("//button[contains(@id,'--btnSubmit')]")).click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.get(getUrl()+"#/Applications");
     }
 
 
@@ -52,11 +67,20 @@ public class Login {
         driver.findElement(By.xpath("//input[contains(@id,'--inputUserName-inner')]")).sendKeys(user);
         driver.findElement(By.xpath("//input[contains(@id,'--inputPassword-inner')]")).sendKeys(password);
         driver.findElement(By.xpath("//button[contains(@id,'--btnSubmit')]")).click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.get(getUrl()+"#/Applications");
     }
 
     public String getUser() {
         return user;
     }
+
+    public String getUrl(){return  url;}
 
 
 }

@@ -1,10 +1,7 @@
 package Applications.CollaborationWorkspace;
 
 
-import E2E.ServiceRequest.CM_ServiceRequest;
-import E2E.ServiceRequest.DEM_ServiceRequest;
-import E2E.ServiceRequest.DRM_ServiceRequest;
-import E2E.ServiceRequest.PM_ServiceRequest;
+import E2E.ServiceRequest.*;
 import Helpers.Asserts;
 import Helpers.BasicControl;
 import Helpers.DynamicScroll;
@@ -31,6 +28,7 @@ public class ServiceRequest {
     JavascriptExecutor js;
     Asserts asserts;
     BasicControl basicControl;
+    RM_ServiceRequest releaseManager;
     CM_ServiceRequest configurationManager;
     PM_ServiceRequest processManager;
     DEM_ServiceRequest entityManager;
@@ -47,6 +45,7 @@ public class ServiceRequest {
         js = (JavascriptExecutor) driver;
         basicControl = new BasicControl(driver);
         searchScrollElement = new DynamicScroll(driver);
+        releaseManager = new RM_ServiceRequest(driver);
         configurationManager = new CM_ServiceRequest(driver);
         processManager = new PM_ServiceRequest(driver);
         entityManager = new DEM_ServiceRequest(driver);
@@ -56,9 +55,15 @@ public class ServiceRequest {
 
     @Test
     public void runProcessServiceRequest() throws InterruptedException, AWTException, IOException {
+        //Iniciamos Sesión
         login.loginPage();
-        LoginApplications.loginRM(driver,"Change Container");
+        //Ingresamos al Release Manager
+        LoginApplications.loginRM(driver,"Projects");
+        //Creamos los componentes del Release Manager
+        releaseManager.createRM_ServiceRequest(login.getUser());
+        //Salimos a la vista de las aplicaciones
         basicControl.logo();
+        //Ingresamos al Configuration Manager
         LoginApplications.loginCM(driver);
         //configurationManager.createCM_ServiceRequest();
         basicControl.logo();

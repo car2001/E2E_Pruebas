@@ -25,27 +25,6 @@ public class FormsRM {
 
     //Project
 
-    public static void formCreateProject(WebDriver driver,String proyecto){
-        listForm = FormsControl.controlNew(driver,"proyecto","");
-        listForm.get(0).sendKeys(proyecto);
-        listForm.get(1).sendKeys(proyecto);
-        listForm.get(2).sendKeys("Proyecto Creado en Selenium");
-        //Thread.sleep(500);
-        driver.findElement(By.id("__xmlview4--ProjectStartDate-icon")).click();
-        LocalDate date = LocalDate.now();
-        driver.findElement(By.xpath("//span[normalize-space()='"+date.getDayOfMonth()+"']")).click();
-        driver.findElement(By.id("__xmlview4--ProjectEndDate-icon")).click();
-        driver.findElement(By.id("__xmlview4--ProjectEndDate-cal--Head-B2")).click();
-        driver.findElement(By.xpath("//div[text()='"+(date.getYear()+5)+"']")).click();
-        List<WebElement> Day = driver.findElements(By.xpath("//span[normalize-space()='"+date.getDayOfMonth()+"']"));
-        Day.get(1).click();
-        driver.findElement(By.id("__xmlview4--selectProjectState-label")).click();
-        driver.findElement(By.xpath("//li[text()='Open']")).click();
-        driver.findElement(By.id("__xmlview4--useInProcess-handle")).click();
-        driver.findElement(By.id("__xmlview4--useInReleases-handle")).click();
-        driver.findElement(By.id(save)).click();
-    }
-
     public static void formEditProject(WebDriver driver,String proyecto) throws InterruptedException {
         listForm = FormsControl.controlEdit(driver,"proyecto","");
         listForm.get(0).clear();
@@ -80,7 +59,7 @@ public class FormsRM {
 
     //Release
 
-    public static void formCreateRelease(WebDriver driver,String release){
+    public static void formCreateRelease(WebDriver driver, String release){
         listForm = FormsControl.controlNew(driver,"liberación","");
         listForm.get(0).sendKeys(release);
         listForm.get(1).sendKeys(release);
@@ -123,23 +102,7 @@ public class FormsRM {
 
     // Change Container
 
-    public static void formCreateChangeContainer(WebDriver driver,String ChangeContainer,String Proyecto,String release,String user) throws InterruptedException {
-        listForm = FormsControl.controlNew(driver,"contenedor de cambios","");
-        listForm.get(0).click();
-        listForm.get(0).sendKeys(ChangeContainer);
-        listForm.get(1).click();
-        listForm.get(1).sendKeys(ChangeContainer);
-        listForm.get(2).click();
-        listForm.get(2).sendKeys( ChangeContainer);
-        List<WebElement> listComboBox = driver.findElements(By.className("sapMSltLabel"));
-        listComboBox.get(0).click();
-        driver.findElement(By.xpath("//li[text()='"+Proyecto+"']")).click();
-        listComboBox.get(1).click();
-        driver.findElement(By.xpath("//li[text()='"+release+"']")).click();
-        listComboBox.get(2).click();
-        driver.findElement(By.xpath("//li[text()='"+user+"']")).click();
-        driver.findElement(By.id(save)).click();
-    }
+
 
     //Deployment Package
 

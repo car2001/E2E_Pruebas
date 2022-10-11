@@ -20,9 +20,6 @@ public class ServiceRequest_Step3 {
     private BasicControl basicControl;
     private Actions action;
     private ElementSVG elementSVG;
-    private Asserts asserts;
-    private JavascriptExecutor js;
-    private SelectListItem selectListItem;
     private FormsActivityForm formsAF;
     private String step3 = "//span[contains(@id,'-count') and @class='sapMITBCount' and text()='3']";
     private String editModelerFB = "--btnEditModelerFB-inner";
@@ -34,11 +31,8 @@ public class ServiceRequest_Step3 {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(100));
         this.basicControl = new BasicControl(driver);
         this.action = new Actions(driver);
-        this.js = (JavascriptExecutor) driver;
         this.elementSVG = new ElementSVG(driver);
         this.formsAF = new FormsActivityForm(driver);
-        this.selectListItem = new SelectListItem(driver);
-        this.asserts = new Asserts(driver);
     }
 
 
@@ -80,7 +74,7 @@ public class ServiceRequest_Step3 {
         elementSVG.clickSVGElementCenter(userTask1);
         //Click para crear el Activity Form
         driver.findElement(By.xpath(addACTF)).click();
-        formsAF.createNewActivityForm("AF-SELENIUM");
+        formsAF.createNewActivityForm("AF-SERVICE REQUEST");
         ChargePopPup.PopPupMain(driver,wait);
         formsAF.panelActivityForm();
 
@@ -90,9 +84,10 @@ public class ServiceRequest_Step3 {
             elementSVG.clickSVGElementCenter(userTask);
             Thread.sleep(1000);
             driver.findElement(By.xpath("//input[contains(@id,'--cbActivityForm-inner')]")).click();
-            driver.findElement(By.xpath("//input[contains(@id,'--cbActivityForm-inner')]")).sendKeys("AF-SELENIUM");
+            driver.findElement(By.xpath("//input[contains(@id,'--cbActivityForm-inner')]")).sendKeys("AF-SERVICE REQUEST");
             driver.findElement(By.xpath("//input[contains(@id,'--cbActivityForm-inner')]")).sendKeys(Keys.TAB);
-            driver.findElement(By.xpath("//button[@title='Rechazar']")).click();
+            driver.findElement(By.xpath("//button[@title='Rechazar' or @title = 'Decline' ]")).click();
+
             Thread.sleep(1000);
         }
 
@@ -111,7 +106,7 @@ public class ServiceRequest_Step3 {
         elementSVG.clickSVGElementCenter(task3);
         Thread.sleep(1000);
         driver.findElement(By.xpath("//span[contains(@id,'--btnEmailDefinition-inner')]")).click();
-        WebElement popEmailDefinition = driver.findElement(By.xpath("//span[text()='Editor de correo electrónico']"));
+        WebElement popEmailDefinition = driver.findElement(By.xpath("//span[text()='Editor de correo electrónico' or text()='Email Editor']"));
         wait.until(ExpectedConditions.visibilityOf(popEmailDefinition));
         driver.findElement(By.xpath("//input[contains(@id,'--miTO-inner')]")).click();
         driver.findElement(By.xpath("//input[contains(@id,'--miTO-inner')]")).sendKeys("role: Superadmin");
@@ -121,7 +116,7 @@ public class ServiceRequest_Step3 {
         driver.findElement(By.xpath("//div[@aria-label='Rich Text Editor, main']")).click();
         driver.findElement(By.xpath("//div[@aria-label='Rich Text Editor, main']")).sendKeys("Proceso Selenium");
         driver.findElement(By.xpath("//span[contains(@id,'--btnSaveEE-content')]")).click();
-        driver.findElement(By.xpath("//button[@title='Rechazar']")).click();
+        driver.findElement(By.xpath("//button[@title='Rechazar' or @title = 'Decline']")).click();
         driver.findElement(By.xpath("//span[contains(@id,'--btnSaveModelerFB-inner')]")).click();*/
         //asserts.assertSave();
     }

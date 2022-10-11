@@ -1,6 +1,7 @@
 package Applications.ReleaseManager;
 
 import Forms.FormsRM;
+import Forms.ReleaseManager.FormsChangeContainer;
 import Helpers.*;
 import HomePage.Login;
 import HomePage.LoginApplications;
@@ -10,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -19,98 +21,69 @@ import java.util.List;
 
 
 public class RM_ChangeContainer {
+
     private WebDriver driver;
-    private final String chosen_browser = "Chrome";
 
     Actions action;
-    SelectBrowser browser = new SelectBrowser(driver);
-    Login login;
     DynamicScroll searchScrollElement;
     Asserts asserts;
     AccessBranch accessBranch;
     BasicControl basicControl;
+    Login login;
+    FormsChangeContainer formsChangeContainer;
 
-    String componente = "Change Container";
+    String componente = "Change Containers";
     String newChangeContainer = "CC_SELENIUM";
-    String project = "Proyecto Release Selenium";
-    String release = "Release Selenium";
-    String DR = "DR_SELENIUM";
     String DP = "DP_SELENIUM";
     String urlQA = "http://wedox.sytes.net/buplat_QA/";
     String urlPROD = "http://wedox.sytes.net/buplat/";
 
-    @BeforeMethod
-    public void setUp(){
-        browser.chooseBrowser(chosen_browser);
-        driver = browser.getDriver();
-        login = new Login(driver);
-        action = new Actions(driver);
-        asserts = new Asserts(driver);
-        searchScrollElement = new DynamicScroll(driver);
-        accessBranch = new AccessBranch(driver);
-        basicControl = new BasicControl(driver);
-        login.loginPage();
-        LoginApplications.loginRM(driver, componente);
+
+    public RM_ChangeContainer(WebDriver driver){
+        this.driver = driver;
+        this.action = new Actions(driver);
+        this.asserts = new Asserts(driver);
+        this.searchScrollElement = new DynamicScroll(driver);
+        this.accessBranch = new AccessBranch(driver);
+        this.basicControl = new BasicControl(driver);
+        this.login = new Login(driver);
+        this.formsChangeContainer = new FormsChangeContainer(driver);
     }
 
-    @Test
-    public void crearChangeContainerArbol() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        String user = login.getUser();
+
+
+
+    public void crearChangeContainerArbol(String changeContainer, String proyecto, String release, String user) throws InterruptedException {
         WebElement btnOpen = driver.findElement(By.xpath("//span[text()='Open']"));
         action.contextClick(btnOpen).perform();
         Thread.sleep(1000);
-        driver.findElement(By.xpath("//div[normalize-space()='New " + componente + "']")).click();
-        FormsRM.formCreateChangeContainer(driver,newChangeContainer,project,release,user);
+        driver.findElement(By.xpath("//div[text()='New Change Container' or text()='Nuevo Contenedor de Cambios']")).click();
+        formsChangeContainer.createChangeContainer(changeContainer,proyecto,release,user);
         asserts.assertSave();
         
     }
 
 
-
-    //arreglar estoo
-    public void crearChangeContainerTabla() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        String user = login.getUser();
-        driver.findElement(By.xpath("//span[text()='Open']")).click();
-        Thread.sleep(4000);
-        WebElement titulo = driver.findElement(By.xpath("//span[text()='Lista de contenedor de cambios']"));
-        wait.until(ExpectedConditions.visibilityOf(titulo));
-        Thread.sleep(5000);
-        List<WebElement> buttons = driver.findElements(By.xpath("//span[@class ='sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnIconFirst sapMBtnDefault']"));
-        action.moveToElement(buttons.get(0)).click().perform();
-        Thread.sleep(5000);
-        FormsRM.formCreateChangeContainer(driver,newChangeContainer,project,release,user);
-        asserts.assertSave();
-
-    }
-
-
-    public void editarChangeContainerTabla(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        driver.findElement(By.xpath("//span[text()='Open']")).click();
-        WebElement titulo = driver.findElement(By.xpath("//span[text()='Lista de contenedor de cambios']"));
-        wait.until(ExpectedConditions.visibilityOf(titulo));
-        List<WebElement> buttons = driver.findElements(By.xpath("//span[@class ='sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnIconFirst sapMBtnDefault']"));
-        driver.findElement(By.xpath("//span[text()='01']")).click();
-        action.moveToElement(buttons.get(1)).click().perform();
-
-        //Aún falta terminar porque nos concentramos en un caso End2End.
-    }
-
     @Test
-    public void activarChangeContainerTabla() throws InterruptedException {
-        crearChangeContainerArbol();
+    public void activarChangeContainerTabla(String changeContainer, String proyecto, String release, String user) throws InterruptedException {
+        crearChangeContainerArbol(changeContainer,proyecto,release,user);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.findElement(By.xpath("//span[text()='Open']")).click();
         Thread.sleep(1000);
-        WebElement titulo = driver.findElement(By.xpath("//span[text()='Lista de contenedor de cambios']"));
+        WebElement titulo = driver.findElement(By.xpath("//span[text()='Lista de Contenedor de Cambios' or text()='Change Container List']"));
         wait.until(ExpectedConditions.visibilityOf(titulo));
         List<WebElement> buttons = driver.findElements(By.xpath("//span[@class ='sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnIconFirst sapMBtnDefault']"));
-        driver.findElement(By.xpath("//span[text()='01']")).click();
-        action.moveToElement(buttons.get(2)).click().perform();
-        Thread.sleep(1000);
-        asserts.assertSave();
+
+        String posCC = searchScrollElement.searchElementTable(proyecto,"Open",release,changeContainer);
+        if(posCC == " "){
+            Assert.assertEquals("No hay el CC","Si hay CC");
+        }else{
+            driver.findElement(By.xpath("//span[text()='"+posCC+"']")).click();
+            action.moveToElement(buttons.get(2)).click().perform();
+            Thread.sleep(1500);
+            asserts.assertSave();
+        }
+
     }
 
     @Test

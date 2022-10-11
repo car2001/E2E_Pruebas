@@ -1,15 +1,18 @@
-package E2E.SimpleProcess;
+package E2E.ServiceRequest;
 
+import Applications.ConfigurationManager.CM_Counter;
 import Applications.ReleaseManager.RM_ChangeContainer;
 import Applications.ReleaseManager.RM_Release;
 import Helpers.AccessBranch;
+import Helpers.Asserts;
 import Helpers.BasicControl;
 import Helpers.DynamicScroll;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 import java.time.LocalDate;
 
-public class RM_SimpleProcess {
+public class RM_ServiceRequest {
 
     private WebDriver driver;
     private BasicControl basicControl;
@@ -19,7 +22,7 @@ public class RM_SimpleProcess {
     private AccessBranch accessBranch;
     private int pos;
 
-    public RM_SimpleProcess(WebDriver driver){
+    public RM_ServiceRequest(WebDriver driver){
         this.driver = driver;
         this.basicControl = new BasicControl(driver);
         this.release = new RM_Release(driver);
@@ -30,15 +33,17 @@ public class RM_SimpleProcess {
 
     String date = LocalDate.now().toString(); //Fecha Actual
     //Nombres componentes
-    private String nameproyecto = "Proyecto-Selenium" + " " + date ;
-    private String nameRelease  = "Release-Selenium"  + " " + date;
-    private String nameChangeContainer = "CC-Selenium" + " " + date;
+    private String nameproyecto = "Proyect-SR" + " " + date ;
+    private String nameRelease  = "Release-SR"  + " " + date;
+    private String nameChangeContainer = "CC-SR" + " " + date;
 
-    public void createRM_SimpleProcess(String user) throws InterruptedException {
+    public void createRM_ServiceRequest(String user) throws InterruptedException {
         release.crearRelease(nameproyecto,nameRelease);
         pos = searchScrollElement.elementSearch("Projects");
         accessBranch.clickBranches(pos);
         accessBranch.clickBranches(searchScrollElement.elementSearch("Change Containers"));
         changeContainer.activarChangeContainerTabla(nameChangeContainer,nameproyecto,nameRelease,user);
     }
+
+
 }

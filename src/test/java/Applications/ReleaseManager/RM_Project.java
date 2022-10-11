@@ -1,59 +1,56 @@
 package Applications.ReleaseManager;
 
 import Forms.FormsRM;
-import Helpers.Asserts;
-import Helpers.DynamicScroll;
-import Helpers.FormsControl;
-import Helpers.SelectBrowser;
-import HomePage.Login;
-import HomePage.LoginApplications;
+import Forms.ReleaseManager.FormsProject;
+import Helpers.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static HomePage.LoginApplications.accessBranch;
+import java.time.Duration;
 
 public class RM_Project {
     private WebDriver driver;
-    private final String chosen_browser = "Chrome";
 
-
+    BasicControl basicControl;
     Actions action;
-    SelectBrowser browser = new SelectBrowser(driver);
-    Login login;
     DynamicScroll searchScrollElement;
     Asserts asserts;
+    FormsProject formsProject;
+    AccessBranch accessBranch;
+    WebDriverWait wait;
+    JavascriptExecutor js;
 
-    String componente = "Project";
+    String componente = "Projects";
     String newProject = "Proyecto Selenium2";
     String editProject = "Proyecto Selenium Editado";
     int exist = -1;
 
-
-
-    @BeforeMethod
-    public void setUp(){
-        browser.chooseBrowser(chosen_browser);
-        driver = browser.getDriver();
-        login = new Login(driver);
-        action = new Actions(driver);
-        asserts = new Asserts(driver);
-        searchScrollElement = new DynamicScroll(driver);
-        login.loginPage();
-        LoginApplications.loginRM(driver, componente);
+    public RM_Project(WebDriver driver){
+        this.driver = driver;
+        this.asserts = new Asserts(driver);
+        this.action = new Actions(driver);
+        this.accessBranch = new AccessBranch(driver);
+        this.searchScrollElement = new DynamicScroll(driver);
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(100));
+        this.js = (JavascriptExecutor) driver;
+        this.basicControl = new BasicControl(driver);
+        this.formsProject = new FormsProject(driver);
     }
 
+
     @Test
-    public void crearProyecto() {
+    public void crearProyecto() throws InterruptedException {
         WebElement proyecto = driver.findElement(By.id("__xmlview4--mainTree-rows-row0-treeicon"));
         action.contextClick(proyecto).perform();
         driver.findElement(By.xpath("//div[normalize-space()='New " + componente + "']")).click();
-        FormsRM.formCreateProject(driver, newProject);
+        formsProject.createProject(driver, newProject);
         asserts.assertSave();
     }
 

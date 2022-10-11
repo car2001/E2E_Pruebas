@@ -1,6 +1,8 @@
 package Applications.ReleaseManager;
 
 import Forms.FormsRM;
+import Forms.ReleaseManager.FormsProject;
+import Forms.ReleaseManager.FormsRelease;
 import Helpers.AccessBranch;
 import Helpers.Asserts;
 import Helpers.DynamicScroll;
@@ -22,47 +24,40 @@ import java.time.Duration;
 
 public class RM_Release  {
     private WebDriver driver;
-    private final String chosen_browser = "Chrome";
 
     Actions action;
-    SelectBrowser browser = new SelectBrowser(driver);
-    Login login;
     AccessBranch accessBranch;
     DynamicScroll searchScrollElement;
     Asserts asserts;
+    FormsProject formsProject;
+    FormsRelease formsRelease;
 
-    String component = "Release";
-    String project = "Proyecto Release Selenium";
-    String newRelease = "Release Selenium";
-    String editRelease = "Release Selenium Editado";
+    String component = "Releases";
     int exist = -1;
 
-
-    @BeforeMethod
-    public void setUp(){
-        browser.chooseBrowser(chosen_browser);
-        driver = browser.getDriver();
-        action = new Actions(driver);
-        asserts = new Asserts(driver);
-        accessBranch = new AccessBranch(driver);
-        searchScrollElement = new DynamicScroll(driver);
-        login = new Login(driver);
-        login.loginPage();
-        LoginApplications.loginRM(driver,"Project");
+    public RM_Release(WebDriver driver){
+        this.driver = driver;
+        this.action = new Actions(driver);
+        this.asserts = new Asserts(driver);
+        this.accessBranch = new AccessBranch(driver);
+        this.searchScrollElement = new DynamicScroll(driver);
+        this.formsProject = new FormsProject(driver);
+        this.formsRelease = new FormsRelease(driver);
     }
 
+
     @Test
-    public void crearRelease(){
+    public void crearRelease(String project,String nameRelease) throws InterruptedException {
         crearProyecto(project);
         exist = searchScrollElement.elementSearch(project);
         if(exist != -1){
             accessBranch.clickBranches(exist);
             exist= searchScrollElement.elementSearch(component);
             if(exist != -1){
-                WebElement release = driver.findElement(By.xpath("//span[normalize-space()='Release']"));
+                WebElement release = driver.findElement(By.xpath("//span[text()='"+component+"']"));
                 action.contextClick(release).perform();
-                driver.findElement(By.xpath("//div[normalize-space()='New " + component + "']")).click();
-                FormsRM.formCreateRelease(driver,newRelease);
+                driver.findElement(By.xpath("//div[text()='Nueva Liberación' or text()='New Release']")).click();
+                formsRelease.createRelease(nameRelease);
                 asserts.assertSave();
             }else{
                 Assert.assertEquals("No hay Release","Si hay Release");
@@ -73,21 +68,21 @@ public class RM_Release  {
     }
 
     @Test
-    public void editarRelease() throws InterruptedException {
+    public void editarRelease(String project,String nameRelease,String editRelease) throws InterruptedException {
         exist = searchScrollElement.elementSearch(project);
         if(exist != -1){
             accessBranch.clickBranches(exist);
             exist= searchScrollElement.elementSearch(component);
             if(exist != -1){
                 accessBranch.clickBranches(exist);
-                exist=searchScrollElement.elementSearch(newRelease);
+                exist=searchScrollElement.elementSearch(nameRelease);
                 if(exist !=-1){
-                    driver.findElement(By.xpath("//span[normalize-space()='"+newRelease+"']")).click();
+                    driver.findElement(By.xpath("//span[normalize-space()='"+nameRelease+"']")).click();
                     FormsRM.formEditRelease(driver,editRelease);
                     asserts.assertSave();
                     accessBranch.clickBranches(0);
                 }else{
-                    Assert.assertEquals("No hay " + newRelease,"Si hay Release");
+                    Assert.assertEquals("No hay " + nameRelease,"Si hay Release");
                 }
             }else{
                 Assert.assertEquals("No hay Release","Si hay Release");
@@ -98,7 +93,7 @@ public class RM_Release  {
     }
 
     @Test
-    public void eliminarRelease(){
+    public void eliminarRelease(String project,String editRelease){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         exist = searchScrollElement.elementSearch(project);
         if(exist != -1){
@@ -125,7 +120,7 @@ public class RM_Release  {
                     driver.findElement(By.xpath("//bdi[normalize-space()='Sí'][last()]")).click();
                     driver.findElement(By.xpath("//bdi[normalize-space()='OK'][last()]")).click();
                 }else{
-                    Assert.assertEquals("No hay " + newRelease,"Si hay Release");
+                    Assert.assertEquals("No hay " + editRelease,"Si hay Release");
                 }
             }else{
                 Assert.assertEquals("No hay Release","Si hay Release");
@@ -142,11 +137,11 @@ public class RM_Release  {
         }
     }
 
-    public void crearProyecto(String proyecto){
-        WebElement despleProyecto = driver.findElement(By.id("__xmlview4--mainTree-rows-row0-treeicon"));
+    public void crearProyecto(String proyecto) throws InterruptedException {
+        WebElement despleProyecto = driver.findElement(By.xpath("//span[contains(@id,'--mainTree-rows-row0-treeicon')]"));
         action.contextClick(despleProyecto).perform();
-        driver.findElement(By.xpath("//div[normalize-space()='New Project']")).click();
-        FormsRM.formCreateProject(driver, proyecto);
+        driver.findElement(By.xpath("//div[text()='New Project' or text()='Nuevo Proyecto']")).click();
+        formsProject.createProject(driver, proyecto);
         asserts.assertSave();
     }
 

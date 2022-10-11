@@ -57,19 +57,19 @@ public class FormsActivityForm {
     }
 
     public void panelActivityForm(int tamModel) throws InterruptedException, AWTException {
-        driver.findElement(By.xpath("//span[contains(@id,'--TreeDMFB-rows-row0-treeicon')]")).click();
+        driver.findElement(By.xpath(dataModelList)).click();
         Thread.sleep(2000);
-        WebElement to = driver.findElement(By.xpath("//div[contains(@id,'idGridBuilder') and @aria-roledescription='Lista de elementos']"));
+        WebElement to = driver.findElement(By.xpath("//div[(@aria-roledescription='Lista de elementos' or @aria-roledescription = 'Item List')]"));
 
         for(int i=tamModel; i > 0 ; i -- ){
             WebElement from = driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row"+i+"-col')]"));
             moveBox(from,to,js);
         }
+
+
         Thread.sleep(1000);
-        driver.findElement(By.id("__xmlview4--btnSaveFB-img")).click();
-        WebElement popupCarga = driver.findElement(By.cssSelector("#sapUiBusyIndicator.sapUiUserSelectable"));
-        wait.until(ExpectedConditions.visibilityOf(popupCarga));
-        wait.until(ExpectedConditions.invisibilityOf(popupCarga));
+        basicControl.btnSave("--btnSaveFB-img");
+        ChargePopPup.PopPupGeneral(driver,wait);
 
     }
 
@@ -174,7 +174,7 @@ public class FormsActivityForm {
 
     private void putPanel(String titlePanel) throws InterruptedException, AWTException {
         WebElement from = driver.findElement(By.xpath("//td[contains(@id,'--idContainerList-rows-row')]//span[text()='Panel']"));
-        WebElement to = driver.findElement(By.xpath("//div[contains(@id,'idGridBuilder') and @aria-roledescription='Lista de elementos']"));
+        WebElement to = driver.findElement(By.xpath("//div[(@aria-roledescription='Lista de elementos' or @aria-roledescription = 'Item List')  and contains(@id,'__container')]"));
         moveBox(from,to,js);
         driver.findElement(By.xpath("//h2[text()='Panel'][@class='sapMPanelHdr']")).click();
         Thread.sleep(1000);
@@ -196,7 +196,7 @@ public class FormsActivityForm {
     private void putAttribute(String titlePanel,String attribute,String typeAttribute) throws InterruptedException, AWTException {
         searchAttribute(attribute);
         WebElement from = driver.findElement(By.xpath("//td[contains(@id,'--TreeDMFB-rows-row')]//span[text()='"+attribute+"']"));
-        WebElement to = driver.findElements(By.xpath("//div[@aria-roledescription='Lista de elementos'  and contains(@id,'__container')]")).get(0);
+        WebElement to = driver.findElements(By.xpath("//div[(@aria-roledescription='Lista de elementos' or @aria-roledescription = 'Item List')  and contains(@id,'__container')]")).get(0);
         from.click();
         moveBox(from,to,js);
         Thread.sleep(1000);
@@ -322,24 +322,6 @@ public class FormsActivityForm {
         return fijo -40;
     }
 
-    public static void main(String[] args) {
 
-        String typeAttribute = "T";
-        switch (typeAttribute) {
-            case " " :
-                break;
-            case "Text Area" :
-                System.out.println("txt");
-                break;
-            default:
-                System.out.println("default");
-                break;
-
-        }
-
-        System.out.println("Fin");
-
-
-    }
 
 }

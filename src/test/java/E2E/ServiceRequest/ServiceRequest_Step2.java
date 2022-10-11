@@ -102,20 +102,11 @@ public class ServiceRequest_Step2 {
 
     private  List<String> listDataModelName(){
         List<String> listName = new ArrayList<String>();
-        listName.add("NoUsersolicitante");
-        listName.add("NOUSARRequestDate");
         listName.add("RequestDatail");
-        listName.add("NousarRequestCategory");
-        listName.add("Impact");
         listName.add("Priority");
         listName.add("Reason");
-        listName.add("NousarAsignee");
         listName.add("EstimatedTime");
-        listName.add("NO_USAR_ApprovalRequiered");
-        listName.add("NousarApprover");
         listName.add("SolutionDetail");
-        listName.add("NO_USAR_ApproveRequest");
-        listName.add("NousarExecutor");
         listName.add("Asignado");
         listName.add("Aprobador");
         listName.add("Ejecutor");
@@ -150,20 +141,11 @@ public class ServiceRequest_Step2 {
 
     private  List<String> listDataDisplayName(){
         List<String> listDisplayName = new ArrayList<String>();
-        listDisplayName.add("NoUsersolicitante");
-        listDisplayName.add("NOUSARRequestDate");
         listDisplayName.add("Detalle de la Solicitud");
-        listDisplayName.add("NousarRequestCategory");
-        listDisplayName.add("NO USAR Impacto");
         listDisplayName.add("Prioridad");
         listDisplayName.add("Motivo de la Solicitud");
-        listDisplayName.add("NousarAsignee");
         listDisplayName.add("Tiempo Estimado (Horas)");
-        listDisplayName.add("NO_USAR_¿Requiere Aprobación?");
-        listDisplayName.add("NousarApprover");
         listDisplayName.add("Detalle de la Solución");
-        listDisplayName.add("NO_USAR_¿Aprueba Solicitud?");
-        listDisplayName.add("NousarExecutor");
         listDisplayName.add("Asignado");
         listDisplayName.add("Aprobador");
         listDisplayName.add("Ejecutor");
@@ -198,20 +180,11 @@ public class ServiceRequest_Step2 {
 
     private  List<String> listDataModelDataType(){
         List<String> listDataType = new ArrayList<String>();
-        listDataType.add("ForeignKey");
-        listDataType.add("DateTime");
         listDataType.add("String");
-        listDataType.add("ForeignKey");
-        listDataType.add("ForeignKey");
-        listDataType.add("ForeignKey");
         listDataType.add("ForeignKey");
         listDataType.add("ForeignKey");
         listDataType.add("BigInteger");
-        listDataType.add("Boolean");
-        listDataType.add("ForeignKey");
         listDataType.add("String");
-        listDataType.add("Boolean");
-        listDataType.add("ForeignKey");
         listDataType.add("ForeignKey");
         listDataType.add("ForeignKey");
         listDataType.add("ForeignKey");
@@ -246,17 +219,10 @@ public class ServiceRequest_Step2 {
 
     private  List<String> listDataModelEntityType(){
         List<String> listEntityType = new ArrayList<String>();
-        listEntityType.add("Local Environment Entity");
 
         listEntityType.add("Cross Environment Entity");
         listEntityType.add("Cross Environment Entity");
-        listEntityType.add("Cross Environment Entity");
-        listEntityType.add("Cross Environment Entity");
-        listEntityType.add("Local Environment Entity");
 
-        listEntityType.add("Local Environment Entity");
-
-        listEntityType.add("Local Environment Entity");
         listEntityType.add("System");
         listEntityType.add("System");
         listEntityType.add("System");
@@ -283,17 +249,9 @@ public class ServiceRequest_Step2 {
 
     private  List<String> listDataModelEntity(){
         List<String> listEntity = new ArrayList<String>();
-        listEntity.add("Employee Selenium");
-
-        listEntity.add("Category Selenium");
-        listEntity.add("Impact Selenium");
         listEntity.add("Priority Selenium");
         listEntity.add("RequestReason Selenium");
-        listEntity.add("Employee Selenium");
 
-        listEntity.add("Employee Selenium");
-
-        listEntity.add("Employee Selenium");
         listEntity.add("User");
         listEntity.add("User");
         listEntity.add("User");

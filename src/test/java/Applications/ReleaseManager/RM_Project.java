@@ -1,6 +1,5 @@
 package Applications.ReleaseManager;
 
-import Forms.FormsRM;
 import Forms.ReleaseManager.FormsProject;
 import Helpers.*;
 import org.openqa.selenium.By;
@@ -26,6 +25,7 @@ public class RM_Project {
     AccessBranch accessBranch;
     WebDriverWait wait;
     JavascriptExecutor js;
+
 
     String componente = "Projects";
     String newProject = "Proyecto Selenium2";
@@ -61,11 +61,11 @@ public class RM_Project {
     }
 
     @Test(priority = 2)
-    public void editarProyecto() throws InterruptedException {
+    public void editarProyecto(String editProject) throws InterruptedException {
         exist= searchScrollElement.elementSearch(newProject);
         if(exist !=-1){
             driver.findElement(By.xpath("//span[normalize-space()='"+newProject+"']")).click();
-            FormsRM.formEditProject(driver,editProject);
+            formsProject.editProject(editProject);
             asserts.assertSave();
         }else{ Assert.assertEquals("No hay "+newProject, "Si hay Proyecto");}
     }
@@ -77,12 +77,11 @@ public class RM_Project {
     }
 
     @Test(priority = 4)
-    public void crearProyectoSinRelease(){
-        String projectWithoutRelease = "Proyecto Sin Release Selenium";
+    public void crearProyectoSinRelease(String projectWithoutRelease) throws InterruptedException {
         WebElement proyecto = driver.findElement(By.id("__xmlview4--mainTree-rows-row0-treeicon"));
         action.contextClick(proyecto).perform();
         driver.findElement(By.xpath("//div[normalize-space()='New "+componente+"']")).click();
-        FormsRM.formCreateProjectWithoutRelease(driver,projectWithoutRelease);
+        formsProject.createProjectWithoutRelease(projectWithoutRelease);
         asserts.assertSave();
         String stateRelease = estadoRelease(projectWithoutRelease);
         Assert.assertEquals(stateRelease,"No hay Release");

@@ -1,7 +1,7 @@
 package Applications.ReleaseManager;
 
-import Forms.FormsRM;
 import Forms.ReleaseManager.FormsChangeContainer;
+import Forms.ReleaseManager.FormsDeploymentPackage;
 import Helpers.*;
 import HomePage.Login;
 import HomePage.LoginApplications;
@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -31,6 +30,7 @@ public class RM_ChangeContainer {
     BasicControl basicControl;
     Login login;
     FormsChangeContainer formsChangeContainer;
+    FormsDeploymentPackage formsDeploymentPackage;
 
     String componente = "Change Containers";
     String newChangeContainer = "CC_SELENIUM";
@@ -48,6 +48,7 @@ public class RM_ChangeContainer {
         this.basicControl = new BasicControl(driver);
         this.login = new Login(driver);
         this.formsChangeContainer = new FormsChangeContainer(driver);
+        this.formsDeploymentPackage = new FormsDeploymentPackage(driver);
     }
 
 
@@ -98,7 +99,7 @@ public class RM_ChangeContainer {
                 WebElement CC = driver.findElement(By.xpath("//span[text()='"+newChangeContainer+"']"));
                 action.contextClick(CC).build().perform();
                 driver.findElement(By.xpath("//div[normalize-space()='Release']")).click();
-                FormsRM.formReleaseCC(driver,accessBranch);
+                formsChangeContainer.releaseCC();
                 exist = searchScrollElement.elementSearch("Open");
                 if(exist != -1){
                     accessBranch.clickBranches(exist);
@@ -107,7 +108,7 @@ public class RM_ChangeContainer {
                         WebElement newDP = driver.findElement(By.xpath("//span[text()='"+DP+"']"));
                         action.contextClick(newDP).build().perform();
                         driver.findElement(By.xpath("//div[normalize-space()='Release']")).click();
-                        FormsRM.formReleaseDP(driver,accessBranch);
+                        formsDeploymentPackage.releaseDP();
                         exist = searchScrollElement.elementSearch("Open");
                         if (exist != -1){
                             driver.findElement(By.xpath("//span[text()='Open']")).click();

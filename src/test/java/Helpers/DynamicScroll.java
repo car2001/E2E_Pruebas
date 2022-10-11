@@ -215,14 +215,5 @@ public class DynamicScroll {
     }
 
 
-    public static void main(String[] args) {
-        String content = "012022-10-11 CC-SROpenJhoser Juarez11 oct. 2022 01:38:22 a.�m.2022-10-11 Proyect-SR2022-10-11 Release-SR2022-10-11 CC-SR";
-        if(content.contains("Open") && content.contains("jjuarez") && content.contains("2022-10-11 Proyect-SR") && content.contains("2022-10-11 Release-SR")){
-            String xpos = content.substring(0,content.indexOf("2022-10-11 CC-SR"));
-            System.out.println(xpos);
-        }else{
-            System.out.println("xxxxxx");
-        }
-    }
 
 }

@@ -57,4 +57,29 @@ public class FormsRelease {
         selectListItem.SelectItemLi("Open");
         basicControl.btnSave();
     }
+
+    public void editRelease(String release) throws InterruptedException {
+        listForm.get(0).click();
+        listForm.get(0).clear();
+        listForm.get(0).sendKeys(release);
+        listForm.get(1).click();
+        listForm.get(1).clear();
+        listForm.get(1).sendKeys(release);
+
+        Thread.sleep(500);
+        driver.findElement(By.xpath(arrowStartDate)).click();
+        driver.findElement(By.xpath(startDate)).click();
+        Thread.sleep(500);
+        driver.findElement(By.xpath(arrowEndDate)).click();
+        driver.findElement(By.xpath(btnYear)).click();
+        driver.findElement(By.xpath(selectYear)).click();
+        driver.findElement(By.xpath(endDate)).click();
+
+        listForm.get(5).click();
+        listForm.get(5).sendKeys("ID "+ release);
+
+        basicControl.btnSave();
+    }
+
+
 }

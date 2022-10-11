@@ -1,65 +1,47 @@
 package Applications.ReleaseManager;
 
-import Forms.FormsRM;
+
+import Forms.ReleaseManager.FormsDeploymentRequest;
 import Helpers.AccessBranch;
 import Helpers.Asserts;
 import Helpers.DynamicScroll;
-import Helpers.SelectBrowser;
-import HomePage.Login;
-import HomePage.LoginApplications;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class RM_DeploymentRequest {
 
     private WebDriver driver;
-    private final String chosen_browser = "Chrome";
+    private Actions action;
+    private DynamicScroll searchScrollElement;
+    private Asserts asserts;
+    private AccessBranch accessBranch;
+    private FormsDeploymentRequest formsDeploymentRequest;
 
-    Actions action;
-    SelectBrowser browser = new SelectBrowser(driver);
-    Login login;
-    DynamicScroll searchScrollElement;
-    Asserts asserts;
-    AccessBranch accessBranch;
 
-    String componente = "Deployment Request";
-    String newDR = "DR_SELENIUM";
-    String project = "Proyecto Release Selenium";
-    String release = "Release Selenium";
+    String componente = "Deployment Requests";
 
-    @BeforeMethod
-    public void setUp(){
-        browser.chooseBrowser(chosen_browser);
-        driver = browser.getDriver();
-        login = new Login(driver);
-        action = new Actions(driver);
-        asserts = new Asserts(driver);
-        searchScrollElement = new DynamicScroll(driver);
-        accessBranch = new AccessBranch(driver);
-        login.loginPage();
-        LoginApplications.loginRM(driver, componente);
+    public RM_DeploymentRequest(WebDriver driver){
+        this.driver = driver;
+        this.action = new Actions(driver);
+        this.searchScrollElement = new DynamicScroll(driver);
+        this.asserts = new Asserts(driver);
+        this.formsDeploymentRequest = new FormsDeploymentRequest(driver);
     }
 
+
     @Test
-    public void createDeploymentRequest() throws InterruptedException {
+    public void createDeploymentRequest(String nameDR, String project , String release) throws InterruptedException {
         WebElement btnOpen = driver.findElement(By.xpath("//span[text()='Open']"));
         action.contextClick(btnOpen).build().perform();
-        driver.findElement(By.xpath("//div[normalize-space()='New " + componente + "']")).click();
-        FormsRM.formDeploymentRequest(driver,newDR,project,release);
+        driver.findElement(By.xpath("//div[text()='New Deployment Request' or text()='Nueva Solicitud de Despliegue']")).click();
+        formsDeploymentRequest.createDeploymentRequest(nameDR, project, release);
         asserts.assertSaveDR();
     }
 
 
-    @AfterMethod
-    public void tearDown(){
-        if (driver != null){
-            driver.quit();
-        }
-    }
+
 
 }

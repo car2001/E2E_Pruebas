@@ -144,6 +144,7 @@ public class FormsActivityForm {
 
             for (Map.Entry<String, String> entry : listAttribute.get(i).entrySet()) {
                 putAttribute(titlePanels[i], entry.getKey(), entry.getValue());
+                Thread.sleep(800);
             }
 
             clickMore("Container"); // Click En el popup de container
@@ -174,7 +175,7 @@ public class FormsActivityForm {
 
     private void putPanel(String titlePanel) throws InterruptedException, AWTException {
         WebElement from = driver.findElement(By.xpath("//td[contains(@id,'--idContainerList-rows-row')]//span[text()='Panel']"));
-        WebElement to = driver.findElement(By.xpath("//div[(@aria-roledescription='Lista de elementos' or @aria-roledescription = 'Item List')  and contains(@id,'__container')]"));
+        WebElement to = driver.findElement(By.xpath("//div[(@aria-roledescription='Lista de elementos' or @aria-roledescription = 'Item List')]"));
         moveBox(from,to,js);
         driver.findElement(By.xpath("//h2[text()='Panel'][@class='sapMPanelHdr']")).click();
         Thread.sleep(1000);
@@ -257,7 +258,7 @@ public class FormsActivityForm {
 
         }
         js.executeScript("let title = document.getElementById('"+idTitlePanel+"');title.scrollIntoView(false);");
-
+        Thread.sleep(1000);
     }
 
     private void searchAttribute(String attribute){

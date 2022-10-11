@@ -1,5 +1,6 @@
 package Forms.ReleaseManager;
 
+import Helpers.AccessBranch;
 import Helpers.BasicControl;
 import Helpers.FormsControl;
 import Helpers.SelectListItem;
@@ -15,6 +16,7 @@ public class FormsChangeContainer {
     private List<WebElement> listForm;
     private BasicControl basicControl;
     private SelectListItem selectListItem;
+    private AccessBranch accessBranch;
     private String arrowProject = "//span[contains(@id,'--selectCCProject-arrow')]";
     private String arrowRelease = "//span[contains(@id,'--selectCCRelease-arrow')]";
     private String arrowOwner   = "//span[contains(@id,'--selectCCOwner-arrow')]";
@@ -23,6 +25,7 @@ public class FormsChangeContainer {
     public FormsChangeContainer(WebDriver driver){
         this.driver = driver;
         this.basicControl = new BasicControl(driver);
+        this.accessBranch = new AccessBranch(driver);
         this.selectListItem = new SelectListItem(driver);
     }
 
@@ -50,6 +53,18 @@ public class FormsChangeContainer {
         selectListItem.SelectItemLi(user);
 
         basicControl.btnSave();
+    }
+
+    public void releaseCC(){
+        basicControl = new BasicControl(driver);
+        listForm = FormsControl.controlNew(driver,"Liberación","");
+        driver.findElement(By.xpath("//span[contains(@id,'--cbDP-arrow')]")).click();
+        driver.findElement(By.xpath("//div[text()='DP_SELENIUM' and @class='sapMSLITitleOnly']")).click();
+        basicControl.btnSave();
+        driver.findElement(By.xpath("//bdi[text()='OK']")).click();
+        accessBranch.clickBranches(1);
+        accessBranch.clickBranches(2);
+
     }
 
 }

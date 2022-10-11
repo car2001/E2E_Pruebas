@@ -21,7 +21,7 @@ public class Login {
         //this.url = "http://wedox.sytes.net/buplat_rt_config/";
         this.url = "http://wedox.sytes.net/buplat_config/";
         
-        this.user = "jjuarez";
+        this.user = "cpingo";
         this.password = "1234";
     }
 

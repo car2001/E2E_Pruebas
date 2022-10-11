@@ -1,14 +1,11 @@
 package Applications.ReleaseManager;
 
-import Forms.FormsRM;
+
 import Forms.ReleaseManager.FormsProject;
 import Forms.ReleaseManager.FormsRelease;
 import Helpers.AccessBranch;
 import Helpers.Asserts;
 import Helpers.DynamicScroll;
-import Helpers.SelectBrowser;
-import HomePage.Login;
-import HomePage.LoginApplications;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -78,7 +75,7 @@ public class RM_Release  {
                 exist=searchScrollElement.elementSearch(nameRelease);
                 if(exist !=-1){
                     driver.findElement(By.xpath("//span[normalize-space()='"+nameRelease+"']")).click();
-                    FormsRM.formEditRelease(driver,editRelease);
+                    formsRelease.editRelease(editRelease);
                     asserts.assertSave();
                     accessBranch.clickBranches(0);
                 }else{

@@ -53,6 +53,7 @@ public class ServiceRequest {
     }
 
 
+
     @Test
     public void runProcessServiceRequest() throws InterruptedException, AWTException, IOException {
         //Iniciamos Sesión
@@ -60,7 +61,7 @@ public class ServiceRequest {
         //Ingresamos al Release Manager
         LoginApplications.loginRM(driver,"Projects");
         //Creamos los componentes del Release Manager
-        releaseManager.createRM_ServiceRequest(login.getUser());
+        //releaseManager.createRM_ServiceRequest(login.getUser());
         //Salimos a la vista de las aplicaciones
         basicControl.logo();
         //Ingresamos al Configuration Manager

@@ -159,7 +159,6 @@ public class DynamicScroll {
     }
 
 
-
     public int searchAttribute(String attributte){
         int xpos = -1;
         WebElement scroll;
@@ -215,5 +214,9 @@ public class DynamicScroll {
     }
 
 
+    public int searchAttributeDataModel(String attribute){
+        int xpos = -1;
+        return xpos;
+    }
 
 }

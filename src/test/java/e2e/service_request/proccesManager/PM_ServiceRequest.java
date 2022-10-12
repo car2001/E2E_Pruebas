@@ -67,6 +67,11 @@ public class PM_ServiceRequest {
     private void searchProcess(String nameProcess){
         int xpos = searchScrollElement.elementSearch("Process Hierarchies");
         if (xpos != -1){
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             accessBranch.clickBranches(xpos);
             xpos = searchScrollElement.elementSearch("Gestión Soporte Selenium");
             if(xpos != -1){

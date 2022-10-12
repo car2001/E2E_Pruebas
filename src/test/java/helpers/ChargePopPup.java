@@ -18,7 +18,7 @@ public class ChargePopPup {
             while(carga.contains("z-index: 8; visibility: visible;")){
                 carga = driver.findElement(By.id("sap-ui-blocklayer-popup")).getAttribute("style");
             }
-            Thread.sleep(500);
+            Thread.sleep(1000);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

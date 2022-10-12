@@ -1,11 +1,14 @@
 package e2e.service_request.proccesManager.steps;
 
+import forms.ProcessManager.FormsRule;
 import helpers.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.w3c.dom.css.Rect;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -20,11 +23,13 @@ public class SR_step5 {
     private SelectListItem selectListItem;
     private ElementSVG elementSVG;
     private Asserts asserts;
+    private FormsRule formsRule;
     private String step5 = "//span[contains(@id,'-count') and @class='sapMITBCount' and text()='5']";
     private String editModelerIC = "--btnEditModelerIC-img";
     private String zoomOut = "//span[contains(@id,'--btnZoomOutIC-img')]";
     private String allowDueDate = "//div[contains(@id,'--allowDueDateChangeIC-handle')]";
     private String arrowSLA = "//span[contains(@id,'--selectSLAProperty-arrow') ] [not(contains(@aria-hidden,'true'))]";
+    private String addRule = "//span[contains(@id,'--btnAddRE-img')]";
 
     public SR_step5(WebDriver driver){
         this.driver = driver;
@@ -34,6 +39,7 @@ public class SR_step5 {
         this.asserts = new Asserts(driver);
         this.action = new Actions(driver);
         this.selectListItem = new SelectListItem(driver);
+        this.formsRule = new FormsRule(driver);
     }
 
     public void step5Process(String nameSLA) throws InterruptedException {
@@ -44,6 +50,7 @@ public class SR_step5 {
 
         //Editamos el paso 5
         basicControl.btnEdit(editModelerIC);
+        Thread.sleep(500);
         //Reducimos el tamaño del modelo
         WebElement btnzoomOut = driver.findElement(By.xpath(zoomOut));
         action.click(btnzoomOut).click().click().perform();
@@ -81,7 +88,7 @@ public class SR_step5 {
 
         //Asignamos los valores al UserTask
 
-/*        for(String userTask : userTasks){
+        for(String userTask : userTasks){
             elementSVG.clickSVGElementCenter(userTask);
             Thread.sleep(1000);
             driver.findElement(By.xpath(allowDueDate)).click();
@@ -91,13 +98,37 @@ public class SR_step5 {
             driver.findElement(By.xpath("//input[contains(@id,'--numberOfDays-inner')]")).sendKeys("5");
             driver.findElement(By.xpath("//button[@title='Rechazar' or @title = 'Decline']")).click();
             Thread.sleep(1000);
-        }*/
+        }
 
         // Asignamos los valores de las reglas
-        elementSVG.clickSVGElementCenter(noRequiereAprobacion);
+        elementSVG.clickSVGElementCenter(siRequiereAprobacion);
+        Thread.sleep(1000);
+        driver.findElement(By.xpath(addRule)).click();
+        ChargePopPup.PopPupGeneral(driver,wait);
+        formsRule.createRule("siRequiereAprobación","",);
 
 
 
+
+        //elementSVG.clickSVGElementRule(noRequiereAprobacion,200,-20);
+        //elementSVG.clickSVGElementRule(siAprueba,49,0);
+        //elementSVG.clickSVGElementRule(noAprueba,-7,0);
+        //elementSVG.clickSVGElementRule(siRequiereEjecutor2,10,0);
+        // elementSVG.clickSVGElementRule(noRequiereEjecutor2,54,0);
+        //elementSVG.clickSVGElementRule(siRequiereEjecutor3,-7,0);
+        //elementSVG.clickSVGElementRule(noRequiereEjecutor3,54,0);
+        //elementSVG.clickSVGElementRule(siObservaciones,153,0);
+        //elementSVG.clickSVGElementRule(noObservaciones,10,0);
+
+    }
+
+    public static void main(String[] args) {
+        /*WebElement task = driver.findElement(By.cssSelector(noObservaciones));
+        Rectangle task1 = task.getRect();
+        task1.getHeight();
+        task1.getWidth();
+
+        System.out.println(task1.getHeight() + " " + task1.getWidth());*/
     }
 
 }

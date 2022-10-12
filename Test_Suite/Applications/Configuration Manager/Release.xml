@@ -3,12 +3,12 @@
 <suite name="ALL_CM">
     <test name="CC">
         <classes>
-            <class name="Applications.ReleaseManager.RM_ChangeContainer">
+            <class name="applications.releaseManager.RM_ChangeContainer">
                 <methods>
                     <include name="crearChangeContainerArbol"></include>
                 </methods>
             </class>
-            <class name="Applications.ReleaseManager.RM_DeploymentPackage">
+            <class name="applications.releaseManager.RM_DeploymentPackage">
                 <methods>
                     <include name="createDeploymentPackage"></include>
                 </methods>
@@ -17,7 +17,7 @@
     </test>
     <test name="Release CC">
         <classes>
-            <class name="Applications.ReleaseManager.RM_ChangeContainer">
+            <class name="applications.releaseManager.RM_ChangeContainer">
                 <methods>
                     <include name="releaseChangeContainer"></include>
                 </methods>

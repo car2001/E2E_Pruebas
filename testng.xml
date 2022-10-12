@@ -3,54 +3,54 @@
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="Test-1">
         <classes>
-            <class name="Applications.ReleaseManager.RM_ChangeContainer">
+            <class name="applications.releaseManager.RM_ChangeContainer">
                 <methods>
                     <include name="activarChangeContainerTabla"/>
                 </methods>
             </class>
-            <class name = "Applications.ConfigurationManager.CM_Counter">
+            <class name = "applications.configurationManager.CM_Counter">
                 <methods>
                     <include name="crearCounter"></include>
                 </methods>
             </class>
-            <class name = "Applications.ConfigurationManager.CM_INS">
+            <class name = "applications.configurationManager.CM_INS">
                 <methods>
                     <include name="crearINS"></include>
                 </methods>
             </class>
-            <class name="Applications.ConfigurationManager.CM_SLA">
+            <class name="applications.configurationManager.CM_SLA">
                 <methods>
                     <include name="crear_SLA"/>
                 </methods>
             </class>
-            <class name="Applications.ConfigurationManager.CM_Performer_Profile">
+            <class name="applications.configurationManager.CM_Performer_Profile">
                 <methods>
                     <include name="crearPerformerProfile"/>
                 </methods>
             </class>
-            <class name="Applications.ConfigurationManager.CM_Notification_Profile">
+            <class name="applications.configurationManager.CM_Notification_Profile">
                 <methods>
                     <include name="crearNotification"/>
                 </methods>
             </class>
-            <class name="Applications.ConfigurationManager.CM_Risk_Profile">
+            <class name="applications.configurationManager.CM_Risk_Profile">
                 <methods>
                     <include name="crearRiskProfile"/>
                 </methods>
             </class>
-            <class name="Applications.ProcessManager.PM_Hierarchies">
+            <class name="applications.processManager.PM_Hierarchies">
                 <methods>
                     <include name="crearHierarchies"></include>
                 </methods>
             </class>
 
-            <class name="Applications.ProcessManager.PM_Process">
+            <class name="applications.processManager.PM_Process">
                 <methods>
                     <include name="crearProceso"></include>
                 </methods>
             </class>
 
-           <class name="Applications.CollaborationWorkspace.PrimerProceso">
+           <class name="applications.collaborationWorkspace.PrimerProceso">
                <methods>
                    <include name="runProcessSi"></include>
                    <include name="runProcessNo"></include>
@@ -60,17 +60,17 @@
     </test>
 <!--    <test name="Test-2">
         <classes>
-            <class name="Applications.ReleaseManager.RM_DeploymentPackage">
+            <class name="applications.releaseManager.RM_DeploymentPackage">
                 <methods>
                     <include name="createDeploymentPackage"/>
                 </methods>
             </class>
-            <class name="Applications.ReleaseManager.RM_ChangeContainer">
+            <class name="applications.releaseManager.RM_ChangeContainer">
                 <methods>
                     <include name="releaseChangeContainer"/>
                 </methods>
             </class>
-            <class name="Applications.CollaborationWorkspace.PrimerProceso">
+            <class name="applications.collaborationWorkspace.PrimerProceso">
                 <methods>
                     <include name="runProcessSiQA"></include>
                     <include name="runProcessNoQA"></include>

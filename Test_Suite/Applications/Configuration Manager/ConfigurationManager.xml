@@ -9,7 +9,7 @@
         <parameter name="inicio" value="100"></parameter>
         <parameter name="incremento" value="100"></parameter>
         <classes>
-            <class name="Applications.ConfigurationManager.CM_Counter">
+            <class name="applications.configurationManager.CM_Counter">
                 <methods>
                     <include name="crearCounter"></include>
                 </methods>
@@ -21,13 +21,13 @@
         <parameter name="separador" value="-"></parameter>
         <parameter name="valorFijo" value="100"></parameter>
         <classes>
-            <class name="Applications.ConfigurationManager.CM_INS">
+            <class name="applications.configurationManager.CM_INS">
                 <methods>
                     <include name="crearINS"></include>
                     <include name="eliminarINS"></include>
                 </methods>
             </class>
-            <class name="Applications.ConfigurationManager.CM_Counter">
+            <class name="applications.configurationManager.CM_Counter">
                 <methods>
                     <include name="eliminarCounter"></include>
                 </methods>
@@ -44,7 +44,7 @@
         <parameter name="restore_Version" value="SLA_WEDOX_RESTAURADO"></parameter>
         <parameter name="delete_SLA" value="SLA_WEDOX_RESTAURADO"></parameter>
         <classes>
-            <class name="Applications.ConfigurationManager.CM_SLA">
+            <class name="applications.configurationManager.CM_SLA">
                 <methods>
                     <include name="crear_SLA"></include>
                     <include name="viewDependecies_SLA"></include>
@@ -66,7 +66,7 @@
         <parameter name="restore_Version" value="FUI_WEDOX_RESTAURADO"></parameter>
         <parameter name="delete_FormUI" value="FUI_WEDOX_RESTAURADO"></parameter>
         <classes>
-            <class name="Applications.ConfigurationManager.CM_Form_UI">
+            <class name="applications.configurationManager.CM_Form_UI">
                 <methods>
                     <include name="crear_FormUI"></include>
                     <include name="viewDependecies_FormUI"></include>
@@ -88,7 +88,7 @@
         <parameter name="restore_Version" value="PP_WEDOX_RESTAURADO"></parameter>
         <parameter name="delete_PP" value="PP_WEDOX_RESTAURADO"></parameter>
         <classes>
-            <class name="Applications.ConfigurationManager.CM_Performer_Profile">
+            <class name="applications.configurationManager.CM_Performer_Profile">
                 <methods>
                     <include name="crearPerformerProfile"></include>
                     <include name="viewDependecies_PP"></include>
@@ -110,7 +110,7 @@
         <parameter name="restoreVersionNP" value="NP_WEDOX_RESTAURADO"></parameter>
         <parameter name="delete_NP" value="NP_WEDOX_RESTAURADO"></parameter>
         <classes>
-            <class name="Applications.ConfigurationManager.CM_Notification_Profile">
+            <class name="applications.configurationManager.CM_Notification_Profile">
                 <methods>
                     <include name="crearNotification"></include>
                     <include name="viewDependecies_Notification"></include>
@@ -132,7 +132,7 @@
         <parameter name="restoreVersionRP" value="RP_WEDOX_RESTAURADO"></parameter>
         <parameter name="delete_RP" value="RP_WEDOX_RESTAURADO"></parameter>
         <classes>
-            <class name="Applications.ConfigurationManager.CM_Risk_Profile">
+            <class name="applications.configurationManager.CM_Risk_Profile">
                 <methods>
                     <include name="crearRiskProfile"></include>
                     <include name="viewDependecies_RP"></include>

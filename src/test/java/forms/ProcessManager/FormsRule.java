@@ -42,7 +42,7 @@ public class FormsRule {
     }
 
 
-    public void createRule(String nameRule,String atributte,String operator) throws InterruptedException {
+    public void createRule(String nameRule,String operand,String operator) throws InterruptedException {
         driver.findElement(By.xpath(inputRuleName)).click();
         driver.findElement(By.xpath(inputRuleName)).sendKeys(nameRule);
         driver.findElement(By.xpath(inputRuleDisplayName)).click();
@@ -57,7 +57,7 @@ public class FormsRule {
         ChargePopPup.PopPupGeneral(driver,wait);
         driver.findElement(By.xpath("//span[contains(@id,'--treeDM-rows-row0') and (@title='Expandir nodos' or @title='Expand Node')]")).click();
 
-        driver.findElement(By.xpath("//span[text()='"+atributte+"']")).click();
+        driver.findElement(By.xpath("//span[text()='"+operand+"']")).click();
         Thread.sleep(800);
 
         arrow = driver.findElements(By.cssSelector(".sapMSltArrow"));
@@ -68,6 +68,49 @@ public class FormsRule {
         driver.findElement(By.xpath(saveRule)).click();
 
         ChargePopPup.PopPupGeneral(driver,wait);
+    }
+
+
+    public void createRule(String nameRule,String operand,String operator,String operandType , String value ) throws InterruptedException {
+        driver.findElement(By.xpath(inputRuleName)).click();
+        driver.findElement(By.xpath(inputRuleName)).sendKeys(nameRule);
+        driver.findElement(By.xpath(inputRuleDisplayName)).click();
+        driver.findElement(By.xpath(inputRuleDisplayName)).sendKeys(nameRule);
+        driver.findElement(By.xpath(btnAddRule)).click();
+
+        List<WebElement> arrow = driver.findElements(By.cssSelector(".sapMSltArrow"));
+        arrow.get(0).click();
+        selectListItem.SelectItemLi("Data Model Attribute");
+
+        driver.findElement(By.xpath(arrowOperand)).click();
+        ChargePopPup.PopPupGeneral(driver,wait);
+        driver.findElement(By.xpath("//span[contains(@id,'--treeDM-rows-row0') and (@title='Expandir nodos' or @title='Expand Node')]")).click();
+        Thread.sleep(500);
+
+        if(searchElement.searchAttributeDataModel(operand) != -1){
+            driver.findElement(By.xpath("//span[text()='"+operand+"']")).click();
+            Thread.sleep(800);
+
+            arrow = driver.findElements(By.cssSelector(".sapMSltArrow"));
+            arrow.get(1).click();
+            Thread.sleep(800);
+            selectListItem.SelectItemLi(operator);
+            Thread.sleep(1000);
+
+            arrow = driver.findElements(By.cssSelector(".sapMSltArrow"));
+            arrow.get(2).click();
+            selectListItem.SelectItemLi(operandType);
+
+            Thread.sleep(800);
+            driver.findElement(By.xpath("//div[contains(@id,'--hbFVROpeRE')]//span[@aria-label='Opciones de selección' or @aria-label='Select Options']")).click();
+            selectListItem.SelectItemDiv(value);
+
+            driver.findElement(By.xpath(saveRule)).click();
+            ChargePopPup.PopPupGeneral(driver,wait);
+            basicControl.btnDecline();
+        }
+
+
     }
 
 

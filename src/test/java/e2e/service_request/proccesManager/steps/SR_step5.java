@@ -88,7 +88,7 @@ public class SR_step5 {
 
         //Asignamos los valores al UserTask
 
-        for(String userTask : userTasks){
+/*        for(String userTask : userTasks){
             elementSVG.clickSVGElementCenter(userTask);
             Thread.sleep(1000);
             driver.findElement(By.xpath(allowDueDate)).click();
@@ -96,16 +96,16 @@ public class SR_step5 {
             selectListItem.SelectItemDiv(nameSLA);
             driver.findElement(By.xpath("//input[contains(@id,'--numberOfDays-inner')]")).click();
             driver.findElement(By.xpath("//input[contains(@id,'--numberOfDays-inner')]")).sendKeys("5");
-            driver.findElement(By.xpath("//button[@title='Rechazar' or @title = 'Decline']")).click();
+            basicControl.btnDecline();
             Thread.sleep(1000);
-        }
+        }*/
 
         // Asignamos los valores de las reglas
         elementSVG.clickSVGElementCenter(siRequiereAprobacion);
         Thread.sleep(1000);
         driver.findElement(By.xpath(addRule)).click();
         ChargePopPup.PopPupGeneral(driver,wait);
-        formsRule.createRule("siRequiereAprobación","",);
+        formsRule.createRule("siRequiereAprobación","¿Requiere Aprobación? : ForeignKey","Equals","Fixed Value","DS");
 
 
 

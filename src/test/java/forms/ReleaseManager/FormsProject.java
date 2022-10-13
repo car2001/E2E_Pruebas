@@ -25,7 +25,7 @@ public class FormsProject {
     private String endDate = "//div[contains(@id,'ProjectEndDate-cal--Month')]//span[text()='" + date.getDayOfMonth() + "']";
     private String stateProject = "//span[contains(@id,'--selectProjectState-arrow')]";
     private String useProcess = "//div[contains(@id,'--useInProcess-handle')]";
-    private String useReleases = "//div[contains(@id,'__xmlview4--useInReleases-handle')]";
+    private String useReleases = "//div[contains(@id,'--useInReleases-handle')]";
 
     public FormsProject(WebDriver driver) {
         this.driver = driver;

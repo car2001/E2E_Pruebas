@@ -216,6 +216,55 @@ public class DynamicScroll {
 
     public int searchAttributeDataModel(String attribute){
         int xpos = -1;
+        int existScroll;
+        WebElement scroll;
+        Boolean displayedScroll = false;
+
+        List<WebElement> modelDataList = driver.findElements(By.xpath("//tr[contains(@id,'--treeDM-rows-row')]"));
+        List<String> nameElement = new ArrayList<>();
+
+        //Pasamos los nombres de los Elementos al nuevo array
+        for ( WebElement modelData : modelDataList){
+            nameElement.add(modelData.getText());
+        }
+
+        try{
+            scroll = driver.findElement(By.xpath("//div[@class='sapUiTableVSb' and contains(@id,'--treeDM-vsb')]"));
+            displayedScroll = scroll.isDisplayed();
+        }catch (Exception e){
+            System.out.println("No se encontro scroll");
+        }
+
+        if(displayedScroll == true){
+            scroll = driver.findElement(By.xpath("//div[@class='sapUiTableVSb' and contains(@id,'--treeDM-vsb')]"));
+            int scrollHeight= js.executeScript("let scrollHeight = arguments[0].scrollHeight; return(scrollHeight)",scroll).hashCode();
+            int clientHeight = js.executeScript("let clientHeight = arguments[0].clientHeight; return(clientHeight)",scroll).hashCode();
+
+            int numVeces = scrollHeight/clientHeight;
+            int iterator = -1;
+
+            while (iterator<=numVeces+1){
+
+                if(nameElement.contains(attribute)){
+                    xpos = nameElement.lastIndexOf(attribute);
+                    nameElement.clear();
+                    break;
+                }
+                else{
+                    iterator = iterator+1;
+                    int multiplo = clientHeight*iterator ;
+                    js.executeScript("arguments[0].scroll(0,'"+multiplo+"')",scroll);
+                    modelDataList = driver.findElements(By.xpath("//tr[contains(@id,'--treeDM-rows-row')]"));
+                    nameElement.clear();
+                    for(int i = 0; i<= modelDataList.size()-1;i=i+1){
+                        nameElement.add(modelDataList.get(i).getText());
+                    }
+                }
+            }
+
+        }else{
+            xpos = nameElement.lastIndexOf(attribute);
+        }
         return xpos;
     }
 

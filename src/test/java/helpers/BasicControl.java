@@ -93,6 +93,11 @@ public class BasicControl {
         driver.findElement(By.xpath("//div[contains(@id,'__xmlview') and @class='sapUiView sapUiXMLView sapMNavItem']//span[contains(@id,'--viewDependencies-img')]")).click();
     }
 
+    //Decline
+    public void btnDecline(){
+        driver.findElement(By.xpath("//button[@title='Rechazar' or @title = 'Decline']")).click();
+    }
+
     //Nueva Versión
     public void btnNewVersion(String version) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));

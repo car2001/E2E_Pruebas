@@ -53,7 +53,7 @@ public class PM_ServiceRequest {
     }
 
     public void createSteps_ServiceRequest() throws IOException, InterruptedException, AWTException {
-        searchProcess("Service Request Selenium");
+        searchProcess("Service Request Selenium"); //Service Request Selenium
         basicControl.openWizard();
         Thread.sleep(5000);
         //step1.step1Process();
@@ -67,13 +67,8 @@ public class PM_ServiceRequest {
     private void searchProcess(String nameProcess){
         int xpos = searchScrollElement.elementSearch("Process Hierarchies");
         if (xpos != -1){
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             accessBranch.clickBranches(xpos);
-            xpos = searchScrollElement.elementSearch("Gestión Soporte Selenium");
+            xpos = searchScrollElement.elementSearch("Gestión Soporte Selenium"); //Gestión Soporte Selenium
             if(xpos != -1){
                 accessBranch.clickBranches(xpos);
                 xpos = searchScrollElement.elementSearch("Processes");

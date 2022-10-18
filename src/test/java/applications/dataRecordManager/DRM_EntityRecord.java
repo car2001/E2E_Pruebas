@@ -87,8 +87,8 @@ public class DRM_EntityRecord {
     }
 
     public void crearDataRecord(String dataName, String[][] attributeList) throws InterruptedException {
-        scrollTop();
         searchScrollElement.elementSearch(dataName);
+        Thread.sleep(1000);
         driver.findElement(By.xpath("//span[text()='"+dataName+"']")).click();
         ChargePopPup.PopPupGeneral(driver,wait);
         formsDataRecord.createDataRecord(attributeList);

@@ -127,6 +127,7 @@ public class SP_step5 {
 
 
         basicControl.btnSave("--btnSaveModelerIC-img");
+        ChargePopPup.PopPupGeneral(driver,wait);
         //Guardamos cambios
         asserts.assertSave();
 

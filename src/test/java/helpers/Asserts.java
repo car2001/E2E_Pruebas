@@ -30,7 +30,11 @@ public class Asserts {
 
     public void assertSaveDiagram(){
         String message = driver.findElement(By.className("sapMMsgStripMessage")).getAttribute("textContent");
-        Assert.assertEquals(message, "El diagrama se guardó con éxito.");
+        if(message.contains("The")){
+            Assert.assertEquals(message,"The diagram was successfully saved");
+        }else{
+            Assert.assertEquals(message, "El diagrama se guardó con éxito.");
+        }
         basicControl.btn_MsgStrigMessage();
     }
 
@@ -48,7 +52,11 @@ public class Asserts {
 
     public void assertSaveModelData(){
         String message = driver.findElement(By.className("sapMMsgStripMessage")).getAttribute("textContent");
-        Assert.assertEquals(message, "Los atributos del modelo de datos se guardaron con éxito");
+        if(message.contains("The")){
+            Assert.assertEquals(message,"The Data Model attributes were successfully saved");
+        }else{
+            Assert.assertEquals(message, "Los atributos del modelo de datos se guardaron con éxito");
+        }
         basicControl.btn_MsgStrigMessage();
     }
 

@@ -4,6 +4,7 @@ import forms.ProcessManager.FormsActivityForm;
 import helpers.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.awt.*;
@@ -15,6 +16,7 @@ public class SR_step3 {
     private WebDriver driver;
     private WebDriverWait wait;
     private BasicControl basicControl;
+    private Asserts asserts;
     private Actions action;
     private ElementSVG elementSVG;
     private FormsActivityForm formsAF;
@@ -28,6 +30,7 @@ public class SR_step3 {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(100));
         this.basicControl = new BasicControl(driver);
         this.action = new Actions(driver);
+        this.asserts = new Asserts(driver);
         this.elementSVG = new ElementSVG(driver);
         this.formsAF = new FormsActivityForm(driver);
     }
@@ -90,25 +93,30 @@ public class SR_step3 {
 
         //Ingresamos a los Send Task
 
-/*
-        //Ingresamos a la actividad 3
-        String task3 = "#__xmlview4--js-canvas-fb > div > div > svg > g > g > g > g.djs-children > g:nth-child(16) > g > rect.djs-outline";
-        elementSVG.clickSVGElementCenter(task3);
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//span[contains(@id,'--btnEmailDefinition-inner')]")).click();
-        WebElement popEmailDefinition = driver.findElement(By.xpath("//span[text()='Editor de correo electrónico' or text()='Email Editor']"));
-        wait.until(ExpectedConditions.visibilityOf(popEmailDefinition));
-        driver.findElement(By.xpath("//input[contains(@id,'--miTO-inner')]")).click();
-        driver.findElement(By.xpath("//input[contains(@id,'--miTO-inner')]")).sendKeys("role: Superadmin");
-        driver.findElement(By.xpath("//input[contains(@id,'--miTO-inner')]")).sendKeys(Keys.TAB);
-        driver.findElement(By.xpath("//input[contains(@id,'--txtSubject-inner')]")).click();
-        driver.findElement(By.xpath("//input[contains(@id,'--txtSubject-inner')]")).sendKeys("Proceso Selenium iniciooo");
-        driver.findElement(By.xpath("//div[@aria-label='Rich Text Editor, main']")).click();
-        driver.findElement(By.xpath("//div[@aria-label='Rich Text Editor, main']")).sendKeys("Proceso Selenium");
-        driver.findElement(By.xpath("//span[contains(@id,'--btnSaveEE-content')]")).click();
-        driver.findElement(By.xpath("//button[@title='Rechazar' or @title = 'Decline']")).click();
-        driver.findElement(By.xpath("//span[contains(@id,'--btnSaveModelerFB-inner')]")).click();*/
-        //asserts.assertSave();
+        for(String sendTask : sendTasks){
+            elementSVG.clickSVGElementCenter(sendTask);
+            Thread.sleep(1000);
+            driver.findElement(By.xpath("//span[contains(@id,'--btnEmailDefinition-inner')]")).click();
+            WebElement popEmailDefinition = driver.findElement(By.xpath("//span[text()='Editor de Correo Electrónico' or text()='Email Editor']"));
+            wait.until(ExpectedConditions.visibilityOf(popEmailDefinition));
+            driver.findElement(By.xpath("//input[contains(@id,'--miTO-inner')]")).click();
+            driver.findElement(By.xpath("//input[contains(@id,'--miTO-inner')]")).sendKeys("role: Superadmin");
+            driver.findElement(By.xpath("//input[contains(@id,'--miTO-inner')]")).sendKeys(Keys.TAB);
+
+            driver.findElement(By.xpath("//input[contains(@id,'--txtSubject-inner')]")).click();
+            driver.findElement(By.xpath("//input[contains(@id,'--txtSubject-inner')]")).sendKeys("Prueba Service Request");
+
+            driver.findElement(By.xpath("//div[@aria-label='Editor editing area: main']")).click();
+            driver.findElement(By.xpath("//div[@aria-label='Editor editing area: main']")).sendKeys("Proceso Selenium");
+
+            driver.findElement(By.xpath("//span[contains(@id,'--btnSaveEE-content')]")).click();
+            Thread.sleep(1000);
+            driver.findElement(By.xpath("//button[@title='Rechazar' or @title = 'Decline']")).click();
+
+        }
+
+        basicControl.btnSave("--btnSaveModelerFB-inner");
+        asserts.assertSave();
     }
 
 }

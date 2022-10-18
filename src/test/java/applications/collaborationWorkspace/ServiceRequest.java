@@ -63,24 +63,29 @@ public class ServiceRequest {
         //Iniciamos Sesión
         login.loginPage();
         //Ingresamos al Release Manager
-        //LoginApplications.loginRM(driver,"Projects");
+        LoginApplications.loginRM(driver,"Projects");
         //Creamos los componentes del Release Manager
         //releaseManager.createRM_ServiceRequest(login.getUser());
         //Salimos a la vista de las aplicaciones
-        //basicControl.logo();
+        basicControl.logo();
         //Ingresamos al Configuration Manager
-        //LoginApplications.loginCM(driver);
+        LoginApplications.loginCM(driver);
+        //Creaamos componente CM
         //configurationManager.createCM_ServiceRequest();
-        //basicControl.logo();
+        basicControl.logo();
+        //Ingresamos al Process Manager
         LoginApplications.loginPM(driver);
         //processManager.createPM_ServiceRequest();
         basicControl.logo();
-        //LoginApplications.loginDataEntity(driver);
+        //Ingresamos al DEMA
+        LoginApplications.loginDataEntity(driver);
         //entityManager.createDEM_ServiceRequest();
-        //basicControl.logo();
-        //LoginApplications.loginDataRecord(driver);
+        basicControl.logo();
+        //Ingresamos al Data record
+        LoginApplications.loginDataRecord(driver);
         //recordManager.createDRM_ServiceRequest();
-        //basicControl.logo();
+        basicControl.logo();
+        //Ingresamos al PM
         LoginApplications.loginPM(driver);
         processManager.createSteps_ServiceRequest();
     }

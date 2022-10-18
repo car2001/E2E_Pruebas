@@ -121,7 +121,7 @@ public class DynamicScroll {
 
 
             while (iterator<=numVeces+1){
-                xpos = busqueda(textContentList,project,state,release,nameCC);
+                xpos = searchString(textContentList,project,state,release,nameCC);
                 if(xpos != " "){
                     break;
                 }else{
@@ -136,13 +136,14 @@ public class DynamicScroll {
                 }
             }
         } else{
-            xpos = busqueda(textContentList,project,state,release,nameCC);
+            xpos = searchString(textContentList,project,state,release,nameCC);
         }
 
         return xpos;
+
     }
 
-    public  String busqueda (List<String> contentList,String project,String state ,String release,String nameCC){
+    public  String searchString (List<String> contentList,String project,String state ,String release,String nameCC){
         String xpos = " ";
         String content = " ";
         for(int i = 0; i<= contentList.size()-1;i=i+1){

@@ -40,6 +40,10 @@ public class FormsDataEntity {
         listForm.get(1).sendKeys(dataEntity);
         listForm.get(2).click();
         listForm.get(2).sendKeys(dataEntity);
+        Thread.sleep(1000);
+
+        driver.findElement(By.xpath("//span[text()='Configuración' or text()='Configuration']")).click();
+
         driver.findElement(By.xpath(arrowTypeEntity)).click();
         selectListItem.SelectItemLi(typeEntity);
 
@@ -53,6 +57,9 @@ public class FormsDataEntity {
             selectListItem.SelectItemLi(attribute.getValue());
             x++;
         }
+
+        driver.findElement(By.xpath("//span[text()='Perfil de Seguridad' or text()='Security Profile']")).click();
+
         basicControl.btnSave();
         ChargePopPup.PopPupGeneral(driver,wait);
     }

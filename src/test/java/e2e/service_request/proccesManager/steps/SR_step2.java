@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -247,30 +248,32 @@ public class SR_step2 {
 
     private  List<String> listDataModelEntity(){
         List<String> listEntity = new ArrayList<String>();
-        listEntity.add("Priority Selenium");
-        listEntity.add("RequestReason Selenium");
+        String date = LocalDate.now().toString();
+
+        listEntity.add("Priority " + date);
+        listEntity.add("RequestReason " +date);
 
         listEntity.add("User");
         listEntity.add("User");
         listEntity.add("User");
         listEntity.add("User");
-        listEntity.add("RequestCategory Selenium");
-        listEntity.add("Decision2 Selenium");
+        listEntity.add("RequestCategory " +date);
+        listEntity.add("Decision2 " + date);
 
-        listEntity.add("Project Selenium");
-        listEntity.add("CustomerContact Selenium");
-        listEntity.add("Customer Selenium");
+        listEntity.add("Project "+date);
+        listEntity.add("CustomerContact "+ date);
+        listEntity.add("Customer "+date);
 
         listEntity.add("User");
         listEntity.add("User");
 
-        listEntity.add("Decision2 Selenium");
-        listEntity.add("Decision2 Selenium");
+        listEntity.add("Decision2 "+date);
+        listEntity.add("Decision2 "+date);
 
-        listEntity.add("Categoria SR Selenium");
-        listEntity.add("Motivo de Solicitud SR Selenium");
-        listEntity.add("Request Closure Authorization Selenium");
-        listEntity.add("Tabla Selenium");
+        listEntity.add("Categoria SR " + date);
+        listEntity.add("Motivo de Solicitud SR " + date);
+        listEntity.add("Request Closure Authorization " + date);
+        listEntity.add("Tabla " + date);
         return listEntity;
     }
 

@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.awt.*;
 import java.io.IOException;
 import java.time.Duration;
+import java.time.LocalDate;
 
 public class PM_ServiceRequest {
     private WebDriver driver;
@@ -28,6 +29,7 @@ public class PM_ServiceRequest {
     private SR_step3 step3;
     private SR_step4 step4;
     private SR_step5 step5;
+    private SR_step8 step8;
 
     public PM_ServiceRequest(WebDriver driver){
         this.driver = driver;
@@ -41,26 +43,37 @@ public class PM_ServiceRequest {
         this.step3 = new SR_step3(driver);
         this.step4 = new SR_step4(driver);
         this.step5 = new SR_step5(driver);
+        this.step8 = new SR_step8(driver);
     }
 
-    private String namePP = "PP-SR";
-    private String nameSLA = "SLA-SR";
+    String date = LocalDate.now().toString(); //Fecha Actual
+    String nameINS =  "INS-SR" + " " + date ;
+    private String nameSLA = "SLA-SR" + " " + date ;
+    private String namePP = "PP-SR" + " " + date ;
+    private String nameLevel = "Gestión Soporte " + date;
+    private String nameProcess = "Service Request " + date;
 
 
     public void createPM_ServiceRequest() throws InterruptedException, AWTException, IOException {
-        hierarchies.crearHierarchies("Gestión Soporte Selenium");
-        process.crearProceso("Gestión Soporte Selenium","Service Request Selenium","INS-SR","SLA-SR");
+        hierarchies.crearHierarchies(nameLevel);
+        process.crearProceso(nameLevel,nameProcess,nameINS,nameSLA);
     }
 
     public void createSteps_ServiceRequest() throws IOException, InterruptedException, AWTException {
-        searchProcess("Service Request Selenium"); //Service Request Selenium
+        searchProcess(nameProcess); //Service Request Selenium
         basicControl.openWizard();
-        Thread.sleep(5000);
+        Thread.sleep(1500);
         //step1.step1Process();
+        Thread.sleep(1000);
         //step2.step2Process();
-        //step3.step3Process();
-        //step4.step4Process(namePP);
+        Thread.sleep(1000);
+        step3.step3Process();
+        Thread.sleep(1000);
+        step4.step4Process(namePP);
+        Thread.sleep(1000);
         step5.step5Process(nameSLA);
+        Thread.sleep(1000);
+        step8.step8Process();
     }
 
 
@@ -68,7 +81,7 @@ public class PM_ServiceRequest {
         int xpos = searchScrollElement.elementSearch("Process Hierarchies");
         if (xpos != -1){
             accessBranch.clickBranches(xpos);
-            xpos = searchScrollElement.elementSearch("Gestión Soporte Selenium"); //Gestión Soporte Selenium
+            xpos = searchScrollElement.elementSearch(nameLevel); //Gestión Soporte Selenium
             if(xpos != -1){
                 accessBranch.clickBranches(xpos);
                 xpos = searchScrollElement.elementSearch("Processes");

@@ -4,9 +4,11 @@ import applications.dataEntityManager.DEM_Entity;
 import helpers.AccessBranch;
 import helpers.BasicControl;
 import helpers.DynamicScroll;
+import net.bytebuddy.asm.Advice;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
+import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -27,27 +29,28 @@ public class DEM_ServiceRequest {
         this.entity = new DEM_Entity(driver);
     }
 
+    String date = LocalDate.now().toString(); //Fecha Actual
+
+
     public void createDEM_ServiceRequest() throws InterruptedException {
         //entidades Locales
-        entity.crearDataEntityGlobal("Employee Selenium",listAttributeEmployee(),"Local Environment Entity");
-        entity.crearDataEntity("CustomerContact Selenium",listAttributeCustomerContact(),"Local Environment Entity");
-        entity.crearDataEntity("Customer Selenium",listAttributeCustomer(),"Local Environment Entity");
+        entity.crearDataEntityGlobal("CustomerContact " + date,listAttributeCustomerContact(),"Local Environment Entity");
+        entity.crearDataEntity("Customer " + date,listAttributeCustomer(),"Local Environment Entity");
         //entidades cross
-        entity.crearDataEntity("Category Selenium",listAttributeCategory(),"Cross Environment Entity");
-        entity.crearDataEntity("Priority Selenium",listAttributePriority(),"Cross Environment Entity");
-        entity.crearDataEntity("Decision2 Selenium",listAttributeDecision2(),"Cross Environment Entity");
-        entity.crearDataEntity("Project Selenium",listAttributeProject(),"Cross Environment Entity");
-        entity.crearDataEntity("Request Closure Authorization Selenium",listAttributeRequestClosure(),"Cross Environment Entity");
+        entity.crearDataEntity("Category " + date,listAttributeCategory(),"Cross Environment Entity");
+        entity.crearDataEntity("Priority " + date,listAttributePriority(),"Cross Environment Entity");
+        entity.crearDataEntity("Decision2 " + date,listAttributeDecision2(),"Cross Environment Entity");
+        entity.crearDataEntity("Project " + date,listAttributeProject(),"Cross Environment Entity");
+        entity.crearDataEntity("Request Closure Authorization " + date,listAttributeRequestClosure(),"Cross Environment Entity");
         //transactional
-        entity.crearDataEntity("Tabla Selenium",listAttributeTablaSelenium(),"Transactional");
-        accessBranch.clickBranches(0);
+        entity.crearDataEntity("Tabla " + date,listAttributeTablaSelenium(),"Transactional");
         //Cross Process
-        entity.crearDataEntityProcess("Gestión Soporte Selenium","Service Request Selenium","RequestCategory Selenium",listAttributeRequestCategory(),"Cross Environment Entity");
-        entity.crearDataEntity("Impact Selenium",listAttributeImpact(),"Cross Environment Entity");
-        entity.crearDataEntity("RequestReason Selenium",listAttributeRequestReason(),"Cross Environment Entity");
+        entity.crearDataEntity("RequestCategory " + date,listAttributeRequestCategory(),"Cross Environment Entity");
+        entity.crearDataEntity("Impact " + date,listAttributeImpact(),"Cross Environment Entity");
+        entity.crearDataEntity("RequestReason " + date,listAttributeRequestReason(),"Cross Environment Entity");
         //Local Process
-        entity.crearDataEntity("Categoria SR Selenium",listAttributeCategoriaSR(),"Local Environment Entity");
-        entity.crearDataEntity("Motivo de Solicitud SR Selenium",listAttributeMotivoSolicitud(),"Local Environment Entity");
+        entity.crearDataEntity("Categoria SR " + date,listAttributeCategoriaSR(),"Local Environment Entity");
+        entity.crearDataEntity("Motivo de Solicitud SR " + date,listAttributeMotivoSolicitud(),"Local Environment Entity");
     }
 
 

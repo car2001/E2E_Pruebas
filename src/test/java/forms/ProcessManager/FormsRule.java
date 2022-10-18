@@ -57,17 +57,22 @@ public class FormsRule {
         ChargePopPup.PopPupGeneral(driver,wait);
         driver.findElement(By.xpath("//span[contains(@id,'--treeDM-rows-row0') and (@title='Expandir nodos' or @title='Expand Node')]")).click();
 
-        driver.findElement(By.xpath("//span[text()='"+operand+"']")).click();
-        Thread.sleep(800);
+        if(searchElement.searchAttributeDataModel(operand) != -1){
+            driver.findElement(By.xpath("//span[text()='"+operand+"']")).click();
+            Thread.sleep(800);
 
-        arrow = driver.findElements(By.cssSelector(".sapMSltArrow"));
-        arrow.get(1).click();
-        Thread.sleep(800);
-        selectListItem.SelectItemLi(operator);
-        Thread.sleep(1000);
-        driver.findElement(By.xpath(saveRule)).click();
+            arrow = driver.findElements(By.cssSelector(".sapMSltArrow"));
+            arrow.get(1).click();
+            Thread.sleep(800);
+            selectListItem.SelectItemLi(operator);
+            Thread.sleep(1000);
+            driver.findElement(By.xpath(saveRule)).click();
 
-        ChargePopPup.PopPupGeneral(driver,wait);
+            ChargePopPup.PopPupGeneral(driver,wait);
+            basicControl.btnDecline();
+            Thread.sleep(800);
+        }
+
     }
 
 
@@ -108,6 +113,7 @@ public class FormsRule {
             driver.findElement(By.xpath(saveRule)).click();
             ChargePopPup.PopPupGeneral(driver,wait);
             basicControl.btnDecline();
+            Thread.sleep(1200);
         }
 
 

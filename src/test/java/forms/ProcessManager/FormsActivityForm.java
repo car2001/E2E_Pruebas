@@ -82,9 +82,11 @@ public class FormsActivityForm {
 
 
         Map<String, String> aprobacionSolucion = new LinkedHashMap<>();
-        aprobacionSolucion.put("¿El Cliente Autorizó el Cierre de la Solicitud?", "RequestClosureAuthorization");
-        aprobacionSolucion.put("¿Hay Observaciones?", "DecisionDescription");
         aprobacionSolucion.put("Comentario de la Observación", "Text Area");
+        aprobacionSolucion.put("¿Hay Observaciones?", "DecisionDescription");
+        aprobacionSolucion.put("¿El Cliente Autorizó el Cierre de la Solicitud?", "RequestClosureAuthorization");
+
+
 
 
         Map<String, String> detalleAtención3 = new LinkedHashMap<>();

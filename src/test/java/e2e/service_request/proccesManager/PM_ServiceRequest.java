@@ -63,9 +63,9 @@ public class PM_ServiceRequest {
         searchProcess(nameProcess); //Service Request Selenium
         basicControl.openWizard();
         Thread.sleep(1500);
-        //step1.step1Process();
+        step1.step1Process();
         Thread.sleep(1000);
-        //step2.step2Process();
+        step2.step2Process();
         Thread.sleep(1000);
         step3.step3Process();
         Thread.sleep(1000);

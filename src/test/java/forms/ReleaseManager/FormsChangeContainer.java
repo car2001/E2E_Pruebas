@@ -64,7 +64,6 @@ public class FormsChangeContainer {
         driver.findElement(By.xpath("//bdi[text()='OK']")).click();
         accessBranch.clickBranches(1);
         accessBranch.clickBranches(2);
-
     }
 
 }

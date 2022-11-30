@@ -6,23 +6,17 @@ import helpers.Asserts;
 import helpers.BasicControl;
 import helpers.FormsControl;
 import helpers.SelectBrowser;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
 public class CM_INS {
 
     private WebDriver driver;
-
-    SelectBrowser browser;
-    Asserts asserts;
-    BasicControl basicControl;
-    FormsINS formsINS;
-
-    final String componente = "Instance Numbering Schemas";
-    final String newINS = "INS Selenium";
-    final String separator = "-";
-    final String fixedValue = "SELENIUM";
-    final String Counter = "Counter Selenium";
+    private Asserts asserts;
+    private BasicControl basicControl;
+    private FormsINS formsINS;
+    private final String componente = "Instance Numbering Schemas";
 
     public CM_INS(WebDriver driver){
         this.driver = driver;
@@ -32,29 +26,30 @@ public class CM_INS {
     }
 
 
-
-    @Parameters({"INS","separador","valorFijo","counter"})
     @Test
-    public void crearINS(@Optional(newINS) String INS, @Optional(separator) String separador , @Optional(fixedValue) String valorFijo , @Optional(Counter) String counter){
+    public void crearINS(String INS,String separador,String valorFijo,String counter) throws InterruptedException {
         basicControl.btn_More(componente);
         formsINS.formCreateINS(INS,separador,valorFijo,counter);
         asserts.assertSave();
     }
 
-    @Parameters("INS")
     @Test
-    public void eliminarINS(@Optional(newINS) String INS){
+    public void editarINS(String INS,String INS_edit,String separador) throws InterruptedException {
+        basicControl.btn_More(componente);
+        String xmlview = basicControl.getXmlview();
+        driver.findElement(By.xpath("//div[@id='"+xmlview+"--listObject']//div[text()='"+INS+"']")).click();
+        formsINS.formEditINS(INS_edit,separador);
+        asserts.assertSave();
+    }
+
+
+    @Test
+    public void eliminarINS(String INS){
         basicControl.btn_More(componente);
         FormsControl.controlDelete(driver,INS);
         String xpathMessage = "//span[@class='sapMText sapUiSelectable sapMTextMaxWidth sapMMsgBoxText']";
         asserts.assertDelete(xpathMessage);
     }
 
-    @AfterMethod
-    public void tearDown(){
-        if (driver != null){
-            driver.quit();
-        }
-    }
 
 }

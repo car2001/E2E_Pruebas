@@ -19,6 +19,7 @@ public class FormsRule {
     private WebDriver driver;
     private List<WebElement> listForm;
     private BasicControl basicControl;
+    private ChargePopPup chargePopPup;
     private SelectListItem selectListItem;
     private Actions action;
     private DynamicScroll searchElement;
@@ -37,6 +38,7 @@ public class FormsRule {
         this.selectListItem = new SelectListItem(driver);
         this.action = new Actions(driver);
         this.searchElement = new DynamicScroll(driver);
+        this.chargePopPup = new ChargePopPup(driver);
         this.js = (JavascriptExecutor) driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
@@ -54,7 +56,7 @@ public class FormsRule {
         selectListItem.SelectItemLi("Data Model Attribute");
 
         driver.findElement(By.xpath(arrowOperand)).click();
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         driver.findElement(By.xpath("//span[contains(@id,'--treeDM-rows-row0') and (@title='Expandir nodos' or @title='Expand Node')]")).click();
 
         if(searchElement.searchAttributeDataModel(operand) != -1){
@@ -68,7 +70,7 @@ public class FormsRule {
             Thread.sleep(1000);
             driver.findElement(By.xpath(saveRule)).click();
 
-            ChargePopPup.PopPupGeneral(driver,wait);
+            chargePopPup.PopPupGeneral();
             basicControl.btnDecline();
             Thread.sleep(800);
         }
@@ -88,7 +90,7 @@ public class FormsRule {
         selectListItem.SelectItemLi("Data Model Attribute");
 
         driver.findElement(By.xpath(arrowOperand)).click();
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         driver.findElement(By.xpath("//span[contains(@id,'--treeDM-rows-row0') and (@title='Expandir nodos' or @title='Expand Node')]")).click();
         Thread.sleep(500);
 
@@ -111,7 +113,7 @@ public class FormsRule {
             selectListItem.SelectItemDiv(value);
 
             driver.findElement(By.xpath(saveRule)).click();
-            ChargePopPup.PopPupGeneral(driver,wait);
+            chargePopPup.PopPupGeneral();
             basicControl.btnDecline();
             Thread.sleep(1200);
         }

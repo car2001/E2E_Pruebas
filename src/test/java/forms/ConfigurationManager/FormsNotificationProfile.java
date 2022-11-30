@@ -22,7 +22,7 @@ public class FormsNotificationProfile {
         this.typeEvent = "//span[contains(@id,'-arrow') and @class='sapMSltArrow']";
     }
 
-    public void formCreateNotification(WebDriver driver, String notification){
+    public void formCreateNotification(String notification){
         basicControl.btnAdd();
         listForm = FormsControl.controlNew(driver,"Perfil de Notificación","Notification Profile");
         listForm.get(0).click();
@@ -37,7 +37,7 @@ public class FormsNotificationProfile {
         basicControl.btnSave();
     }
 
-    public void formEditNotification(WebDriver driver,String notification) throws InterruptedException {
+    public void formEditNotification(String notification) throws InterruptedException {
         listForm = FormsControl.controlEdit(driver,"Perfil de Notificación","Notification Profile");
         listForm.get(0).click();
         listForm.get(0).clear();

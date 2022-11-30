@@ -30,6 +30,7 @@ public class SR_step5 {
     private String allowDueDate = "//div[contains(@id,'--allowDueDateChangeIC-handle')]";
     private String arrowSLA = "//span[contains(@id,'--selectSLAProperty-arrow') ] [not(contains(@aria-hidden,'true'))]";
     private String addRule = "//span[contains(@id,'--btnAddRE-img')]";
+    private ChargePopPup chargePopPup;
 
     public SR_step5(WebDriver driver){
         this.driver = driver;
@@ -40,12 +41,13 @@ public class SR_step5 {
         this.action = new Actions(driver);
         this.selectListItem = new SelectListItem(driver);
         this.formsRule = new FormsRule(driver);
+        this.chargePopPup = new ChargePopPup(driver);
     }
 
     public void step5Process(String nameSLA) throws InterruptedException {
         //Ingreso al paso 5
         driver.findElement(By.xpath(step5)).click();
-        ChargePopPup.PopPupDetail(driver, wait);
+        chargePopPup.PopPupDetail();
         FormsControl.controlTitle(driver, "Integrar Código", "Integrate Code");
 
         //Editamos el paso 5
@@ -104,21 +106,21 @@ public class SR_step5 {
         elementSVG.clickSVGElementCenter(siRequiereAprobacion);
         Thread.sleep(1000);
         driver.findElement(By.xpath(addRule)).click();
-        ChargePopPup.PopPupGeneral(driver, wait);
+        chargePopPup.PopPupGeneral();
         formsRule.createRule("siRequiereAprobación", "¿Requiere Aprobación? : ForeignKey", "Equals", "Fixed Value", "DS");
 
 
         elementSVG.clickSVGElementCenter(noRequiereAprobacion);
         Thread.sleep(1000);
         driver.findElement(By.xpath(addRule)).click();
-        ChargePopPup.PopPupGeneral(driver, wait);
+        chargePopPup.PopPupGeneral();
         formsRule.createRule("noRequiereAprobación", "¿Requiere Aprobación? : ForeignKey", "Equals", "Fixed Value", "DN");
 
         int [] dimension = withAndHeightElement(siAprueba);
         elementSVG.clickSVGElementRule(siAprueba, (dimension[0]/2) - 1, 0);
         Thread.sleep(1000);
         driver.findElement(By.xpath(addRule)).click();
-        ChargePopPup.PopPupGeneral(driver, wait);
+        chargePopPup.PopPupGeneral();
         formsRule.createRule("siAprueba", "¿Aprueba Solicitud? : ForeignKey", "Equals", "Fixed Value", "DS");
 
 
@@ -126,51 +128,51 @@ public class SR_step5 {
         elementSVG.clickSVGElementRule(noAprueba, -((dimension[0]/2) - 1), 0);
         Thread.sleep(1000);
         driver.findElement(By.xpath(addRule)).click();
-        ChargePopPup.PopPupGeneral(driver, wait);
+        chargePopPup.PopPupGeneral();
         formsRule.createRule("noAprueba", "¿Aprueba Solicitud? : ForeignKey", "Equals", "Fixed Value", "DN");
 
         elementSVG.clickSVGElementCenter(siRequiereEjecutor2);
         Thread.sleep(1000);
         driver.findElement(By.xpath(addRule)).click();
-        ChargePopPup.PopPupGeneral(driver, wait);
+        chargePopPup.PopPupGeneral();
         formsRule.createRule("siRequiereEjecutor2", "¿Se Requiere 2° Ejecutor? : Boolean", "Is True");
 
         dimension = withAndHeightElement(noRequiereEjecutor2);
         elementSVG.clickSVGElementRule(noRequiereEjecutor2, (dimension[0]/2) - 1, 0);
         Thread.sleep(1000);
         driver.findElement(By.xpath(addRule)).click();
-        ChargePopPup.PopPupGeneral(driver, wait);
+        chargePopPup.PopPupGeneral();
         formsRule.createRule("noRequiereEjecutor2", "¿Se Requiere 2° Ejecutor? : Boolean", "Is False");
 
         elementSVG.clickSVGElementCenter(siRequiereEjecutor3);
         Thread.sleep(1000);
         driver.findElement(By.xpath(addRule)).click();
-        ChargePopPup.PopPupGeneral(driver, wait);
+        chargePopPup.PopPupGeneral();
         formsRule.createRule("siRequiereEjecutor3", "¿Se Requiere 3° Ejecutor? : Boolean", "Is True");
 
         dimension = withAndHeightElement(noRequiereEjecutor3);
         elementSVG.clickSVGElementRule(noRequiereEjecutor3,(dimension[0]/2) - 1,0);
         Thread.sleep(1000);
         driver.findElement(By.xpath(addRule)).click();
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         formsRule.createRule("noRequiereEjecutor3","¿Se Requiere 3° Ejecutor? : Boolean","Is False");
 
         dimension = withAndHeightElement(siObservaciones);
         elementSVG.clickSVGElementRule(siObservaciones,-((dimension[0]/2) - 1),0);
         Thread.sleep(1000);
         driver.findElement(By.xpath(addRule)).click();
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         formsRule.createRule("siObservaciones","¿Hay Observaciones? : ForeignKey","Equals","Fixed Value","DS");
 
 
         elementSVG.clickSVGElementCenter(noObservaciones);
         Thread.sleep(1000);
         driver.findElement(By.xpath(addRule)).click();
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         formsRule.createRule("noObservaciones","¿Hay Observaciones? : ForeignKey","Equals","Fixed Value","DN");
 
         basicControl.btnSave("--btnSaveModelerIC-img");
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         //Guardamos cambios
         asserts.assertSave();
     }

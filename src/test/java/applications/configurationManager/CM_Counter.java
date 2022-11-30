@@ -4,22 +4,19 @@ import forms.ConfigurationManager.FormsCounter;
 import helpers.Asserts;
 import helpers.BasicControl;
 import helpers.FormsControl;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
 public class CM_Counter {
 
     private WebDriver driver;
-    final String URL = "http://wedox.sytes.net/buplat_config/";
 
-    Asserts asserts;
-    BasicControl basicControl;
-    FormsCounter formsCounter;
+    private Asserts asserts;
+    private BasicControl basicControl;
+    private FormsCounter formsCounter;
 
-    final String componente = "Counters";
-    final String newCounter = "Counter Selenium";
-    final String start = "100";
-    final String increment = "1";
+    private final String componente = "Counters";
 
     public CM_Counter(WebDriver driver){
         this.driver = driver;
@@ -28,24 +25,25 @@ public class CM_Counter {
         this.formsCounter = new FormsCounter(driver);
     }
 
-    @BeforeMethod
-    public void setup() throws InterruptedException {
-        basicControl.btn_More(componente);
-    }
 
-    @Parameters({"counter","inicio","incremento"})
-    @Test
-    public void crearCounter (@Optional(newCounter) String counter, @Optional(start) String inicio, @Optional(increment) String aumento){
+    public void crearCounter (String counter,String inicio,String aumento){
         basicControl.btn_More(componente);
         formsCounter.formCreateCounter(counter,inicio,aumento);
         asserts.assertSave();
     }
 
-    @Parameters("delete_counter")
-    @Test
-    public void eliminarCounter(@Optional(newCounter) String delete_counter){
+    public void editarCounter (String counter, String counterEdit,String inicio,String aumento) throws InterruptedException {
         basicControl.btn_More(componente);
-        FormsControl.controlDelete(driver,delete_counter);
+        String xmlview = basicControl.getXmlview();
+        driver.findElement(By.xpath("//div[@id='"+xmlview+"--listObject']//div[text()='"+counter+"']")).click();
+        formsCounter.formEditCounter(counterEdit,inicio,aumento);
+        asserts.assertSave();
+    }
+
+
+    public void eliminarCounter(String counter){
+        basicControl.btn_More(componente);
+        FormsControl.controlDelete(driver,counter);
         String xpathMessage = "//span[@class='sapMText sapUiSelectable sapMTextMaxWidth sapMMsgBoxText']";
         asserts.assertDelete(xpathMessage);
     }

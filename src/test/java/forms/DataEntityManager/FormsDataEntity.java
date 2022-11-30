@@ -24,12 +24,14 @@ public class FormsDataEntity {
     private String arrowTbl = "//table[contains(@id,'--idTableAttribute-listUl')]//span[contains(@class,'sapMSltArrow')]";
     private String inputTbl = "//table[contains(@id,'--idTableAttribute-listUl')]//div[not(contains(@id,'idDisplayNameGrid'))]//input[contains(@class,'sapMInputBaseInner')]";
     private String addAtributte = "//button[@title='Agregar' or @title='Add']";
+    private ChargePopPup chargePopPup;
 
     public FormsDataEntity(WebDriver driver){
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(100));
         this.basicControl = new BasicControl(driver);
         this.selectListItem = new SelectListItem(driver);
+        this.chargePopPup = new ChargePopPup(driver);
     }
 
     public void createDataEntity(String dataEntity,Map<String,String> attributeList,String typeEntity) throws InterruptedException {
@@ -61,7 +63,7 @@ public class FormsDataEntity {
         driver.findElement(By.xpath("//span[text()='Perfil de Seguridad' or text()='Security Profile']")).click();
 
         basicControl.btnSave();
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
     }
 
 

@@ -22,6 +22,7 @@ public class SR_step1 {
     private WebDriver driver;
     private WebDriverWait wait;
     private BasicControl basicControl;
+    private ChargePopPup chargePopPup;
     private Asserts asserts;
     private Actions action;
     private String editModel = "--btnEdit-img";
@@ -34,6 +35,7 @@ public class SR_step1 {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(100));
         this.asserts = new Asserts(driver);
         this.action = new Actions(driver);
+        this.chargePopPup = new ChargePopPup(driver);
     }
 
     public void step1Process() throws InterruptedException, IOException {
@@ -56,7 +58,7 @@ public class SR_step1 {
         pb.start();
         Thread.sleep(6000);
         basicControl.btnSave(saveModel);
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         asserts.assertSaveDiagram();
     }
 

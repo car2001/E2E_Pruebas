@@ -16,6 +16,7 @@ public class SR_step3 {
     private WebDriver driver;
     private WebDriverWait wait;
     private BasicControl basicControl;
+    private ChargePopPup chargePopPup;
     private Asserts asserts;
     private Actions action;
     private ElementSVG elementSVG;
@@ -33,6 +34,7 @@ public class SR_step3 {
         this.asserts = new Asserts(driver);
         this.elementSVG = new ElementSVG(driver);
         this.formsAF = new FormsActivityForm(driver);
+        this.chargePopPup = new ChargePopPup(driver);
     }
 
 
@@ -40,7 +42,7 @@ public class SR_step3 {
 
         //Ingreso al paso 3
         driver.findElement(By.xpath(step3)).click();
-        ChargePopPup.PopPupDetail(driver,wait);
+        chargePopPup.PopPupDetail();
         FormsControl.controlTitle(driver,"Asignar Formularios","Assign Forms");
         //Editamos el paso 3
         basicControl.btnEdit(editModelerFB);
@@ -75,7 +77,7 @@ public class SR_step3 {
         //Click para crear el Activity Form
         driver.findElement(By.xpath(addACTF)).click();
         formsAF.createNewActivityForm("AF-SERVICE REQUEST");
-        ChargePopPup.PopPupMain(driver,wait);
+        chargePopPup.PopPupMain();
         formsAF.panelActivityForm();
 
         //Ingresamos a todos los User Task

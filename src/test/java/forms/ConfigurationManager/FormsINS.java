@@ -54,4 +54,22 @@ public class FormsINS {
         selectListItem.SelectItemDiv(counter);
         basicControl.btnSave();
     }
+
+    public void formEditINS(String INS , String separador) throws InterruptedException {
+        listForm = FormsControl.controlEdit(driver,"Esquema de Numeración de Instancias","Instance Numbering Schema");
+        listForm.get(0).click();
+        listForm.get(0).clear();
+        listForm.get(0).sendKeys(INS);
+        listForm.get(1).click();
+        listForm.get(1).clear();
+        listForm.get(1).sendKeys(INS);
+        listForm.get(2).click();
+        listForm.get(2).clear();
+        listForm.get(2).sendKeys(INS);
+        listForm.get(3).click();
+        listForm.get(3).clear();
+        listForm.get(3).sendKeys(separador);
+        //Agregamos Component List
+        basicControl.btnSave();
+    }
 }

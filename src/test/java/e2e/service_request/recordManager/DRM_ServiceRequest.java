@@ -11,18 +11,14 @@ import java.time.LocalDate;
 
 public class DRM_ServiceRequest {
     private WebDriver driver;
-    private BasicControl basicControl;
-    private JavascriptExecutor js ;
-    AccessBranch accessBranch;
-    DynamicScroll searchScrollElement;
-    DRM_EntityRecord entityRecord;
+    private AccessBranch accessBranch;
+    private DynamicScroll searchScrollElement;
+    private DRM_EntityRecord entityRecord;
 
     public DRM_ServiceRequest(WebDriver driver){
         this.driver = driver;
         this.accessBranch = new AccessBranch(driver);
-        this.js = (JavascriptExecutor)driver;
         this.searchScrollElement = new DynamicScroll(driver);
-        this.basicControl = new BasicControl(driver);
         this.entityRecord = new DRM_EntityRecord(driver);
     }
 

@@ -24,13 +24,9 @@ public class ServiceRequestMain {
 
     private WebDriver driver;
     private String chosen_browser = "Chrome";
-
     private Login login;
-    private DynamicScroll searchScrollElement;
+    private LoginApplications loginApplications;
     private SelectBrowser browser = new SelectBrowser(driver);
-    private Actions action;
-    private JavascriptExecutor js;
-    private Asserts asserts;
     private BasicControl basicControl;
     private RM_ServiceRequest releaseManager;
     private CM_ServiceRequest configurationManager;
@@ -44,16 +40,13 @@ public class ServiceRequestMain {
         browser.chooseBrowser(chosen_browser);
         driver = browser.getDriver();
         login = new Login(driver);
-        action = new Actions(driver);
-        asserts = new Asserts(driver);
-        js = (JavascriptExecutor) driver;
         basicControl = new BasicControl(driver);
-        searchScrollElement = new DynamicScroll(driver);
         releaseManager = new RM_ServiceRequest(driver);
         configurationManager = new CM_ServiceRequest(driver);
         processManager = new PM_ServiceRequest(driver);
         entityManager = new DEM_ServiceRequest(driver);
         recordManager = new DRM_ServiceRequest(driver);
+        loginApplications = new LoginApplications(driver);
     }
 
 
@@ -63,43 +56,32 @@ public class ServiceRequestMain {
         //Iniciamos Sesión
         login.loginPage();
         //Ingresamos al Release Manager
-        LoginApplications.loginRM(driver,"Projects");
+        loginApplications.loginRM("Projects");
         //Creamos los componentes del Release Manager
         releaseManager.createRM_ServiceRequest(login.getUser());
         //Salimos a la vista de las aplicaciones
         basicControl.logo();
         //Ingresamos al Configuration Manager
-        LoginApplications.loginCM(driver);
+        loginApplications.loginCM();
         //Creaamos componente CM
         configurationManager.createCM_ServiceRequest();
         basicControl.logo();
         //Ingresamos al Process Manager
-        LoginApplications.loginPM(driver);
+        loginApplications.loginPM();
         processManager.createPM_ServiceRequest();
         basicControl.logo();
         //Ingresamos al DEMA
-        LoginApplications.loginDataEntity(driver);
+        loginApplications.loginDataEntity();
         entityManager.createDEM_ServiceRequest();
         basicControl.logo();
         //Ingresamos al Data record
-        LoginApplications.loginDataRecord(driver);
+        loginApplications.loginDataRecord();
         recordManager.createDRM_ServiceRequest();
         basicControl.logo();
         //Ingresamos al PM
-        LoginApplications.loginPM(driver);
+        loginApplications.loginPM();
         processManager.createSteps_ServiceRequest();
     }
 
-    @Test
-    public void deleteunProcessServiceRequest() throws InterruptedException {
-        login.loginPage();
-        LoginApplications.loginRM(driver,"Change Container");
-        basicControl.logo();
-        LoginApplications.loginCM(driver);
-        configurationManager.deleteCM_ServiceRequest();
-        basicControl.logo();
-        LoginApplications.loginPM(driver);
-        basicControl.logo();
-    }
 
 }

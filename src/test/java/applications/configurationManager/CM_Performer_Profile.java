@@ -12,15 +12,13 @@ import org.testng.annotations.*;
 
 public class CM_Performer_Profile {
     private WebDriver driver;
-
-    SelectBrowser browser;
-    Asserts asserts;
-    BasicControl basicControl;
-    FormsPerformerProfile formsPerformerProfile;
+    private SelectBrowser browser;
+    private Asserts asserts;
+    private BasicControl basicControl;
+    private FormsPerformerProfile formsPerformerProfile;
 
     final String componente = "Performer Profiles";
-    final String newPerformer = "Performer Selenium";
-    final String editPerformer = "Performer Edit Selenium";
+
 
     public CM_Performer_Profile(WebDriver driver){
         this.driver = driver;
@@ -31,41 +29,30 @@ public class CM_Performer_Profile {
     }
 
 
-    @BeforeMethod
-    public void SetUp(){
-        basicControl.btn_More(componente);
-    }
-
-    @Parameters("PP")
     @Test
-    public void crearPerformerProfile(@Optional(newPerformer) String PP){
+    public void crearPerformerProfile(String PP){
         basicControl.btn_More(componente);
         formsPerformerProfile.formCreatePerformer(PP);
         asserts.assertSave();
     }
 
-    @Parameters({"PP","PP_edit"})
+
     @Test
-    public void editarPerformerProfile(@Optional(newPerformer) String PP, @Optional(editPerformer) String PP_edit ) throws InterruptedException {
+    public void editarPerformerProfile(String PP, String PP_edit ) throws InterruptedException {
         basicControl.btn_More(componente);
-        driver.findElement(By.xpath("//div[text()='"+PP+"']")).click();
+        String xmlview = basicControl.getXmlview();
+        driver.findElement(By.xpath("//div[@id='"+xmlview+"--listObject']//div[text()='"+PP+"']")).click();
         formsPerformerProfile.formEditPerformer(PP_edit);
         asserts.assertSave();
     }
 
-    @Parameters("delete_PP")
+
     @Test
-    public void eliminarPerformerProfile(@Optional(editPerformer) String delete_PP){
+    public void eliminarPerformerProfile(String delete_PP){
         basicControl.btn_More(componente);
         FormsControl.controlDelete(driver,delete_PP);
         String xpathMessage = "//span[@class='sapMText sapUiSelectable sapMTextMaxWidth sapMMsgBoxText']";
         asserts.assertDelete(xpathMessage);
     }
 
-    @AfterMethod
-    public void tearDown(){
-        if(driver != null){
-            driver.quit();
-        }
-    }
 }

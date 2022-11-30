@@ -3,25 +3,29 @@ package applications.dataEntityManager;
 import forms.DataEntityManager.FormsDataEntity;
 import helpers.AccessBranch;
 import helpers.Asserts;
+import helpers.ChargePopPup;
 import helpers.DynamicScroll;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.util.Map;
 
 public class DEM_Entity {
 
     private WebDriver driver;
-    Actions action;
-    AccessBranch accessBranch;
-    DynamicScroll searchScrollElement;
-    Asserts asserts;
-    FormsDataEntity formsDataEntity;
-    String componente = "Data Entities";
+    private Actions action;
+    private AccessBranch accessBranch;
+    private DynamicScroll searchScrollElement;
+    private Asserts asserts;
+    private FormsDataEntity formsDataEntity;
+    private String componente = "Data Entities";
+    private WebDriverWait wait;
 
 
     public DEM_Entity(WebDriver driver){
@@ -31,6 +35,7 @@ public class DEM_Entity {
         this.searchScrollElement = new DynamicScroll(driver);
         this.asserts = new Asserts(driver);
         this.formsDataEntity = new FormsDataEntity(driver);
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(100));
     }
 
     @Test

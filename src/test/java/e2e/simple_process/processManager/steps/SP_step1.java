@@ -22,6 +22,7 @@ public class SP_step1 {
     private String editModel = "--btnEdit-img";
     private String openFile = "//span[contains(@id,'--btnOpenFile-img')]";
     private String saveModel = "--btnSave-inne";
+    private ChargePopPup chargePopPup;
 
     public SP_step1(WebDriver driver){
         this.driver = driver;
@@ -29,6 +30,7 @@ public class SP_step1 {
         this.basicControl = new BasicControl(driver);
         this.action = new Actions(driver);
         this.asserts = new Asserts(driver);
+        this.chargePopPup = new ChargePopPup(driver);
     }
 
     public void step1Process() throws InterruptedException {
@@ -54,7 +56,7 @@ public class SP_step1 {
         driver.findElement(By.xpath("//span[normalize-space()='Send Task']")).click();
 
         basicControl.btnSave("--btnSave-inner");
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         asserts.assertSaveDiagram();
     }
 

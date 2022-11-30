@@ -26,7 +26,7 @@ public class SP_step4 {
     private String allowInsCancellation = "//div[contains(@id,'--allowInsCancellationSUP-handle')]";
     private String arrowPerformerProfile = "//span[contains(@id,'--selectPerfProfileProperty-arrow') and not(contains(@aria-hidden,'true'))]";
     private String saveModelerSp = "--btnSaveModelerSP-img";
-
+    private ChargePopPup chargePopPup;
 
     public SP_step4(WebDriver driver){
         this.driver = driver;
@@ -37,12 +37,13 @@ public class SP_step4 {
         this.action = new Actions(driver);
         this.js = (JavascriptExecutor) driver;
         this.asserts = new Asserts(driver);
+        this.chargePopPup = new ChargePopPup(driver);
     }
 
     public void step4Process() throws InterruptedException {
         //Ingreso al paso 4
         driver.findElement(By.xpath(step4)).click();
-        ChargePopPup.PopPupDetail(driver,wait);
+        chargePopPup.PopPupDetail();
         FormsControl.controlTitle(driver,"Configurar Ejecutantes","Set Up Performers");
 
         //Editamos el paso 4

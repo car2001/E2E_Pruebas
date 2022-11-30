@@ -24,6 +24,7 @@ public class PM_ServiceRequest {
     private PM_Process process;
     private AccessBranch accessBranch;
     private DynamicScroll searchScrollElement;
+    private ChargePopPup chargePopPup;
     private SR_step1 step1;
     private SR_step2 step2;
     private SR_step3 step3;
@@ -38,6 +39,7 @@ public class PM_ServiceRequest {
         this.process = new PM_Process(driver);
         this.searchScrollElement = new DynamicScroll(driver);
         this.accessBranch= new AccessBranch(driver);
+        this.chargePopPup = new ChargePopPup(driver);
         this.step1 = new SR_step1(driver);
         this.step2 = new SR_step2(driver);
         this.step3 = new SR_step3(driver);
@@ -91,7 +93,7 @@ public class PM_ServiceRequest {
                     if(xpos != -1){
                         WebElement process = driver.findElement(By.xpath("//span[text()='"+nameProcess+"']"));
                         process.click();
-                        ChargePopPup.PopPupGeneral(driver,new WebDriverWait(driver, Duration.ofSeconds(100)));
+                        chargePopPup.PopPupGeneral();
                         //Ingreso al proceso
                     }else{
                         System.out.println("No hay proceso buscado");

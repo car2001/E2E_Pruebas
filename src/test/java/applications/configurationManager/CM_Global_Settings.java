@@ -22,10 +22,11 @@ public class CM_Global_Settings {
     private WebDriver driver;
     private String chosen_browser = "Chrome";
 
-    SelectBrowser browser = new SelectBrowser(driver);
-    Login login;
-    WebDriverWait wait;
-    BasicControl basicControl;
+    private SelectBrowser browser = new SelectBrowser(driver);
+    private Login login;
+    private LoginApplications loginApplications;
+    private WebDriverWait wait;
+    private BasicControl basicControl;
 
     @BeforeMethod
     public void setUp(){
@@ -39,12 +40,12 @@ public class CM_Global_Settings {
     @Test
     public void checkHideAplicaciones(){
         loginApplication();
-        LoginApplications.loginCM(driver);
+        loginApplications.loginCM();
         basicControl.btn_More("Global Settings");
         hideApps();
         loginApplication();
         findHiddenApps();
-        LoginApplications.loginCM(driver);
+        loginApplications.loginCM();
         basicControl.btn_More("Global Settings");
         restoreApps();
     }

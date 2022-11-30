@@ -33,5 +33,25 @@ public class FormsCounter {
         basicControl.btnSave();
     }
 
+    public  void formEditCounter(String counterEdit, String inicio , String incremento) throws InterruptedException {
+        listForm = FormsControl.controlEdit(driver,"Contador","Counter");
+        listForm.get(0).click();
+        listForm.get(0).clear();
+        listForm.get(0).sendKeys(counterEdit);
+        listForm.get(1).click();
+        listForm.get(1).clear();
+        listForm.get(1).sendKeys(counterEdit);
+        listForm.get(2).click();
+        listForm.get(2).clear();
+        listForm.get(2).sendKeys(counterEdit);
+        listForm.get(3).click();
+        listForm.get(3).clear();
+        listForm.get(3).sendKeys(inicio);
+        listForm.get(4).click();
+        listForm.get(4).clear();
+        listForm.get(4).sendKeys(incremento);
+        basicControl.btnSave();
+    }
+
 
 }

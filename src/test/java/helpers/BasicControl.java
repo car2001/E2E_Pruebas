@@ -16,12 +16,18 @@ public class BasicControl {
     private JavascriptExecutor js;
     private WebDriverWait wait;
     private Actions action;
+    private ChargePopPup chargePopPup;
 
     public BasicControl(WebDriver driver){
         this.driver = driver;
         this.js = (JavascriptExecutor)driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(50));
         this.action = new Actions(driver);
+    }
+
+    public String getLanguage(){
+        String idioma = driver.findElement(By.xpath("//html")).getAttribute("lang");
+        return idioma;
     }
 
     //Logo
@@ -111,7 +117,7 @@ public class BasicControl {
         }else{
             driver.findElement(By.xpath("//bdi[contains(@id,'--minorVersionRB-label-bdi') or text()='Minor Version']")).click();
         }
-        driver.findElement(By.xpath("//bdi[contains(@id,'-BDI-content') and ( text()='Crear versión' or text()='Create Version')]")).click();
+        driver.findElement(By.xpath("//bdi[contains(@id,'-BDI-content') and ( text()='Crear Versión' or text()='Create Version')]")).click();
 
     }
 
@@ -129,7 +135,7 @@ public class BasicControl {
         }else{
             driver.findElement(By.xpath("//bdi[contains(@id,'--minorVersionRB-label-bdi') or text()='Minor Version']")).click();
         }
-        driver.findElement(By.xpath("//bdi[contains(@id,'-BDI-content') and (text()='Crear versión' or text()='Create Version')]")).click();
+        driver.findElement(By.xpath("//bdi[contains(@id,'-BDI-content') and (text()='Crear Versión' or text()='Create Version')]")).click();
     }
 
     public String getXmlview() {
@@ -150,13 +156,13 @@ public class BasicControl {
     //Reclamar
     public void claim(){
         driver.findElement(By.xpath("//span[contains(@id,'--btnClain-img')]")).click();
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
     }
 
     //Enviar
     public void submit(){
         driver.findElement(By.xpath("//bdi[text() = 'Enviar' and contains(@id,'--btnSubmit-BDI-content')]")).click();
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
     }
 
     public void btn_MsgStrigMessage(){
@@ -166,7 +172,7 @@ public class BasicControl {
     //More - CM
     public void btn_More(String componente){
         driver.findElement(By.xpath("//span[text()='"+componente+"']")).click();
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         String mas = "//div[contains(@id,'__xmlview') and @class='sapUiView sapUiXMLView sapMNavItem']//span[(text()='Más' or text()='More') and @class='sapMSLITitle']";
         try {
             WebElement more = driver.findElement(By.xpath(mas));

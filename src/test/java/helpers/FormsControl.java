@@ -59,18 +59,23 @@ public class FormsControl {
         }
     }
 
-    public static void controlDelete(WebDriver driver, Actions action , WebElement elemento,String componente){
+
+    public static void controlDelete(WebDriver driver, Actions action , WebElement elemento,String component, String componente ){
         action.contextClick(elemento).perform();
-        driver.findElement(By.xpath("//div[normalize-space()='Delete "+componente+"']")).click();
+        driver.findElement(By.xpath("//div[normalize-space()='Delete "+component+"' or normalize-space()='Borrar "+componente+"']")).click();
         driver.findElement(By.xpath("//bdi[normalize-space()='Sí' or normalize-space()='Yes']")).click();
         driver.findElement(By.xpath("//bdi[normalize-space()='OK']")).click();
     }
 
     public static void controlDelete(WebDriver driver, String nameComponent){
-        driver.findElement(By.xpath("//div[text()='"+nameComponent+"']/parent::div/parent::div/following-sibling::button")).click();
+        basicControl = new BasicControl(driver);
+        String xmlview = basicControl.getXmlview();
+        driver.findElement(By.xpath("//div[@id='"+xmlview+"--listObject']//div[text()='"+nameComponent+"']/parent::div/parent::div/following-sibling::button")).click();
         driver.findElement(By.xpath("//bdi[normalize-space()='Sí' or normalize-space()='Yes']")).click();
         driver.findElement(By.xpath("//bdi[normalize-space()='OK']")).click();
     }
+
+
 
     public static void controlLook(WebDriver driver, String edit, JavascriptExecutor js) throws InterruptedException {
         basicControl = new BasicControl(driver);
@@ -100,4 +105,6 @@ public class FormsControl {
             System.out.println(e.getMessage());
         }
     }
+
+
 }

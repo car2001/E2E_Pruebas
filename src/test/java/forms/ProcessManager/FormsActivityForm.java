@@ -12,6 +12,7 @@ import org.testng.Assert;
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class FormsActivityForm {
     private String dataModel = "//span[text()='Modelo de Datos' or text()='Data Model'][@class='sapMText sapMTextNoWrap sapMITBText sapMITBBadgeHolder']";
     private String dataModelList = "//span[contains(@id,'--TreeDMFB-rows-row0-treeicon')]";
     private String containerList = "//span[contains(@id,'--idContainerList-rows-row0-treeicon')]";
+    private ChargePopPup chargePopPup;
 
 
     public FormsActivityForm(WebDriver driver){
@@ -39,6 +41,7 @@ public class FormsActivityForm {
         this.searchElement = new DynamicScroll(driver);
         this.js = (JavascriptExecutor) driver;
         this.wait = new WebDriverWait(driver,Duration.ofSeconds(100));
+        this.chargePopPup = new ChargePopPup(driver);
     }
 
     public void createNewActivityForm(String nameAf){
@@ -65,7 +68,7 @@ public class FormsActivityForm {
 
         Thread.sleep(1000);
         basicControl.btnSave("--btnSaveFB-img");
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
 
     }
 
@@ -87,44 +90,43 @@ public class FormsActivityForm {
         aprobacionSolucion.put("¿El Cliente Autorizó el Cierre de la Solicitud?", "RequestClosureAuthorization");
 
 
-
-
         Map<String, String> detalleAtención3 = new LinkedHashMap<>();
-        detalleAtención3.put("¿Se Requiere 3° Ejecutor?", " ");
-        detalleAtención3.put("Ejecutor 3", "Full Name");
-        detalleAtención3.put("Tiempo Estimado 3 (Horas)", " ");
         detalleAtención3.put("Detalle de la Atención Realizada 3", "Text Area");
+        detalleAtención3.put("Tiempo Estimado 3 (Horas)", " ");
+        detalleAtención3.put("Ejecutor 3", "Full Name");
+        detalleAtención3.put("¿Se Requiere 3° Ejecutor?", " ");
+
 
         Map<String, String> detalleAtención2 = new LinkedHashMap<>();
-        detalleAtención2.put("¿Se Requiere 2° Ejecutor?", " ");
-        detalleAtención2.put("Ejecutor 2", "Full Name");
-        detalleAtención2.put("Tiempo Estimado 2 (Horas)", " ");
         detalleAtención2.put("Detalle de la Atención Realizada 2", "Text Area");
+        detalleAtención2.put("Tiempo Estimado 2 (Horas)", " ");
+        detalleAtención2.put("Ejecutor 2", "Full Name");
+        detalleAtención2.put("¿Se Requiere 2° Ejecutor?", " ");
+
 
         Map<String, String> detalleAtención1 = new LinkedHashMap<>();
-        detalleAtención1.put("Asignado", "Full Name");
-        detalleAtención1.put("Tiempo Estimado (Horas)", " ");
         detalleAtención1.put("Detalle de la Solución", "Text Area");
+        detalleAtención1.put("Tiempo Estimado (Horas)", " ");
+        detalleAtención1.put("Asignado", "Full Name");
 
         Map<String, String> aprobacionSolicitud = new LinkedHashMap<>();
-        aprobacionSolicitud.put("¿Requiere Aprobación?", "DecisionDescription");
-        aprobacionSolicitud.put("Aprobador", "Full Name");
-        aprobacionSolicitud.put("¿Aprueba Solicitud?", "DecisionDescription");
         aprobacionSolicitud.put("Comentario de la Aprobación", "Text Area");
+        aprobacionSolicitud.put("¿Aprueba Solicitud?", "DecisionDescription");
+        aprobacionSolicitud.put("Aprobador", "Full Name");
+        aprobacionSolicitud.put("¿Requiere Aprobación?", "DecisionDescription");
 
         Map<String, String> informacionSolicitud = new LinkedHashMap<>();
-        informacionSolicitud.put("Cliente", "NombreComercial");
-        informacionSolicitud.put("Reportado por", "FullName");
-        informacionSolicitud.put("Resumen de la Solicitud", " ");
-        informacionSolicitud.put("Detalle de la Solicitud", "Text Area");
-        informacionSolicitud.put("Referencia Externa", " ");
-        informacionSolicitud.put("Prioridad", "PriorityName");
-        informacionSolicitud.put("Categoría", "RequestCategoryName");
-        informacionSolicitud.put("Motivo de la Solicitud", "RequestReasonName");
-        informacionSolicitud.put("Posible Fecha de Entrega", " ");
-        informacionSolicitud.put("Tiempo Total Estimado (horas)", " ");
         informacionSolicitud.put("Tabla Selenium", "Table");
-
+        informacionSolicitud.put("Tiempo Total Estimado (horas)", " ");
+        informacionSolicitud.put("Posible Fecha de Entrega", " ");
+        informacionSolicitud.put("Motivo de la Solicitud", "RequestReasonName");
+        informacionSolicitud.put("Categoría", "RequestCategoryName");
+        informacionSolicitud.put("Prioridad", "PriorityName");
+        informacionSolicitud.put("Referencia Externa", " ");
+        informacionSolicitud.put("Detalle de la Solicitud", "Text Area");
+        informacionSolicitud.put("Resumen de la Solicitud", " ");
+        informacionSolicitud.put("Reportado por", "FullName");
+        informacionSolicitud.put("Cliente", "NombreComercial");
         List<Map<String, String>> listAttribute = new ArrayList<>();
 
         listAttribute.add(aprobacionSolucion);
@@ -150,7 +152,7 @@ public class FormsActivityForm {
         }
 
         basicControl.btnSave("--btnSaveFB-img");
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
     }
 
     private void clickMore(String element) throws InterruptedException {
@@ -289,8 +291,8 @@ public class FormsActivityForm {
         robot.mouseMove(x+desplazamiento.get(0)+10,y-desplazamiento.get(1));
         Thread.sleep(1000);
         robot.mouseRelease(InputEvent.BUTTON1_MASK);
-        //robot.mousePress(InputEvent.BUTTON1_MASK);
-        //robot.mouseRelease(InputEvent.BUTTON1_MASK);
+        robot.mousePress(InputEvent.BUTTON1_MASK);
+        robot.mouseRelease(InputEvent.BUTTON1_MASK);
     }
 
     private List<Integer> calculoPixeles(WebElement from , WebElement to,JavascriptExecutor js){
@@ -320,6 +322,8 @@ public class FormsActivityForm {
 
         return fijo -40;
     }
+
+
 
 
 

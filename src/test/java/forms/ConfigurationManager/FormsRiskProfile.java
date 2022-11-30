@@ -30,7 +30,7 @@ public class FormsRiskProfile {
         this.rateRisk = "//input[contains(@id,'--RateRisk-inner')]";
     }
 
-    public void formCreateRisk(WebDriver driver, String risk){
+    public void formCreateRisk(String risk){
         basicControl.btnAdd();
         listForm = FormsControl.controlNew(driver,"Perfil de Riesgo","Risk Profile");
         listForm.get(0).click();
@@ -45,7 +45,7 @@ public class FormsRiskProfile {
         driver.findElement(By.xpath(numberMinutes)).sendKeys("60");
         basicControl.btnSave();
     }
-    public void formEditRisk(WebDriver driver,String risk) throws InterruptedException {
+    public void formEditRisk(String risk) throws InterruptedException {
         listForm = FormsControl.controlEdit(driver,"Perfil de Riesgo","Risk Profile");
         listForm.get(0).click();
         listForm.get(0).clear();

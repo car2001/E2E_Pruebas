@@ -19,7 +19,7 @@ public class PM_Hierarchies {
     Asserts asserts;
 
     String component = "Process Hierarchies";
-    String nameLevel1 = "Jerarquia Selenium";
+
 
     FormsHierarchie formsHierarchie;
 
@@ -49,7 +49,7 @@ public class PM_Hierarchies {
         int xpos = searchScrollElement.elementSearch(nameLevel);
         if(xpos != -1){
             WebElement hierarchie = driver.findElement(By.xpath("//span[text()='"+nameLevel+"']"));
-            FormsControl.controlDelete(driver,action,hierarchie,"Level");
+            FormsControl.controlDelete(driver,action,hierarchie,"Level","Nivel");
         }else{
             Assert.assertEquals("No se encontro la jerarquia","NO");
         }

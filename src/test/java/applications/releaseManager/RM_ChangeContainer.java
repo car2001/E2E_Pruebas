@@ -23,14 +23,15 @@ public class RM_ChangeContainer {
 
     private WebDriver driver;
 
-    Actions action;
-    DynamicScroll searchScrollElement;
-    Asserts asserts;
-    AccessBranch accessBranch;
-    BasicControl basicControl;
-    Login login;
-    FormsChangeContainer formsChangeContainer;
-    FormsDeploymentPackage formsDeploymentPackage;
+    private Actions action;
+    private DynamicScroll searchScrollElement;
+    private Asserts asserts;
+    private AccessBranch accessBranch;
+    private BasicControl basicControl;
+    private Login login;
+    private FormsChangeContainer formsChangeContainer;
+    private FormsDeploymentPackage formsDeploymentPackage;
+    private ChargePopPup chargePopPup;
 
     String componente = "Change Containers";
     String newChangeContainer = "CC_SELENIUM";
@@ -48,6 +49,7 @@ public class RM_ChangeContainer {
         this.basicControl = new BasicControl(driver);
         this.login = new Login(driver);
         this.formsChangeContainer = new FormsChangeContainer(driver);
+        this.chargePopPup = new ChargePopPup(driver);
         this.formsDeploymentPackage = new FormsDeploymentPackage(driver);
     }
 
@@ -87,7 +89,7 @@ public class RM_ChangeContainer {
 
     }
 
-    @Test
+ /*   @Test
     public void releaseChangeContainer() throws InterruptedException {
         int exist = -1;
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(100));
@@ -133,8 +135,8 @@ public class RM_ChangeContainer {
             asserts.assertSave();
         }
 
-    }
-
+    }*/
+/*
     @Test
     public void releaseEnviromentQA(WebDriverWait wait) throws InterruptedException {
         Thread.sleep(1000);
@@ -146,20 +148,20 @@ public class RM_ChangeContainer {
         exist = searchScrollElement.elementSearch("Open");
         if (exist != -1) {
             driver.findElement(By.xpath("//span[text()='Open']")).click();
-            ChargePopPup.PopPupMain(driver,wait);
+            chargePopPup.PopPupMain();
             WebElement titulo = driver.findElement(By.xpath("//span[text()='Lista de solicitudes de instalación']"));
             wait.until(ExpectedConditions.visibilityOf(titulo));
             List<WebElement> buttons = driver.findElements(By.xpath("//span[@class ='sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnIconFirst sapMBtnDefault']"));
             driver.findElement(By.xpath("//span[text()='01']")).click();
             action.moveToElement(buttons.get(0)).click().perform();
-            ChargePopPup.PopPupMain(driver,wait);
+            chargePopPup.PopPupMain();
             asserts.assertSave();
             driver.findElement(By.xpath("//span[text()='02']")).click();
             Thread.sleep(500);
             driver.findElement(By.xpath("//span[text()='01']")).click();
             buttons = driver.findElements(By.xpath("//span[@class ='sapMBtnInner sapMBtnHoverable sapMFocusable sapMBtnIconFirst sapMBtnDefault']"));
             action.moveToElement(buttons.get(0)).click().perform();
-            ChargePopPup.PopPupMain(driver,wait);
+            chargePopPup.PopPupMain();
             asserts.assertSave();
         }
     }
@@ -183,7 +185,7 @@ public class RM_ChangeContainer {
             Thread.sleep(1000);
             asserts.assertSave();
         }
-    }
+    }*/
 
     @AfterMethod
     public void tearDown(){

@@ -137,7 +137,7 @@ public class RM_Release  {
         WebElement despleProyecto = driver.findElement(By.xpath("//span[contains(@id,'--mainTree-rows-row0-treeicon')]"));
         action.contextClick(despleProyecto).perform();
         driver.findElement(By.xpath("//div[text()='New Project' or text()='Nuevo Proyecto']")).click();
-        formsProject.createProject(driver, proyecto);
+        formsProject.createProject(proyecto);
         asserts.assertSave();
     }
 

@@ -13,45 +13,44 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class LoginApplications {
-    public static WebDriverWait wait;
-    public static AccessBranch accessBranch;
-    public static BasicControl basicControl;
-    public static JavascriptExecutor js;
+    private WebDriverWait wait;
+    private WebDriver driver;
+    private AccessBranch accessBranch;
+    private BasicControl basicControl;
+    private JavascriptExecutor js;
+    private ChargePopPup chargePopPup;
 
-    public static void loginOSM(WebDriver driver){
-        wait = new WebDriverWait(driver, Duration.ofSeconds(100));
-        js = (JavascriptExecutor) driver;
-        accessBranch = new AccessBranch(driver);
-        basicControl = new BasicControl(driver);
+    public LoginApplications(WebDriver driver){
+        this.driver = driver;
+        this.accessBranch = new AccessBranch(driver);
+        this.basicControl = new BasicControl(driver);
+        this.js = (JavascriptExecutor) driver;
+        this.chargePopPup = new ChargePopPup(driver);
+    }
+
+    public void loginOSM(){
         basicControl.btnApplication("Organizational Structure Manager");
         accessBranch.clickBranches(0);
         accessBranch.clickBranches(1);
     }
 
-    public static void loginCM(WebDriver driver){
-        wait = new WebDriverWait(driver, Duration.ofSeconds(100));
-        js = (JavascriptExecutor) driver;
-        basicControl = new BasicControl(driver);
+    public void loginCM(){
         basicControl.btnApplication("Configuration Manager");
         wait.until(ExpectedConditions.elementToBeClickable(By.id("navListItem-navList-0-a")));
         int tam = js.executeScript("let tam = document.getElementById('sap-ui-blocklayer-popup'); return(tam.clientHeight)").hashCode();
         if(tam != 0){
-            ChargePopPup.PopPupGeneral(driver,wait);
+            chargePopPup.PopPupGeneral();
         }
         driver.findElement(By.xpath("//div[@title='Reusable Component']")).click();
         driver.findElement(By.xpath("//div[@title='Setting']")).click();
     }
 
-    public static void loginRM(WebDriver driver, String componente){
-        wait = new WebDriverWait(driver,Duration.ofSeconds(100));
-        js = (JavascriptExecutor) driver;
-        accessBranch = new AccessBranch(driver);
-        basicControl = new BasicControl(driver);
+    public  void loginRM(String componente){
         basicControl.btnApplication("Release Manager");
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         int tam = js.executeScript("let tam = document.getElementById('sap-ui-blocklayer-popup'); return(tam.clientHeight)").hashCode();
         if(tam != 0){
-            ChargePopPup.PopPupGeneral(driver,wait);
+            chargePopPup.PopPupGeneral();
         }
 
         if(componente.equals("Projects")){
@@ -65,58 +64,38 @@ public class LoginApplications {
         }
     }
 
-    public static void loginPM(WebDriver driver) throws InterruptedException {
-        wait = new WebDriverWait(driver,Duration.ofSeconds(100));
-        js = (JavascriptExecutor) driver;
-        accessBranch = new AccessBranch(driver);
-        basicControl = new BasicControl(driver);
+    public void loginPM() throws InterruptedException {
         basicControl.btnApplication("Process Manager");
         //Esperamos las cargas
         String xmlview = basicControl.getXmlview();
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         int tam = js.executeScript("let tam = document.getElementById('sap-ui-blocklayer-popup'); return(tam.clientHeight)").hashCode();
         if(tam != 0){
-            ChargePopPup.PopPupGeneral(driver,wait);
+            chargePopPup.PopPupGeneral();
         }
     }
 
-    public static void loginColl(WebDriver driver, String proceso){
-        wait = new WebDriverWait(driver,Duration.ofSeconds(100));
-        js = (JavascriptExecutor) driver;
-        basicControl = new BasicControl(driver);
+    public void loginColl(String proceso){
         basicControl.btnApplication("Collaboration Workspace");
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         driver.findElement(By.id("navListItem-navList-2")).click();
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         driver.findElement(By.xpath("//div[contains(@aria-label,'"+proceso+"')]")).click();
         driver.findElement(By.xpath("//bdi[text()='Sí' or text()='Yes']")).click();
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         int tam = js.executeScript("let tam = document.getElementById('sap-ui-blocklayer-popup'); return(tam.clientHeight)").hashCode();
         if(tam != 0){
-            ChargePopPup.PopPupGeneral(driver,wait);
+            chargePopPup.PopPupGeneral();
         }
     }
 
-    public static void loginDataEntity(WebDriver driver){
-        wait = new WebDriverWait(driver,Duration.ofSeconds(100));
-        basicControl = new BasicControl(driver);
+    public void loginDataEntity(){
         basicControl.btnApplication("Data Entity Manager");
-        ChargePopPup.PopPupGeneral(driver,wait);
-        int tam = js.executeScript("let tam = document.getElementById('sap-ui-blocklayer-popup'); return(tam.clientHeight)").hashCode();
-        if(tam != 0){
-            ChargePopPup.PopPupGeneral(driver,wait);
-        }
+        chargePopPup.PopPupGeneral();
     }
 
-    public static void loginDataRecord(WebDriver driver){
-        wait = new WebDriverWait(driver,Duration.ofSeconds(100));
-        basicControl = new BasicControl(driver);
+    public  void loginDataRecord(){
         basicControl.btnApplication("Data Record Manager");
-        ChargePopPup.PopPupGeneral(driver,wait);
-        int tam = js.executeScript("let tam = document.getElementById('sap-ui-blocklayer-popup'); return(tam.clientHeight)").hashCode();
-        if(tam != 0){
-            ChargePopPup.PopPupGeneral(driver,wait);
-        }
     }
 
 }

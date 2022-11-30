@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 
 public class SelectListItem {
-    public WebDriver driver;
+    private  WebDriver driver;
 
     public SelectListItem(WebDriver driver){
         this.driver = driver;
@@ -14,7 +14,6 @@ public class SelectListItem {
 
     public void SelectItemDiv(String item){
         String path = "//div[contains(@id,'-popup')][contains(@style,'visibility: visible;')]//div[text()='"+item+"']";
-        //div[contains(@id,'-popup')][contains(@style,'visibility: visible;')]//div[text()='Category Selenium'][@class='sapMSLITitleOnly']
         WebElement element = driver.findElement(By.xpath(path));
         element.click();
     }

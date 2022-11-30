@@ -16,7 +16,6 @@ import java.time.Duration;
 
 public class DRM_EntityRecord {
     private WebDriver driver;
-    private WebDriverWait wait;
     private JavascriptExecutor js;
     private BasicControl basicControl;
     private Actions action;
@@ -25,11 +24,11 @@ public class DRM_EntityRecord {
     private Asserts asserts;
     private String componente = "Data Entities";
     private FormsDataRecord formsDataRecord;
+    private ChargePopPup chargePopPup;
 
 
     public DRM_EntityRecord(WebDriver driver){
         this.driver = driver;
-        this.wait = new WebDriverWait(driver,Duration.ofSeconds(100));
         this.js = (JavascriptExecutor)driver;
         this.basicControl = new BasicControl(driver);
         this.action = new Actions(driver);
@@ -37,6 +36,7 @@ public class DRM_EntityRecord {
         this.searchScrollElement = new DynamicScroll(driver);
         this.asserts = new Asserts(driver);
         this.formsDataRecord = new FormsDataRecord(driver);
+        this.chargePopPup = new ChargePopPup(driver);
     }
 
     @Test
@@ -51,7 +51,7 @@ public class DRM_EntityRecord {
     @Test
     public void crearDataRecordProcess(String hierarchie,String process,String dataName, String[][] attributeList ,String typeEntity) throws InterruptedException {
         accessBranch.clickBranches(1);
-        ChargePopPup.PopPupTree(driver,wait);
+        chargePopPup.PopPupTree();
         int xpos =searchScrollElement.elementSearch(hierarchie);
         if(xpos != -1){
             accessBranch.clickBranches(xpos);
@@ -90,7 +90,7 @@ public class DRM_EntityRecord {
         searchScrollElement.elementSearch(dataName);
         Thread.sleep(1000);
         driver.findElement(By.xpath("//span[text()='"+dataName+"']")).click();
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         formsDataRecord.createDataRecord(attributeList);
     }
 

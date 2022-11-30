@@ -22,16 +22,17 @@ public class SimpleProcess {
     private WebDriver driver;
     private String chosen_browser = "Chrome";
 
-    Login login;
-    DynamicScroll searchScrollElement;
-    SelectBrowser browser = new SelectBrowser(driver);
-    Actions action;
-    JavascriptExecutor js;
-    Asserts asserts;
-    BasicControl basicControl;
-    RM_SimpleProcess releaseManager;
-    CM_SimpleProcess configurationManager;
-    PM_SimpleProcess processManager;
+    private Login login;
+    private LoginApplications loginApplications;
+    private DynamicScroll searchScrollElement;
+     private  SelectBrowser browser = new SelectBrowser(driver);
+    private Actions action;
+    private JavascriptExecutor js;
+    private Asserts asserts;
+    private BasicControl basicControl;
+    private RM_SimpleProcess releaseManager;
+    private CM_SimpleProcess configurationManager;
+    private PM_SimpleProcess processManager;
 
 
     @BeforeTest
@@ -39,6 +40,7 @@ public class SimpleProcess {
         browser.chooseBrowser(chosen_browser);
         driver = browser.getDriver();
         login = new Login(driver);
+        loginApplications = new LoginApplications(driver);
         action = new Actions(driver);
         asserts = new Asserts(driver);
         js = (JavascriptExecutor) driver;
@@ -55,18 +57,18 @@ public class SimpleProcess {
         //Iniciamos Sesión
         login.loginPage();
         //Ingresamos al Release Manager
-        LoginApplications.loginRM(driver,"Projects");
+        loginApplications.loginRM("Projects");
         //Creamos los componentes del Release Manager
         //releaseManager.createRM_SimpleProcess(login.getUser());
         //Salimos a la vista de las aplicaciones
         basicControl.logo();
         //Ingresamos al Configuration Manager
-        LoginApplications.loginCM(driver);
+        loginApplications.loginCM();
         //configurationManager.createCM_SimpleProcess();
         //Salimos a la vista de las aplicaciones
         basicControl.logo();
         //Ingresamos al Process Manager
-        LoginApplications.loginPM(driver);
+        loginApplications.loginPM();
         processManager.createPM_SimpleProcess();
 
 

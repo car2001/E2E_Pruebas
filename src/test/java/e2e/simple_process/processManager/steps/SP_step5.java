@@ -23,6 +23,7 @@ public class SP_step5 {
     private String editModelerIC = "--btnEditModelerIC-img";
     private String allowDueDate = "//div[contains(@id,'--allowDueDateChangeIC-handle')]";
     private String arrowSLA = "//span[contains(@id,'--selectSLAProperty-arrow') ] [not(contains(@aria-hidden,'true'))]";
+    private ChargePopPup chargePopPup;
 
     public SP_step5(WebDriver driver){
         this.driver = driver;
@@ -31,12 +32,13 @@ public class SP_step5 {
         this.elementSVG = new ElementSVG(driver);
         this.asserts = new Asserts(driver);
         this.selectListItem = new SelectListItem(driver);
+        this.chargePopPup = new ChargePopPup(driver);
     }
 
     public void step5Process() throws InterruptedException {
         //Ingreso al paso 5
         driver.findElement(By.xpath(step5)).click();
-        ChargePopPup.PopPupDetail(driver,wait);
+        chargePopPup.PopPupDetail();
         FormsControl.controlTitle(driver,"Integrar Código","Integrate Code");
 
         //Editamos el paso 5
@@ -77,7 +79,7 @@ public class SP_step5 {
         elementSVG.clickSVGElementCenter(reglaSi);
         Thread.sleep(1000);
         driver.findElement(By.xpath("//span[contains(@id,'--btnAddRE-img')]")).click();
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         driver.findElement(By.xpath("//input[contains(@id,'--ruleName-inner')]")).click();
         driver.findElement(By.xpath("//input[contains(@id,'--ruleName-inner')]")).sendKeys("Regla SI");
         driver.findElement(By.xpath("//input[contains(@id,'--ruleDisplayName-inner')]")).click();
@@ -87,7 +89,7 @@ public class SP_step5 {
         arrow.get(0).click();
         selectListItem.SelectItemLi("Data Model Attribute");
         driver.findElements(By.xpath("//span[(@aria-label='Mostrar ayuda para entradas' or @aria-label='Show Value Help') and contains(@id,'-vhi') ]")).get(0).click();
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         driver.findElement(By.xpath("//span[contains(@id,'--treeDM-rows-row0') and (@title='Expandir nodos' or @title='Expand Node')]")).click();
         driver.findElement(By.xpath("//span[text()='¿Acepta? : Boolean']")).click();
         Thread.sleep(800);
@@ -97,13 +99,13 @@ public class SP_step5 {
         selectListItem.SelectItemLi("Is True");
         Thread.sleep(1000);
         driver.findElement(By.xpath("//bdi[text()='Guardar' or text()='Save']")).click();
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
 
         //REGLA NO
         elementSVG.clickSVGElementRule(reglaNo,-40,0);
         Thread.sleep(1000);
         driver.findElement(By.xpath("//span[contains(@id,'--btnAddRE-img')]")).click();
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         driver.findElement(By.xpath("//input[contains(@id,'--ruleName-inner')]")).click();
         driver.findElement(By.xpath("//input[contains(@id,'--ruleName-inner')]")).sendKeys("Regla NO");
         driver.findElement(By.xpath("//input[contains(@id,'--ruleDisplayName-inner')]")).click();
@@ -113,7 +115,7 @@ public class SP_step5 {
         arrow.get(0).click();
         selectListItem.SelectItemLi("Data Model Attribute");
         driver.findElements(By.xpath("//span[(@aria-label='Mostrar ayuda para entradas' or @aria-label='Show Value Help') and contains(@id,'-vhi') ]")).get(0).click();
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         driver.findElement(By.xpath("//span[contains(@id,'--treeDM-rows-row0') and (@title='Expandir nodos' or @title='Expand Node')]")).click();
         driver.findElement(By.xpath("//span[text()='¿Acepta? : Boolean']")).click();
         arrow = driver.findElements(By.cssSelector(".sapMSltArrow"));
@@ -122,12 +124,12 @@ public class SP_step5 {
         selectListItem.SelectItemLi("Is False");
         Thread.sleep(1000);
         driver.findElement(By.xpath("//bdi[text()='Guardar' or text()='Save']")).click();
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         driver.findElement(By.xpath("//button[@title='Rechazar' or @title = 'Decline']")).click();
 
 
         basicControl.btnSave("--btnSaveModelerIC-img");
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         //Guardamos cambios
         asserts.assertSave();
 

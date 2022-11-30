@@ -18,23 +18,18 @@ public class PM_Process {
 
     private WebDriver driver;
 
-    BasicControl basicControl;
-    Actions action;
-    AccessBranch accessBranch;
-    DynamicScroll searchScrollElement;
-    Asserts asserts;
-    JavascriptExecutor js;
-    ElementSVG elementSVG;
-    WebDriverWait wait;
-    FormsProcess formsProcess;
+    private BasicControl basicControl;
+    private Actions action;
+    private AccessBranch accessBranch;
+    private DynamicScroll searchScrollElement;
+    private Asserts asserts;
+    private JavascriptExecutor js;
+    private ElementSVG elementSVG;
+    private WebDriverWait wait;
+    private  FormsProcess formsProcess;
+    private ChargePopPup chargePopPup;
+    private String component = "Processes";
 
-    String component = "Processes";
-    String nameLevel = "Jerarquia Selenium";
-    String nameProcess = "Proceso Selenium";
-    String INS = "INS Selenium";
-    String SLA = "SLA Selenium";
-    String AF = "Activity Form Selenium";
-    String PP = "Performer Selenium";
 
     public PM_Process(WebDriver driver) {
         this.driver = driver;
@@ -46,6 +41,7 @@ public class PM_Process {
         this.js = (JavascriptExecutor) driver;
         this.basicControl = new BasicControl(driver);
         this.formsProcess = new FormsProcess(driver);
+        this.chargePopPup = new ChargePopPup(driver);
     }
 
     @Test
@@ -61,7 +57,7 @@ public class PM_Process {
                 driver.findElement(By.xpath("//div[normalize-space()='New Process' or text()='Nuevo Proceso']")).click();
                 Thread.sleep(1000);
                 formsProcess.createProcess(nameProcess, INS, SLA);
-                ChargePopPup.PopPupMain(driver, wait);
+                chargePopPup.PopPupMain();
                 asserts.assertSave();
                 //Realizamos los pasos
                 //stepsProcess();

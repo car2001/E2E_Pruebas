@@ -16,13 +16,14 @@ public class PrimerProceso {
     private WebDriver driver;
     private String chosen_browser = "Chrome";
 
-    Login login;
-    DynamicScroll searchScrollElement;
-    SelectBrowser browser = new SelectBrowser(driver);
-    Actions action;
-    JavascriptExecutor js;
-    Asserts asserts;
-    BasicControl basicControl;
+    private Login login;
+    private LoginApplications loginApplications;
+    private DynamicScroll searchScrollElement;
+    private SelectBrowser browser = new SelectBrowser(driver);
+    private Actions action;
+    private JavascriptExecutor js;
+    private Asserts asserts;
+    private BasicControl basicControl;
 
     private String nameProcess = "Proceso Selenium";
     String urlQA = "http://wedox.sytes.net/buplat_QA/";
@@ -39,7 +40,7 @@ public class PrimerProceso {
         basicControl = new BasicControl(driver);
         searchScrollElement = new DynamicScroll(driver);
         login.loginPage();
-        LoginApplications.loginColl(driver, nameProcess);
+        loginApplications.loginColl(nameProcess);
     }
 
     @Test
@@ -58,7 +59,7 @@ public class PrimerProceso {
     @Test
     public void runProcessSiQA() {
         login.loginPage(urlQA);
-        LoginApplications.loginColl(driver, nameProcess);
+        loginApplications.loginColl(nameProcess);
         basicControl.claim();
         FormsColl.primerProcesoSi(driver);
     }
@@ -66,7 +67,7 @@ public class PrimerProceso {
     @Test
     public void runProcessNoQA(){
         login.loginPage(urlQA);
-        LoginApplications.loginColl(driver, nameProcess);
+        loginApplications.loginColl(nameProcess);
         basicControl.claim();
         FormsColl.primerProcesoNo(driver);
     }
@@ -74,7 +75,7 @@ public class PrimerProceso {
     @Test
     public void runProcessSiPROD() {
         login.loginPage(urlPROD);
-        LoginApplications.loginColl(driver, nameProcess);
+        loginApplications.loginColl(nameProcess);
         basicControl.claim();
         FormsColl.primerProcesoSi(driver);
     }
@@ -82,7 +83,7 @@ public class PrimerProceso {
     @Test
     public void runProcessNoPROD(){
         login.loginPage(urlPROD);
-        LoginApplications.loginColl(driver, nameProcess);
+        loginApplications.loginColl(nameProcess);
         basicControl.claim();
         FormsColl.primerProcesoNo(driver);
     }

@@ -6,14 +6,14 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 public class Asserts {
-    WebDriver driver ;
-    JavascriptExecutor js;
-    BasicControl basicControl;
+    private WebDriver driver ;
+    private JavascriptExecutor js;
+    private BasicControl basicControl;
 
     public Asserts(WebDriver driver) {
         this.driver = driver;
-        js= (JavascriptExecutor) driver;
-        basicControl = new BasicControl(driver);
+        this.js= (JavascriptExecutor) driver;
+        this.basicControl = new BasicControl(driver);
     }
 
     public void assertSave(){
@@ -51,7 +51,7 @@ public class Asserts {
     }
 
     public void assertSaveModelData(){
-        String message = driver.findElement(By.className("sapMMsgStripMessage")).getAttribute("textContent");
+        String message = driver.findElement(By.xpath("//div[contains(@id,'--messageSection')]//div[@class='sapMMsgStripMessage']//span")).getAttribute("textContent");
         if(message.contains("The")){
             Assert.assertEquals(message,"The Data Model attributes were successfully saved");
         }else{
@@ -78,9 +78,14 @@ public class Asserts {
         }
     }
 
-    public void assertDoubleCheck(String expected){
+    public void assertDoubleCheck(String expected,String esperado){
         String message = driver.findElement(By.className("sapMMsgStripMessage")).getAttribute("textContent");
-        Assert.assertEquals(message,expected);
+        String idioma = basicControl.getLanguage();
+        if(idioma.equals("en")){
+            Assert.assertEquals(message,expected);
+        }else{
+            Assert.assertEquals(message,esperado);
+        }
         basicControl.btn_MsgStrigMessage();
         basicControl.btnCancel();
     }

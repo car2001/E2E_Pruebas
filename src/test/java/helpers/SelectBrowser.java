@@ -7,8 +7,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class SelectBrowser {
-    private WebDriver driver;
 
+    private WebDriver driver;
 
     public SelectBrowser(WebDriver driver){
         this.driver = driver;

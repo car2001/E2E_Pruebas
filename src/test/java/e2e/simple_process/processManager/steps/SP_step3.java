@@ -25,7 +25,7 @@ public class SP_step3 {
     private String step3 = "//span[contains(@id,'-count') and @class='sapMITBCount' and text()='3']";
     private String editModelerFB = "--btnEditModelerFB-inner";
     private String addACTF = "//span[contains(@id,'--btnAddACTF-img')]";
-
+    private ChargePopPup chargePopPup;
 
     public SP_step3(WebDriver driver){
         this.driver = driver;
@@ -35,13 +35,14 @@ public class SP_step3 {
         this.elementSVG = new ElementSVG(driver);
         this.formsAF = new FormsActivityForm(driver);
         this.asserts = new Asserts(driver);
+        this.chargePopPup = new ChargePopPup(driver);
     }
 
 
     public void step3Process()  throws InterruptedException, AWTException {
         //Ingreso al paso 3
         driver.findElement(By.xpath(step3)).click();
-        ChargePopPup.PopPupDetail(driver,wait);
+        chargePopPup.PopPupDetail();
         FormsControl.controlTitle(driver,"Asignar Formularios","Assign Forms");
         //Editamos el paso 3
         basicControl.btnEdit(editModelerFB);
@@ -62,7 +63,7 @@ public class SP_step3 {
         //Click para crear el Activity Form
         driver.findElement(By.xpath(addACTF)).click();
         formsAF.createNewActivityForm("AF-SELENIUM");
-        ChargePopPup.PopPupMain(driver,wait);
+        chargePopPup.PopPupMain();
         formsAF.panelActivityForm(3);
 
         //Ingresamos a la actividad 2
@@ -81,7 +82,7 @@ public class SP_step3 {
         elementSVG.clickSVGElementCenter(sendtask);
         Thread.sleep(1000);
         driver.findElement(By.xpath("//span[contains(@id,'--btnEmailDefinition-inner')]")).click();
-        ChargePopPup.PopPupGeneral(driver,wait);
+        chargePopPup.PopPupGeneral();
         WebElement popEmailDefinition = driver.findElement(By.xpath("//span[text()='Editor de Correo Electrónico' or text()='Email Editor']"));
         wait.until(ExpectedConditions.visibilityOf(popEmailDefinition));
         driver.findElement(By.xpath("//input[contains(@id,'--miTO-inner')]")).click();
